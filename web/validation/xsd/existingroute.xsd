@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:element name="existingroute">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="id"/>
+                <xs:element ref="name"/>
+                <xs:element ref="route_type"/>
+                <xs:element ref="route"/>
+                <xs:element ref="updated_at"/>
+                <xs:element ref="created_at"/>
+                <xs:element ref="user_id"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="id">
+        <xs:simpleType>
+            <xs:restriction base="xs:nonNegativeInteger">
+                <xs:minInclusive value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="name">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[a-zA-Z ]*[a-zA-Z]"/>
+                <xs:whiteSpace value="preserve"/>
+                <xs:minLength value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="route_type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[a-zA-Z ]*[a-zA-Z]"/>
+                <xs:whiteSpace value="preserve"/>
+                <xs:minLength value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="route">
+        <xs:simpleType>
+            <xs:restriction base="xs:string" />
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="updated_at">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime">
+                <xs:pattern value="'-'? yyyy '-' mm '-' dd 'T' hh ':' mm ':' ss ('.' s+)? (zzzzzz)?"/>
+                <xs:whiteSpace value="preserve"/>
+                <xs:minLength value="24"/>
+                <xs:maxLength value="24"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="created_at">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime">
+                <xs:pattern value="'-'? yyyy '-' mm '-' dd 'T' hh ':' mm ':' ss ('.' s+)? (zzzzzz)?"/>
+                <xs:whiteSpace value="preserve"/>
+                <xs:minLength value="24"/>
+                <xs:maxLength value="24"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="user_id">
+        <xs:simpleType>
+            <xs:restriction base="xs:nonNegativeInteger">
+                <xs:minInclusive value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+</xs:schema>

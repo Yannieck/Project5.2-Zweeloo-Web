@@ -1,0 +1,67 @@
+html
+    head
+        title routeEditor
+        script(src='https://cdn.tailwindcss.com')
+        link(rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' integrity='sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==' crossorigin='')
+        script(src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' integrity='sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==' crossorigin='')
+    body
+        style.
+            :root {
+                --maincolor: #fff5d2;
+                --secondcolor: #ffefb9;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: var(--maincolor);
+            }
+
+            #main_container {
+                background-color: var(--secondcolor);
+            }
+
+            #content {
+                background-color: var(--maincolor);
+            }
+
+            #map {
+                height: 45rem;
+                width: 100rem;
+            }
+        include head.pug
+        block content
+            .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
+                    .overflow-hidden.rounded-lg.flex.flex-wrap.justify-center.items-center.p-12(class='w-[95%] h-fit')#content
+                        .rounded-lg#map
+                            head
+                                title Add Map
+                                script(src='https://polyfill.io/v3/polyfill.min.js?features=default')
+                            h3 De map is aan het laden... even geduld!
+                                map
+                                script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDROcKPidV0pTzGZvZmKJlhmJTT-SHZaiQ&callback=initMap&v=weekly' defer='')
+                                script.
+                                    const geojson = !{JSON.stringify(route.route)}
+
+                                    function initMap() {
+                                        const uluru = { lat: 52.793964, lng: 6.728638 };
+                                        const map = new google.maps.Map(document.getElementById("map"), {
+                                        zoom: 15,
+                                        center: uluru,
+                                        });
+
+                                        map.data.addGeoJson(geojson);
+
+                                        map.addListener('click', (clickevent) => {
+                                            const marker = new google.maps.Marker({
+                                                position: clickevent.latLng.toJSON(),
+                                                map: map
+                                            });
+                                            const input = document.getElementById('justin');
+                                            const latLng = clickevent.latLng.toJSON();
+                                            input.value = JSON.stringify(latLng.lat) + ", " + JSON.stringify(latLng.lng);
+                                            console.log(clickevent.latLng.toJSON())
+                                        });
+                                    }
+
+                                    window.initMap = initMap;

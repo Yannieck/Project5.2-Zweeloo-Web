@@ -1,0 +1,43 @@
+html
+    head
+        title login
+        script(src='https://cdn.tailwindcss.com')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+        script(src='/scripts/settings.js' type='module' defer)
+    body
+        style.
+            :root {
+                --maincolor: #fff5d2;
+                --secondcolor: #ffefb9;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #ffefb9;
+            }
+
+            #main_container {
+                background-color: var(--secondcolor);
+            }
+
+            #content {
+                background-color: var(--maincolor);
+            }
+
+            #settings_button {
+                background-color: #00427d;
+            }
+        include head.pug
+        block content
+            .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
+                    .flex.overflow-hidden.rounded-lg.justify-center.items-center(class='w-[40%] h-4/6')#content
+                        .flex.items-center.justify-center
+                            div
+                                form(action='/settings' method='POST')
+                                    label.block.mb-2.text-sm.font-medium(for='contenttype') Select a content type for requests
+                                    select#contenttype.my-5.bg-gray-50.border.border-gray-300.text-gray-900.text-sm.rounded-lg.block.w-full(name='content_type' class='focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500')
+                                        option(value='JSON') JSON
+                                        option(value='XML') XML
+
+                                    input(type='submit' value='Submit').px-4.py-2.my-5.rounded.bg-blue.text-white.inline-block.shadow-lg#settings_button

@@ -1,0 +1,98 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1654607430.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "id",
+    "email",
+    "first_name",
+    "last_name",
+    "updated_at",
+    "created_at",
+    "password"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#root/id",
+      "title": "Id",
+      "minLength": 1,
+      "type": "integer",
+      "examples": [
+        1
+      ],
+      "default": 0
+    },
+
+    "password": {
+      "title": "password",
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 50,
+      "default": "",
+      "pattern": "^.*$"
+    },
+
+    "email": {
+      "$id": "#root/email",
+      "title": "email",
+      "type": "string",
+      "format": "email",
+      "minLength": 6,
+      "maxLength": 127,
+      "pattern": "^\\S+@\\S+\\.\\S+$",
+      "examples": [
+        "hello@nhlstenden.com"
+      ]
+    },
+    "first_name": {
+      "$id": "#root/first_name",
+      "title": "first_name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 125,
+      "default": "",
+      "examples": [
+        "Hello"
+      ],
+      "pattern": "^[a-zA-Z ]*"
+    },
+    "last_name": {
+      "$id": "#root/last_name",
+      "title": "last_name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 125,
+      "default": "",
+      "examples": [
+        "Hello"
+      ],
+      "pattern": "^[a-zA-Z ]*"
+    },
+    "updated_at": {
+      "$id": "#root/updated_at",
+      "title": "Updated_at",
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 24,
+      "default": "",
+      "examples": [
+        "2022-05-09T10:34:58.000Z"
+      ],
+      "pattern": "^.*$"
+    },
+    "created_at": {
+      "$id": "#root/created_at",
+      "title": "Created_at",
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 24,
+      "default": "",
+      "examples": [
+        "2022-05-09T10:34:58.000Z"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}

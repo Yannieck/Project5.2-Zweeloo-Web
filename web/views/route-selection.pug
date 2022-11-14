@@ -1,0 +1,69 @@
+html
+    head
+        title route-selection
+        script(src='https://cdn.tailwindcss.com')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js' integrity='sha512-53HyVymh+n8HTeZ6ND4oQ+yWHxupmItxAybc5lesv8CsPvyjRijNy8fOCw3Lg/IVv7OTDkIjGRwa78Jv2EQT/A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+        script(src='/scripts/routeselection.js' type='module' defer)
+
+    body
+        style.
+            :root {
+                --maincolor: #fff5d2;
+                --secondcolor: #ffefb9;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: var(--maincolor);
+            }
+
+            #main_div {
+                background-color: var(--secondcolor);
+            }
+
+            /* both of these classes are used in routeselection.js */
+            .bgmain {
+                background-color: var(--maincolor);
+            }
+
+            .bgsecond {
+                background-color: var(--secondcolor);
+            }
+        include head.pug
+        block content
+            .w-full.flex.justify-center.overflow-hidden(class='md:h-[93%]')
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='md:w-[99%] md:h-[93%]')#main_div
+                    .overflow-hidden.rounded-lg(class='w-[90%] h-5/6')
+                        .m-5#route_selection
+                            h1.text-4xl.font-bold.font-sans.mb-5 Routes
+
+                            // kijken of we een functie kunnen maken zodat er voor elke route een tabel wordt ingeladen.
+                                ook moet er nog een bewerken knop komen die verwijst naar de route met het juiste ID
+                                en op het moment dat er iets van de database ingeladen moet worden komen er errors
+                            //mixin route(route)
+                            //    a(href='/routeeditor' class='h-2/5').grid.grid-rows-1.font-sans.rounded-lg
+                            //        .p-3.shadow-sm.rounded-sm
+                            //            .flex.items-center.space-x-2.font-semibold.text-gray-900.leading-8
+                            //                span.tracking-wide About
+                            //            .text-gray-700
+                            //                .grid.text-sm(class='md:grid-cols-2')
+                            //                    .grid.grid-cols-2.my-1
+                            //                        .px-7.py-2.font-semibold Route ID
+                            //                        input(value=route.route_id).px-4.py-2.rounded-lg
+                            //                    .grid.grid-cols-2.my-1
+                            //                        .px-7.py-2.font-semibold Route
+                            //                        input(value=route.route).px-4.py-2.rounded-lg
+                            //                    .grid.grid-cols-2.my-1
+                            //                        .px-7.py-2.font-semibold User id
+                            //                        input(value=route.user_id).px-4.py-2.rounded-lg
+                            //                    .grid.grid-cols-2.my-1
+                            //                        .px-7.py-2.font-semibold Created at
+                            //                        input(value=route.created_at).px-4.py-2.rounded-lg
+                            //                    .grid.grid-cols-2.my-1
+                            //                        .px-7.py-2.font-semibold Updated at
+                            //                        input(value=route.updated_at).px-4.py-2.rounded-lg
+                            //
+                            //if(data)
+                            //    for item in data
+                            //        +route(item)

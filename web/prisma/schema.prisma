@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model geofence {
+  id           Int     @id @default(autoincrement())
+  order_number Int
+  name         String  @db.VarChar(255)
+  description  String? @db.Text
+  location     String? @db.VarChar(150)
+  artist       String? @db.VarChar(255)
+  technique    String? @db.VarChar(50)
+  size         String? @db.VarChar(20)
+  collection   String? @db.VarChar(150)
+  route_id     Int
+
+  @@index([route_id], map: "fk_geofence_route_id")
+}
+
+model route {
+  id         Int              @id @default(autoincrement())
+  name       String           @db.VarChar(150)
+  route_type route_route_type @default(walking)
+  route      Json
+  updated_at DateTime         @default(now()) @db.DateTime(0)
+  created_at DateTime         @default(now()) @db.DateTime(0)
+  user_id    Int
+  user       user             @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_route_user")
+
+  @@index([user_id], map: "fk_route_user_idx")
+}
+
+model user {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique(map: "email_UNIQUE") @db.VarChar(255)
+  first_name String   @db.VarChar(150)
+  last_name  String   @db.VarChar(150)
+  password   String   @db.VarChar(255)
+  updated_at DateTime @default(now()) @db.DateTime(0)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  route      route[]
+}
+
+enum route_route_type {
+  walking
+  cycling
+}

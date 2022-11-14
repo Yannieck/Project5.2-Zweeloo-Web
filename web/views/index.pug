@@ -1,0 +1,36 @@
+html
+    head
+        title Landingpage
+        script(src='https://cdn.tailwindcss.com')
+
+    body
+        style.
+            :root {
+                --maincolor: #fff5d2;
+                --secondcolor: #ffefb9;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: var(--maincolor);
+            }
+
+            #main_container {
+                background-color: var(--secondcolor);
+            }
+
+            #content {
+                background-color: var(--maincolor);
+            }
+        include head.pug
+        block content
+            .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
+                    .overflow-hidden.rounded-lg.flex.flex-wrap.justify-center.items-center(class='w-[90%] h-5/6')#content
+                        .w-full.flex.justify-center.items-center.text-center
+                            a(href='https://kunstenaarsdorpzweeloo.nl/')
+                                img(src='https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png')
+                        .w-full.flex.justify-center.items-center.text-center
+                            h1.text-4xl Editorpagina Stichting Kunstenaarsdorp Zweeloo
+                        .w-full.flex.justify-center.items-center.text-center
+                            h1.text-2xl Welkom op de landingspagina voor Stichting Kunstenaarsdorp Zweeloo.
