@@ -1,15 +1,14 @@
-<!--suppress ALL -->
 <h1 align="center" id="logo">
   <a href="https://kunstenaarsdorpzweeloo.nl">
-    <img src="https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png" alt="Stichting Kunstenaarsdorp Zweeloo" title="Stichting Kunstenaarsdorp Zweeloo" height="60" />
+    <img style="background-color:#fff; padding: 15px; border-radius: 5px" src="https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png" alt="Stichting Kunstenaarsdorp Zweeloo" title="Stichting Kunstenaarsdorp Zweeloo" height="60" />
   </a>
 </h1>
 
 <p align="center">
-    <a href="#about">About</a> •    
-    <a href="#getting-started">Getting Started</a> •
-    <a href="#documentation">Documentation</a> •
-    <a href="#extra">Extra</a>
+  <a href="#about">About</a> •    
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#extra">Extra</a>
 </p>
 
 <hr/>
@@ -21,16 +20,16 @@
 <h2 align="center" id="about">Used Techniques</h2>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white" alt=""/>
-    <img src="https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens" alt=""/>
-    <img src="https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white" alt=""/>
+  <img src="https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white" alt=""/>
+  <img src="https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens" alt=""/>
+  <img src="https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white" alt=""/>
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E" alt=""/>
-    <img src="https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white" alt=""/>
-    <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white" alt=""/>
-    <img src="https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454" alt=""/>
+  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E" alt=""/>
+  <img src="https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white" alt=""/>
+  <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white" alt=""/>
+  <img src="https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454" alt=""/>
 </p>
 
 <br/>
@@ -98,10 +97,10 @@ npm install
 
 <h2>Running</h2>
 
-**Please note:**
-This project is NOT shipped with an SQL export of the database.
-[Prisma ORM](https://www.prisma.io/) handles the database connection and schema management.
-This means you should either generate the client, or push the database schema to the server.
+> **Please note:**
+> This project is NOT shipped with an SQL export of the database.
+> [Prisma ORM](https://www.prisma.io/) handles the database connection and schema management.
+> This means you should either generate the client, or push the database schema to the server.
 
 To push the database schema to the server, use the following command. Make sure that you have a database called 'skz'.
 
