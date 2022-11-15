@@ -1,33 +1,15 @@
 meta(charset='UTF-8')
 meta(name='viewport' content='width=device-width, initial-scale=1.0')
 meta(http-equiv='X-UA-Compatible' content='ie=edge')
-meta(name='language', content='en')
+meta(name='language' content='nl')
 
-style.
-    nav {
-        font-family: 'Poppins', sans-serif;
-        background-color: #fff5d2;
-    }
+link(rel='icon' type='image/png' href='./images/cropped-logoSZKpalet-192x192.png')
 
-// This example requires Tailwind CSS v2.0+
-nav
-    .max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
-        .relative.flex.items-center.justify-between.h-16
-            .absolute.inset-y-0.left-0.flex.items-center(class='sm:hidden')
-            .flex-1.flex.items-center.justify-center(class='sm:items-stretch sm:justify-start')
-                .flex-shrink-0.flex.items-center
-                    a(href='/')
-                        img.block.h-8.w-auto(class='lg:hidden'  src='https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png' alt='SKZ')
-                        img.hidden.h-8.w-auto(class='lg:block' src='https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png' alt='SKZ')
-                .hidden(class='sm:block sm:ml-6')
-                    .flex.space-x-4
-                        // Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-                        a.px-3.py-2.rounded-md.text-sm.font-medium(href='/' class='hover:bg-gray-700 hover:text-white' aria-current='page') Home
-                        a.px-3.py-2.rounded-md.text-sm.font-medium(href='/profile' class='hover:bg-gray-700 hover:text-white' aria-current='page') Profile
-                        a.px-3.py-2.rounded-md.text-sm.font-medium(href='/routeselection' class='hover:bg-gray-700 hover:text-white') Route Editor
-                        a.px-3.py-2.rounded-md.text-sm.font-medium(href='/register' class='hover:bg-gray-700 hover:text-white') Register
-                        a.px-3.py-2.rounded-md.text-sm.font-medium(href='/settings' class='hover:bg-gray-700 hover:text-white') Settings
+//- Import scripts
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js' integrity='sha512-53HyVymh+n8HTeZ6ND4oQ+yWHxupmItxAybc5lesv8CsPvyjRijNy8fOCw3Lg/IVv7OTDkIjGRwa78Jv2EQT/A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js' integrity='sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==' crossorigin='anonymous' referrerpolicy='no-referrer')
 
-            div
-                a.px-3.py-2.rounded-md.text-sm.font-medium(href='/login' class='hover:bg-gray-700 hover:text-white') Login
-                a.px-3.py-2.rounded-md.text-sm.font-medium(href='/logout' class='hover:bg-gray-700 hover:text-white') Logout
+script(src='https://cdn.tailwindcss.com')
+style 
+    include ./style.css

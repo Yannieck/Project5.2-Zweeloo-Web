@@ -1,39 +1,14 @@
 html
     head
+        include head.pug
         title route-selection
-        script(src='https://cdn.tailwindcss.com')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js' integrity='sha512-53HyVymh+n8HTeZ6ND4oQ+yWHxupmItxAybc5lesv8CsPvyjRijNy8fOCw3Lg/IVv7OTDkIjGRwa78Jv2EQT/A==' crossorigin='anonymous' referrerpolicy='no-referrer')
         script(src='/scripts/routeselection.js' type='module' defer)
 
-    body
-        style.
-            :root {
-                --maincolor: #fff5d2;
-                --secondcolor: #ffefb9;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                background-color: var(--maincolor);
-            }
-
-            #main_div {
-                background-color: var(--secondcolor);
-            }
-
-            /* both of these classes are used in routeselection.js */
-            .bgmain {
-                background-color: var(--maincolor);
-            }
-
-            .bgsecond {
-                background-color: var(--secondcolor);
-            }
-        include head.pug
+    body.clr-bg-main
+        include header.pug
         block content
             .w-full.flex.justify-center.overflow-hidden(class='md:h-[93%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='md:w-[99%] md:h-[93%]')#main_div
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='md:w-[99%] md:h-[93%]').clr-bg-sec
                     .overflow-hidden.rounded-lg(class='w-[90%] h-5/6')
                         .m-5#route_selection
                             h1.text-4xl.font-bold.font-sans.mb-5 Routes

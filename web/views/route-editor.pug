@@ -1,38 +1,22 @@
 html
     head
+        include head.pug
         title routeEditor
-        script(src='https://cdn.tailwindcss.com')
+
         link(rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' integrity='sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==' crossorigin='')
         script(src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' integrity='sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==' crossorigin='')
-    body
+
+    body.clr-bg-main
         style.
-            :root {
-                --maincolor: #fff5d2;
-                --secondcolor: #ffefb9;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                background-color: var(--maincolor);
-            }
-
-            #main_container {
-                background-color: var(--secondcolor);
-            }
-
-            #content {
-                background-color: var(--maincolor);
-            }
-
             #map {
                 height: 45rem;
                 width: 100rem;
             }
-        include head.pug
+        include header.pug
         block content
             .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
-                    .overflow-hidden.rounded-lg.flex.flex-wrap.justify-center.items-center.p-12(class='w-[95%] h-fit')#content
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]').clr-bg-sec
+                    .overflow-hidden.rounded-lg.flex.flex-wrap.justify-center.items-center.p-12(class='w-[95%] h-fit').clr-bg-main
                         .rounded-lg#map
                             head
                                 title Add Map

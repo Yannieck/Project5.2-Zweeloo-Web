@@ -1,48 +1,18 @@
 html
     head
-        title index
-        script(src='https://cdn.tailwindcss.com')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js' integrity='sha512-53HyVymh+n8HTeZ6ND4oQ+yWHxupmItxAybc5lesv8CsPvyjRijNy8fOCw3Lg/IVv7OTDkIjGRwa78Jv2EQT/A==' crossorigin='anonymous' referrerpolicy='no-referrer')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js' integrity='sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==' crossorigin='anonymous' referrerpolicy='no-referrer')
-        script(src='/scripts/register.js' type='module' defer)
-        //should be replaced with a header file
-
-    body
-        style.
-            :root {
-                --maincolor: #fff5d2;
-                --secondcolor: #ffefb9;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                background-color: #ffefb9;
-            }
-
-            #main_container {
-                background-color: var(--secondcolor);
-            }
-
-            #content {
-                background-color: var(--maincolor);
-            }
-
-            #register_box {
-                background-color: var(--secondcolor)
-            }
-
-            #register_button {
-                background-color: #00427d;
-            }
         include head.pug
+        title index
+        script(src='/scripts/register.js' type='module' defer)
+
+    body.clr-bg-sec
+        include header.pug
         block content
             .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
-                    .flex.rounded-lg.justify-center.items-center.overflow-hidden(class='w-[40%] h-5/6')#content
+                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]').clr-bg-sec
+                    .flex.rounded-lg.justify-center.items-center.overflow-hidden(class='w-[40%] h-5/6').clr-bg-main
                         .flex.items-center.justify-center
                             .w-full.max-w-md
-                                .shadow-lg.rounded.px-12.pt-6.pb-2.mb-2#register_box
+                                .shadow-lg.rounded.px-12.pt-6.pb-2.mb-2.clr-bg-sec
                                     .text-gray-800.text-2xl.flex.justify-center.border-b-2.py-2.mb-2.text-center
                                         | Registratie Stichting Kunstenaarsdorp Zweeloo App
                                     .mb-2
@@ -66,4 +36,4 @@ html
                                             | Last name
                                         input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(value='Sijbesma' class='focus:outline-none focus:shadow-outline'  type='text' placeholder='Last Name' name='password' required='')#last_name
                                     .flex.items-center.justify-between
-                                        button.px-4.py-2.rounded.bg-blue.text-white.inline-block.shadow-lg#register_button Register
+                                        button.px-4.py-2.rounded.bg-blue.text-white.inline-block.shadow-lg.clr-acc-blue#register_button Register

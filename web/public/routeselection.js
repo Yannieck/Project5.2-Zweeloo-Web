@@ -40,7 +40,7 @@ if(type === 'XML') {
 function addElementXML(data) {
     const main = document.getElementById('route_selection')
     const a = document.createElement('a');
-    a.classList.add('grid', 'grid-rows-1', 'font-sans', 'rounded-lg', 'my-2', 'bgmain');
+    a.classList.add('grid', 'grid-rows-1', 'font-sans', 'rounded-lg', 'my-2', 'clr-bg-main');
     a.href = '/routeeditor/' + data.data.id;
     main.appendChild(a);
 
@@ -49,7 +49,7 @@ function addElementXML(data) {
     a.appendChild(div1);
 
     const div2 = document.createElement('div');
-    div2.classList.add('flex', 'items-center', 'space-x-2', 'font-semibold', 'leading-8', 'bgsecond');
+    div2.classList.add('flex', 'items-center', 'space-x-2', 'font-semibold', 'leading-8', 'clr-bg-sec');
     div1.appendChild(div2);
 
     const span = document.createElement('span');
@@ -61,7 +61,7 @@ function addElementXML(data) {
 function addElementJSON(data) {
     const main = document.getElementById('route_selection')
     const a = document.createElement('a');
-    a.classList.add('grid', 'grid-rows-1', 'font-sans', 'rounded-lg', 'my-2', 'bgmain');
+    a.classList.add('grid', 'grid-rows-1', 'font-sans', 'rounded-lg', 'my-2', 'clr-bg-main');
     a.href = '/routeeditor/' + data.id;
     main.appendChild(a);
 
@@ -70,7 +70,7 @@ function addElementJSON(data) {
     a.appendChild(div1);
 
     const div2 = document.createElement('div');
-    div2.classList.add('flex', 'items-center', 'space-x-2', 'font-semibold', 'leading-8', 'bgsecond');
+    div2.classList.add('flex', 'items-center', 'space-x-2', 'font-semibold', 'leading-8', 'clr-bg-sec');
     div1.appendChild(div2);
 
     const span = document.createElement('span');

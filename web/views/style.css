@@ -1,0 +1,43 @@
+:root {
+    --clr-bg-300: #fff5d2; /* Main background color */
+    --clr-bg-400: #ffefb9; /* Darker background color */
+    --clr-acc-600: #e2030f; /* Accent color 1 */
+    --clr-acc-500: #00427d; /* Accent color 2 */
+    --clr-txt-900: #333333; /* Text color */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+}
+
+.clr-bg-main {
+    background-color: var(--clr-bg-300);
+}
+
+.clr-bg-sec {
+    background-color: var(--clr-bg-400);
+}
+
+.clr-acc-red {
+    background-color: var(--clr-acc-600);
+}
+
+.clr-acc-blue {
+    background-color: var(--clr-acc-500);
+}
+
+.clr-text {
+    background-color: var(--clr-txt-900);
+}
