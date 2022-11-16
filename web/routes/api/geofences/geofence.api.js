@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 const auth = require('../../../middleware/auth');
 const geofencecontroller = require('../../../bin/geofencecontroller');
-const StatusCodes = require("http-status-codes");
+const HSC = require("http-status-codes");
 const XMLRefactor = require('../../../middleware/XMLRefactors');
-const Statuscodes = require("http-status-codes");
 const ContentTypeCheck = require('../../../middleware/contenttypecheck');
 
 router.get('/:id', async(req, res) => {
@@ -21,9 +20,9 @@ router.get('/:id', async(req, res) => {
         } else {
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.geofenceResponse(geofence);
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.Statuscodes.OK).send(xmlres);
             } else {
-                return res.status(StatusCodes.OK).send(geofence);
+                return res.status(HSC.StatusCodes.OK).send(geofence);
             }
         }
     } catch (e) {
@@ -49,16 +48,16 @@ router.post('/newgeofence', auth, ContentTypeCheck.checkGeofenceCreate, async(re
 
         if(req.header('accept') === 'application/xml') {
             const xmlres = XMLRefactor.apisuccessresponse(201, 'Geofence created');
-            return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+            return res.set('Content-Type', 'application/xml').status(HSC.Statuscodes.OK).send(xmlres);
         } else {
-            return res.status(Statuscodes.OK).json({ message: "Geofence created!" });
+            return res.status(HSC.Statuscodes.OK).json({ message: "Geofence created!" });
         }
     } catch (e) {
         if(req.header('accept') === 'application/xml') {
             const xmlres = XMLRefactor.apiErrorBuilder(400, "Bad request");
             return res.set('Content-Type', 'application/xml').send(xmlres);
         } else {
-            return res.status(Statuscodes.BAD_REQUEST).send(e);
+            return res.status(HSC.Statuscodes.BAD_REQUEST).send(e);
         }
     }
 });
@@ -71,9 +70,9 @@ router.delete('/deletegeofence/:id', auth, async(req, res) => {
         if(result) {
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.succesfulDeleteResponse({code: 200, message: 'Geofence deleted succesfully!'});
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.Statuscodes.OK).send(xmlres);
             } else {
-                return res.status(Statuscodes.OK).send({message: 'Geofence deleted succesfully!'})
+                return res.status(HSC.Statuscodes.OK).send({message: 'Geofence deleted succesfully!'})
             }
         } else {
             if(req.header('accept') === 'application/xml') {
@@ -91,7 +90,7 @@ router.delete('/deletegeofence/:id', auth, async(req, res) => {
             const xmlres = XMLRefactor.apiErrorBuilder(400, "Bad request");
             return res.set('Content-Type', 'application/xml').send(xmlres);
         } else {
-            return res.status(Statuscodes.BAD_REQUEST).send(e);
+            return res.status(HSC.Statuscodes.BAD_REQUEST).send(e);
         }
     }
 })
@@ -113,9 +112,9 @@ router.get('/geofencesfromroute/:route_id', async(req, res) => {
             const geofences = await geofencecontroller.getGeofencesFromRoute(route_id);
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.allGeofencesAtRouteResponse(geofences);
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.Statuscodes.OK).send(xmlres);
             } else {
-                return res.status(StatusCodes.OK).send(geofences);
+                return res.status(HSC.StatusCodes.OK).send(geofences);
             }
         }
     } catch (e) {
@@ -153,9 +152,9 @@ router.post('/editgeofence/:id', auth, ContentTypeCheck.checkGeofenceEdit, async
 
         if(req.header('accept') === 'application/xml') {
             const xmlres = XMLRefactor.geofenceResponse(geofence);
-            return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+            return res.set('Content-Type', 'application/xml').status(HSC.Statuscodes.OK).send(xmlres);
         } else {
-            return res.status(Statuscodes.OK).send(geofence);
+            return res.status(HSC.Statuscodes.OK).send(geofence);
         }
     } catch (e) {
         if(req.header('accept') === 'application/xml') {

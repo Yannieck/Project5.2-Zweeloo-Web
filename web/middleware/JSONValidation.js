@@ -7,21 +7,21 @@ const createrouteschema = require('../validation/json/createroute.json');
 const geofenceschema = require('../validation/json/geofence.json');
 const edituserschema = require('../validation/json/edituser.json');
 
+// const JOIValidator = require("./JOIValidator");
 const ajv = new Ajv();
 addFormats(ajv);
 
 class JSONValidation {
-    static validateLogin = (req, res) => {
-        const data = req.body;
-        const validate =  ajv.compile(loginschema);
-        const valid = validate(data);
+    // static validateLogin = (req, res) => {
+    //     const data = req.body;
+    //     const valid = JOIValidator.validateLogin(data);
 
-        if(!valid) {
-            return res.json(validate.errors[0].message);
-        } else {
-            return true;
-        }
-    }
+    //     if(!valid) {
+    //         return res.json(validate.errors[0].message);
+    //     } else {
+    //         return true;
+    //     }
+    // }
 
     static validateRegister = (req, res) => {
         const data = req.body;

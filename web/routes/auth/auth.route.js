@@ -1,14 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const authcontroller = require('../../bin/authcontroller');
-const ContentTypeCheck = require('../../middleware/contenttypecheck');
+const auth = require("../../middleware/auth");
+const AuthController = require("../../bin/authcontroller");
+const ContentTypeCheck = require("../../middleware/contenttypecheck");
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.post('/login', ContentTypeCheck.checkLogin, authcontroller.login);
+//Check login
+router.post("/login", ContentTypeCheck.checkLogin, AuthController.login);
 
-router.post('/register', auth, ContentTypeCheck.checkRegister, authcontroller.register);
+//Check register
+router.post(
+    "/register",
+    auth,
+    ContentTypeCheck.checkRegister,
+    AuthController.register
+);
 
 module.exports = router;

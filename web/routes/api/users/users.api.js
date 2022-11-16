@@ -3,7 +3,7 @@ const router = express.Router();
 const usercontroller = require('../../../bin/usercontroller');
 const auth = require('../../../middleware/auth');
 const authservice = require('../../../config/authservice');
-const Statuscodes = require('http-status-codes');
+const HCS = require('http-status-codes');
 const XMLRefactor = require("../../../middleware/XMLRefactors");
 const ContentTypeCheck = require('../../../middleware/contenttypecheck');
 
@@ -20,9 +20,9 @@ router.get('/allUsers', auth, async(req, res) => {
         } else {
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.allUsersResponse(users);
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
             } else {
-                return res.status(Statuscodes.OK).json(users);
+                return res.status(HSC.StatusCodes.OK).json(users);
             }
         }
     } catch (e) {
@@ -30,7 +30,7 @@ router.get('/allUsers', auth, async(req, res) => {
             const xmlres = XMLRefactor.apiErrorBuilder(500, "Internal server error");
             return res.set('Content-Type', 'application/xml').send(xmlres);
         } else {
-            return res.status(Statuscodes.INTERNAL_SERVER_ERROR).send();
+            return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
         }
     }
 });
@@ -44,9 +44,9 @@ router.get('/:id', auth, async(req, res) => {
             const safe_user = authservice.getSafeData(user);
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.userResponse(safe_user);
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
             } else {
-                return res.status(Statuscodes.OK).json(safe_user);
+                return res.status(HSC.StatusCodes.OK).json(safe_user);
             }
         } else {
             if(req.header('accept') === 'application/xml') {
@@ -61,7 +61,7 @@ router.get('/:id', auth, async(req, res) => {
             const xmlres = XMLRefactor.apiErrorBuilder(500, "Internal server error");
             return res.set('Content-Type', 'application/xml').send(xmlres);
         } else {
-            return res.status(Statuscodes.INTERNAL_SERVER_ERROR).send();
+            return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
         }
     }
 });
@@ -81,9 +81,9 @@ router.post('/edit/:id', auth, ContentTypeCheck.checkUserEdit, async(req, res) =
 
         if(req.header('accept') === 'application/xml') {
             const xmlres = XMLRefactor.userResponse(user);
-            return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+            return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
         } else {
-            return res.status(Statuscodes.OK).send(user);
+            return res.status(HSC.StatusCodes.OK).send(user);
         }
     } catch(e) {
         if(req.header('accept') === 'application/xml') {
@@ -103,9 +103,9 @@ router.delete('/deleteuser/:id', auth, async(req, res) => {
         if(result) {
             if(req.header('accept') === 'application/xml') {
                 const xmlres = XMLRefactor.succesfulDeleteResponse({code: 200, message: 'User deleted succesfully!'});
-                return res.set('Content-Type', 'application/xml').status(Statuscodes.OK).send(xmlres);
+                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
             } else {
-                return res.status(Statuscodes.OK).send({message: 'User deleted succesfully!'})
+                return res.status(HSC.StatusCodes.OK).send({message: 'User deleted succesfully!'})
             }
         } else {
             if(req.header('accept') === 'application/xml') {
@@ -123,7 +123,7 @@ router.delete('/deleteuser/:id', auth, async(req, res) => {
             const xmlres = XMLRefactor.apiErrorBuilder(400, "Bad request");
             return res.set('Content-Type', 'application/xml').send(xmlres);
         } else {
-            return res.status(Statuscodes.BAD_REQUEST).send(e);
+            return res.status(HSC.StatusCodes.BAD_REQUEST).send(e);
         }
     }
 });

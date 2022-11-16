@@ -2,7 +2,7 @@ const { hashSync, compareSync } = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
 class Authservice {
-    static isValid = (password, user_password) => {
+    static validatePasswords = (password, user_password) => {
         return compareSync(password, user_password);
     }
 
