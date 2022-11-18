@@ -18,34 +18,22 @@ class ContentTypeCheck {
             //Return an error with code 400
             return res.status(HCS.StatusCodes.BAD_REQUEST).json({
                 redirect: "/login",
-                message: "Data validation failed : " + checkValidity,
+                message: "Data validation failed",
             });
         }
     };
 
     static checkRegister = (req, res, next) => {
-        if (req.is("application/xml")) {
-            try {
-                if (XMLValidation.validateRegister(req, res, next)) {
-                    return next();
-                }
-            } catch (e) {
-                const xmlres = XMLRefactor.apiErrorBuilder(
-                    400,
-                    "Data validation failed"
-                );
-                return res.set("Content-Type", "application/xml").send(xmlres);
-            }
+        const data = req.body;
+        const checkValidity = JOIValidator.validateRegister(data);
+
+        if (checkValidity === true) {
+            return next();
         } else {
-            try {
-                if (JSONValidation.validateRegister(req)) {
-                    return next();
-                }
-            } catch (e) {
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .send({ err: "Data validation failed" });
-            }
+            return res.status(HCS.StatusCodes.BAD_REQUEST).json({
+                redirect: "/register",
+                message: "Data validation failed",
+            });
         }
     };
 

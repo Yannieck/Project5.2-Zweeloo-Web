@@ -1,7 +1,5 @@
 const axios = window.axios;
 const swal = window.sweetAlert;
-const builder = new fxparser.XMLBuilder({ format: true });
-const parser = new fxparser.XMLParser();
 
 const login_button = document.getElementById("login_button");
 
