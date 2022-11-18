@@ -8,9 +8,8 @@ login_button.addEventListener("click", () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    //Get the login data from the post with the use of Axios
+    //Put the login data into the post with axios
     axios
-        //Find the post
         .post(
             "/auth/login",
             {

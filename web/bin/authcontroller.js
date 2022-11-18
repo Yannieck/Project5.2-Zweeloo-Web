@@ -1,7 +1,6 @@
 const UserController = require("./usercontroller");
-const Authservice = require("../config/authservice");
+const AuthService = require("../config/AuthService");
 const HCS = require("http-status-codes");
-const XMLRefactor = require("../middleware/XMLRefactors");
 
 class AuthController {
     static login = async (req, res, next) => {
@@ -20,13 +19,13 @@ class AuthController {
 
             //Check if the entered passwordt matches the user password
             if (
-                await Authservice.validatePasswords(
+                await AuthService.validatePasswords(
                     data.password,
                     user.password
                 )
             ) {
                 //Create a "logged in" cookie
-                const tokenObject = Authservice.issueJWT(user);
+                const tokenObject = AuthService.issueJWT(user);
 
                 //Create a cookie, send the status code and send the redirect
                 return res
@@ -65,7 +64,7 @@ class AuthController {
             }
 
             if (
-                !Authservice.comparePasswords(
+                !AuthService.comparePasswords(
                     data.password,
                     data.password_repeat
                 )
@@ -76,7 +75,7 @@ class AuthController {
                 });
             }
 
-            const hashed_password = Authservice.hashPassword(data.password);
+            const hashed_password = AuthService.hashPassword(data.password);
 
             const new_user = await UserController.createUser(
                 data.email,

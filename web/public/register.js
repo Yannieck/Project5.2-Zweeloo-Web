@@ -4,12 +4,14 @@ const swal = window.sweetAlert;
 const register_button = document.getElementById("register_button");
 
 register_button.addEventListener("click", () => {
+    //Get all the registration values from the inputs
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const password_repeat = document.getElementById("password_repeat").value;
     const first_name = document.getElementById("first_name").value;
     const last_name = document.getElementById("last_name").value;
 
+    //Put the register information in the post with axios
     axios
         .post(
             "/auth/register",
@@ -28,6 +30,7 @@ register_button.addEventListener("click", () => {
                 },
             }
         )
+        //If the post was succesfull, no errors occured
         .then((res) => {
             let data = res.data;
 
