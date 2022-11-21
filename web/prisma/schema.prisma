@@ -7,46 +7,82 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model geofence {
-  id           Int     @id @default(autoincrement())
-  order_number Int
-  name         String  @db.VarChar(255)
-  description  String? @db.Text
-  location     String? @db.VarChar(150)
-  artist       String? @db.VarChar(255)
-  technique    String? @db.VarChar(50)
-  size         String? @db.VarChar(20)
-  collection   String? @db.VarChar(150)
-  route_id     Int
+model poi_img {
+  id     Int    @id @default(autoincrement())
+  src    String @db.VarChar(255)
+  poi    poi    @relation(fields: [poi_id], references: [id])
+  poi_id Int
+}
 
-  @@index([route_id], map: "fk_geofence_route_id")
+model poi {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  lat         Decimal   @db.Decimal()
+  lon         Decimal   @db.Decimal()
+  description String    @db.VarChar(255)
+  audio_src   String    @db.VarChar(255)
+  route_id    Int
+  route       route     @relation(fields: [route_id], references: [id])
+  poi_img     poi_img[]
+}
+
+model node {
+  id       Int     @id @default(autoincrement())
+  index    Int
+  lat      Decimal @db.Decimal()
+  lon      Decimal @db.Decimal()
+  route_id Int
+  route    route   @relation(fields: [route_id], references: [id])
 }
 
 model route {
-  id         Int              @id @default(autoincrement())
-  name       String           @db.VarChar(150)
-  route_type route_route_type @default(walking)
-  route      Json
-  updated_at DateTime         @default(now()) @db.DateTime(0)
-  created_at DateTime         @default(now()) @db.DateTime(0)
-  user_id    Int
-  user       user             @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_route_user")
+  id          Int        @id @default(autoincrement())
+  name        String     @db.VarChar(255)
+  route       Json
+  type        route_type @default(WALK)
+  distance    Float      @db.Float()
+  extra       String     @db.VarChar(255)
+  description String     @db.VarChar(255)
+  wheelchair  Boolean    @default(false)
+  poi         poi[]
+  node        node[]
+  log         log[]
+}
 
-  @@index([user_id], map: "fk_route_user_idx")
+model log {
+  id       Int       @id @default(autoincrement())
+  type     crud_type
+  datetime DateTime  @default(now()) @db.DateTime(0)
+  user_id  Int
+  user     user      @relation(fields: [user_id], references: [id])
+  route    route     @relation(fields: [route_id], references: [id])
+  route_id Int
 }
 
 model user {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique(map: "email_UNIQUE") @db.VarChar(255)
-  first_name String   @db.VarChar(150)
-  last_name  String   @db.VarChar(150)
-  password   String   @db.VarChar(255)
-  updated_at DateTime @default(now()) @db.DateTime(0)
-  created_at DateTime @default(now()) @db.DateTime(0)
-  route      route[]
+  id         Int    @id @default(autoincrement())
+  email      String @unique(map: "email_UNIQUE") @db.VarChar(255)
+  first_name String @db.VarChar(255)
+  last_name  String @db.VarChar(255)
+  password   String @db.VarChar(512)
+  log        log[]
 }
 
-enum route_route_type {
-  walking
-  cycling
+model sponsor {
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+  adress String @db.VarChar(255)
+  info   String @db.VarChar(255)
+  logo   String @db.VarChar(255)
+}
+
+enum route_type {
+  WALK
+  BIKE
+}
+
+enum crud_type {
+  CREATE
+  UPDATE
+  DELETE
 }
