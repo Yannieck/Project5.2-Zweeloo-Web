@@ -86,3 +86,7 @@ enum crud_type {
   UPDATE
   DELETE
 }
+
+enum hallo {
+  create
+}
