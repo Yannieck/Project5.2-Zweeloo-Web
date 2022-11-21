@@ -63,44 +63,4 @@ router.get("/register", auth, (req, res) => {
     res.render("register", { logedIn: req.cookies.hasOwnProperty("jwt") });
 });
 
-router.get("/settings", (req, res) => {
-    if (req.cookies.contenttype) {
-        return res.render("settings", {
-            logedIn: req.cookies.hasOwnProperty("jwt"),
-        });
-    } else {
-        return res
-            .cookie("contenttype", "JSON", {
-                expires: new Date(Date.now() + 2147483647999),
-                httpOnly: false,
-                sameSite: "Strict",
-                secure: true,
-            })
-            .render("settings", { logedIn: req.cookies.hasOwnProperty("jwt") });
-    }
-});
-
-router.post("/settings", (req, res) => {
-    const type = req.body.content_type;
-    if (type === "XML") {
-        return res
-            .cookie("contenttype", "XML", {
-                expires: new Date(Date.now() + 2147483647999),
-                httpOnly: false,
-                sameSite: "Strict",
-                secure: true,
-            })
-            .render("index", { logedIn: req.cookies.hasOwnProperty("jwt") });
-    } else {
-        return res
-            .cookie("contenttype", "JSON", {
-                expires: new Date(Date.now() + 2147483647999),
-                httpOnly: false,
-                sameSite: "Strict",
-                secure: true,
-            })
-            .render("index", { logedIn: req.cookies.hasOwnProperty("jwt") });
-    }
-});
-
 module.exports = router;

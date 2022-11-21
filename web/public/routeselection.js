@@ -7,7 +7,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-const type = getCookie('contenttype');
+const type = "JSON";
 
 if(type === 'XML') {
     axios.get('/api/routes/allroutesnames', {

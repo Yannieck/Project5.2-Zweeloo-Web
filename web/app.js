@@ -17,7 +17,7 @@ app.use(xmlparser());
 
 app.use('/scripts', express.static('public'));
 app.use('/validations', express.static('validation'));
-app.use('/images', express.static('assets/img'));
+app.use('/images', express.static('public/assets/img'));
 
 app.use('/', require('./routes'));
 
