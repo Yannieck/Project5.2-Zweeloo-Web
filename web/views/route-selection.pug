@@ -4,41 +4,39 @@ html
         title route-selection
         script(src='/scripts/routeselection.js' type='module' defer)
 
-    body.clr-bg-main
+    body.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
         block content
-            .w-full.flex.justify-center.overflow-hidden(class='md:h-[93%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='md:w-[99%] md:h-[93%]').clr-bg-sec
-                    .overflow-hidden.rounded-lg(class='w-[90%] h-5/6')
-                        .m-5#route_selection
-                            h1.text-4xl.font-bold.font-sans.mb-5 Routes
-
-                            // kijken of we een functie kunnen maken zodat er voor elke route een tabel wordt ingeladen.
-                                ook moet er nog een bewerken knop komen die verwijst naar de route met het juiste ID
-                                en op het moment dat er iets van de database ingeladen moet worden komen er errors
-                            //mixin route(route)
-                            //    a(href='/routeeditor' class='h-2/5').grid.grid-rows-1.font-sans.rounded-lg
-                            //        .p-3.shadow-sm.rounded-sm
-                            //            .flex.items-center.space-x-2.font-semibold.text-gray-900.leading-8
-                            //                span.tracking-wide About
-                            //            .text-gray-700
-                            //                .grid.text-sm(class='md:grid-cols-2')
-                            //                    .grid.grid-cols-2.my-1
-                            //                        .px-7.py-2.font-semibold Route ID
-                            //                        input(value=route.route_id).px-4.py-2.rounded-lg
-                            //                    .grid.grid-cols-2.my-1
-                            //                        .px-7.py-2.font-semibold Route
-                            //                        input(value=route.route).px-4.py-2.rounded-lg
-                            //                    .grid.grid-cols-2.my-1
-                            //                        .px-7.py-2.font-semibold User id
-                            //                        input(value=route.user_id).px-4.py-2.rounded-lg
-                            //                    .grid.grid-cols-2.my-1
-                            //                        .px-7.py-2.font-semibold Created at
-                            //                        input(value=route.created_at).px-4.py-2.rounded-lg
-                            //                    .grid.grid-cols-2.my-1
-                            //                        .px-7.py-2.font-semibold Updated at
-                            //                        input(value=route.updated_at).px-4.py-2.rounded-lg
-                            //
-                            //if(data)
-                            //    for item in data
-                            //        +route(item)
+            .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                .px-16
+                    h1.text-4xl.font-bold.mb-5 Routes
+                .line
+                // kijken of we een functie kunnen maken zodat er voor elke route een tabel wordt ingeladen.
+                    ook moet er nog een bewerken knop komen die verwijst naar de route met het juiste ID
+                    en op het moment dat er iets van de database ingeladen moet worden komen er errors
+                //mixin route(route)
+                //    a(href='/routeeditor' class='h-2/5').grid.grid-rows-1.font-sans.rounded-lg
+                //        .p-3.shadow-sm.rounded-sm
+                //            .flex.items-center.space-x-2.font-semibold.text-gray-900.leading-8
+                //                span.tracking-wide About
+                //            .text-gray-700
+                //                .grid.text-sm(class='md:grid-cols-2')
+                //                    .grid.grid-cols-2.my-1
+                //                        .px-7.py-2.font-semibold Route ID
+                //                        input(value=route.route_id).px-4.py-2.rounded-lg
+                //                    .grid.grid-cols-2.my-1
+                //                        .px-7.py-2.font-semibold Route
+                //                        input(value=route.route).px-4.py-2.rounded-lg
+                //                    .grid.grid-cols-2.my-1
+                //                        .px-7.py-2.font-semibold User id
+                //                        input(value=route.user_id).px-4.py-2.rounded-lg
+                //                    .grid.grid-cols-2.my-1
+                //                        .px-7.py-2.font-semibold Created at
+                //                        input(value=route.created_at).px-4.py-2.rounded-lg
+                //                    .grid.grid-cols-2.my-1
+                //                        .px-7.py-2.font-semibold Updated at
+                //                        input(value=route.updated_at).px-4.py-2.rounded-lg
+                //
+                //if(data)
+                //    for item in data
+                //        +route(item)

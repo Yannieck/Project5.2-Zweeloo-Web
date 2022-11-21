@@ -1,6 +1,5 @@
-nav
-    .max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
-        .flex.items-center.justify-between.h-16
+nav.max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
+        .flex.items-center.justify-between.h-16.border-b-2.clr-border-sec.px-10
             .flex-1.flex.items-center.justify-center(class='sm:items-stretch sm:justify-start')
                 .flex-shrink-0.flex.items-center
                     a(href='/')
@@ -15,5 +14,5 @@ nav
                         a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Aanmelden
                         a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/settings') Instellingen
             div.flex.space-x-4
-                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = logedIn ? '' : null) Login
-                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/logout' hidden = logedIn ? null : '') Logout
+                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = logedIn ? '' : null) Log In
+                a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = logedIn ? null : '') Log Uit

@@ -2,38 +2,31 @@ html
     head
         include head.pug
         title index
-        script(src='/scripts/register.js' type='module' defer)
+        script(src="/scripts/register.js" type="module" defer)
 
-    body.clr-bg-sec
+    body.clr-bg-main(class="border-[20px] clr-border-sec")
         include header.pug
         block content
-            .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]').clr-bg-sec
-                    .flex.rounded-lg.justify-center.items-center.overflow-hidden(class='w-[40%] h-5/6').clr-bg-main
-                        .flex.items-center.justify-center
-                            .w-full.max-w-md
-                                .shadow-lg.rounded.px-12.pt-6.pb-2.mb-2.clr-bg-sec
-                                    .text-gray-800.text-2xl.flex.justify-center.border-b-2.py-2.mb-2.text-center
-                                        | Registratie Stichting Kunstenaarsdorp Zweeloo App
-                                    .mb-2
-                                        label.block.text-gray-700.text-sm.font-normal.mb-1
-                                            | Email
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight(name='email' type='email' required='' placeholder='Email')#email
-                                    .mb-2
-                                        label.block.text-gray-700.text-sm.font-normal.mb-1
-                                            | Password
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type='password' placeholder='Password' name='password' required='')#password
-                                    .mb-2
-                                        label.block.text-gray-700.text-sm.font-normal.mb-1
-                                            | Repeat Password
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type='password' placeholder='Repeat Password' name='password_repeat' required='')#password_repeat
-                                    .mb-4
-                                        label.block.text-gray-700.text-sm.font-normal.mb-2
-                                            | First name
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type='text' placeholder='First Name' name='first_name' required='')#first_name
-                                    .mb-6
-                                        label.block.text-gray-700.text-sm.font-normal.mb-2
-                                            | Last name
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type='text' placeholder='Last Name' name='password' required='')#last_name
-                                    .flex.items-center.justify-between
-                                        button.px-4.py-2.rounded.bg-blue.text-white.inline-block.shadow-lg.clr-acc-blue#register_button Register
+            .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class="h-[calc(100%-4rem)] md:px-32")
+                .px-16.w-full                
+                    h1.text-4xl.font-bold.mb-5 Profile
+                    form(class="w-3/4")
+                        .flex.w-full.gap-4
+                            div(class="w-1/2")
+                                label.text-gray-700.text-sm.font-normal.mb-2(for="first_name") First name                        
+                                input.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type="text" name="first_name" placeholder="First Name" required)#first_name
+                            div(class="w-1/2")
+                                label.text-gray-700.text-sm.font-normal.mb-2(for="last_name") Last name
+                                input.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type="text" name="password" placeholder="Last Name" required)#last_name
+
+                        label.block.text-gray-700.text-sm.font-normal.mb-1(for="email") Email
+                        input.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight(type="email" name="email" placeholder="Email" required)#email
+
+                        label.block.text-gray-700.text-sm.font-normal.mb-1(for="password") Password
+                        input.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type="password" name="password" placeholder="Password" required)#password
+
+                        label.block.text-gray-700.text-sm.font-normal.mb-1(for="password_repeat") Repeat Password
+                        input.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(type="password" name="password_repeat" placeholder="Repeat Password" required)#password_repeat
+
+                        button.px-4.py-2.mt-4.rounded.bg-blue.text-white.inline-block.clr-acc-blue#register_button(type="submit") Register
+                .line
