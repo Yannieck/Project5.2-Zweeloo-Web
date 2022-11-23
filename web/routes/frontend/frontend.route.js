@@ -11,6 +11,10 @@ router.get("/login", (req, res) => {
     res.render("login", { logedIn: req.cookies.hasOwnProperty("jwt") });
 });
 
+router.get("/login/:status", (req, res) => {
+    res.render("login", { logedIn: req.cookies.hasOwnProperty("jwt"), status: req.params.status });
+});
+
 router.get("/routeeditor/:id", auth, (req, res) => {
     const id = parseInt(req.params.id);
     const url = "http://localhost:3000/api/routes/route/" + id;
@@ -60,7 +64,11 @@ router.get("/profile", auth, (req, res) => {
 });
 
 router.get("/register", auth, (req, res) => {
-    res.render("register", { logedIn: req.cookies.hasOwnProperty("jwt") });
+    res.render("register", { logedIn: req.cookies.hasOwnProperty("jwt")});
+});
+
+router.get("/register/:status", auth, (req, res) => {
+    res.render("register", { logedIn: req.cookies.hasOwnProperty("jwt"), status: req.params.status });
 });
 
 module.exports = router;

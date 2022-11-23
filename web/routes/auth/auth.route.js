@@ -11,11 +11,6 @@ router.use(express.urlencoded({ extended: true }));
 router.post("/login", ContentTypeCheck.checkLogin, AuthController.login);
 
 //Check register
-router.post(
-    "/register",
-    auth,
-    ContentTypeCheck.checkRegister,
-    AuthController.register
-);
+router.post("/register", auth, ContentTypeCheck.checkRegister, AuthController.register);
 
 module.exports = router;

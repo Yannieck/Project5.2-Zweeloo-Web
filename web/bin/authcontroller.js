@@ -11,10 +11,9 @@ class AuthController {
             const user = await UserController.getUser(data.email);
             if (!user) {
                 //Return an error if the user is not in the database
-                return res.status(HCS.StatusCodes.BAD_REQUEST).json({
-                    redirect: "/login",
-                    message: "Could not find a user with this email adress",
-                });
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/login/invalid_credentials`);
             }
 
             //Check if the entered passwordt matches the user password
@@ -36,18 +35,18 @@ class AuthController {
                         secure: true,
                     })
                     .status(HCS.StatusCodes.OK)
-                    .json({ redirect: "/routeselection" });
+                    .redirect(`/login/login_successfull`);
             } else {
                 //Return an error if the password is incorrect
                 return res
                     .status(HCS.StatusCodes.UNAUTHORIZED)
-                    .json({ redirect: "/login", message: "invalid password" });
+                    .redirect(`/login/invalid_credentials`);
             }
         } catch (e) {
             //Return an error if the try failed
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .json({ redirect: "/login", message: e });
+                .redirect(`/login/login_unknown_error`);
         }
     };
 
@@ -55,26 +54,22 @@ class AuthController {
         let data = req.body;
 
         try {
+            //Try to find the email in the database to check if the email is taken
             const user = await UserController.getUser(data.email);
             if (user) {
-                return res.status(HCS.StatusCodes.CONFLICT).json({
-                    redirect: "/register",
-                    message: "This email is already taken",
-                });
+                return res
+                    .status(HCS.StatusCodes.CONFLICT)
+                    .redirect(`/register/email_taken`);
             }
 
-            if (
-                !AuthService.comparePasswords(
-                    data.password,
-                    data.password_repeat
-                )
-            ) {
-                return res.status(HCS.StatusCodes.UNAUTHORIZED).json({
-                    redirect: "/register",
-                    message: "Passwords are not equal",
-                });
+            //Make sure the passwords are identical
+            if (!data.password === data.password_repeat) {
+                return res
+                    .status(HCS.StatusCodes.UNAUTHORIZED)
+                    .redirect(`/register/unequal_password`);
             }
 
+            //Create a user
             const hashed_password = AuthService.hashPassword(data.password);
 
             const new_user = await UserController.createUser(
@@ -84,20 +79,20 @@ class AuthController {
                 data.last_name
             );
 
+            //Redirect when done
             if (new_user) {
-                res.status(HCS.StatusCodes.OK).json({ redirect: "/login" });
+                res.status(HCS.StatusCodes.OK).redirect(
+                    `/register/register_success`
+                );
             } else {
                 return res
                     .status(HCS.StatusCodes.BAD_REQUEST)
-                    .json({
-                        redirect: "/register",
-                        message: "Could not create account",
-                    });
+                    .redirect(`/register/failed_create_account`);
             }
         } catch (e) {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .json({ redirect: "/register", message: e });
+                .redirect(`/register/register_unknown_error`);
         }
     };
 }

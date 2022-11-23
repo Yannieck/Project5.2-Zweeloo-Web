@@ -16,10 +16,7 @@ class ContentTypeCheck {
             return next();
         } else {
             //Return an error with code 400
-            return res.status(HCS.StatusCodes.BAD_REQUEST).json({
-                redirect: "/login",
-                message: "Data validation failed",
-            });
+            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/login/login_failed_validation`);
         }
     };
 
@@ -30,10 +27,7 @@ class ContentTypeCheck {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).json({
-                redirect: "/register",
-                message: "Data validation failed",
-            });
+            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/register/register_failed_validation`);
         }
     };
 
