@@ -2,10 +2,12 @@ const { hashSync, compareSync } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class Authservice {
+    //Compare passwords
     static validatePasswords = (password, user_password) => {
         return compareSync(password, user_password);
     };
 
+    //Create JSON Web Token
     static issueJWT = (user) => {
         const expiresIn = "2h";
         delete user.password;
@@ -27,10 +29,6 @@ class Authservice {
     static decodeJWT = (token) => {
         const decoded = jwt.verify(token, process.env.APP_SECRET);
         return decoded.user;
-    };
-
-    static comparePasswords = (password, password_rp) => {
-        return password === password_rp;
     };
 
     static hashPassword = (password) => {
