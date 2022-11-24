@@ -26,6 +26,7 @@ class Authservice {
         };
     };
 
+    //Decode the JSON Web Token
     static decodeJWT = (token) => {
         const decoded = jwt.verify(token, process.env.APP_SECRET);
         return decoded.user;
