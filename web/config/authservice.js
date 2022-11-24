@@ -36,6 +36,7 @@ class Authservice {
         return hashSync(password, 10);
     };
 
+    //Get a user without the password
     static getSafeData = (user) => {
         delete user.password;
         return user;
