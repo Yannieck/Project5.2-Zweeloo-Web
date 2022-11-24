@@ -3,7 +3,7 @@ const router = express.Router();
 const UserController = require("../../../bin/usercontroller");
 const auth = require("../../../middleware/auth");
 const authservice = require("../../../config/authservice");
-const HCS = require("http-status-codes");
+const HSC = require("http-status-codes");
 const ContentTypeCheck = require("../../../middleware/contenttypecheck");
 
 router.get("/allUsers", auth, async (req, res) => {
