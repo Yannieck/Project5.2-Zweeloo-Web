@@ -2,8 +2,6 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const xmlparser = require('express-xml-bodyparser')
-
 app.use(cors());
 app.use(cookieParser());
 
@@ -13,7 +11,6 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
-app.use(xmlparser());
 
 app.use('/scripts', express.static('public/assets/scripts'));
 app.use("/styles", express.static("public/assets/styles"))
