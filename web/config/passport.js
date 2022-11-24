@@ -3,21 +3,12 @@ const passportCustom = require("passport-custom");
 const CustomStrategy = passportCustom.Strategy;
 const jwt = require("jsonwebtoken");
 
-/**
- * Get jwt token from cookie
- */
-const getToken = (req) => {
-    return req.cookies.jwt;
-};
-
-/**
- * Register custom strategy
- */
+// Register custom strategy
 passport.use(
     "jwt-authentication",
     new CustomStrategy((req, done) => {
         try {
-            const token = getToken(req);
+            const token = req.cookies.jwt;
 
             // Verify token by environment variable
             jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {

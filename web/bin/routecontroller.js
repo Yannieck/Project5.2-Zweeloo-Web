@@ -1,13 +1,21 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-class Routecontroller {
+class RouteController {
     static async getRoute(route) {
         return prisma.route.findUnique({
             where: {
-                route
-            }
-        })
+                route: route,
+            },
+        });
+    }
+
+    static async getRouteById(id) {
+        return prisma.route.findUnique({
+            where: {
+                id,
+            },
+        });
     }
 
     static async getAllRoutes() {
@@ -16,48 +24,45 @@ class Routecontroller {
                 id: true,
                 name: true,
                 route: true,
-                updated_at: true,
-                created_at: true,
-                user_id: true
-            }
-        })
+                description: true,
+                distance: true,
+                extra: true,
+                type: true,
+                wheelchair: true,
+            },
+        });
     }
 
     static async getAllRoutesNames() {
         return prisma.route.findMany({
             select: {
                 id: true,
-                name: true
-            }
-        })
-    }
-
-    static async getRouteById(id) {
-        return prisma.route.findUnique({
-            where: {
-                id
-            }
+                name: true,
+            },
         });
     }
 
-    static async createRoute(name, route_type, route, user_id) {
+    static async createRoute(name, route, description, distance, extra, type, wheelchair) {
         return prisma.route.create({
             data: {
-                name,
-                route_type,
-                route,
-                user_id
-            }
-        })
+                name: name,
+                route: route,
+                description: description,
+                distance: distance,
+                extra: extra,
+                type: type,
+                wheelchair: wheelchair,
+            },
+        });
     }
 
     static async deleteRoute(id) {
         return prisma.route.delete({
             where: {
-                id
-            }
+                id: id,
+            },
         });
     }
 }
 
-module.exports = Routecontroller;
+module.exports = RouteController;

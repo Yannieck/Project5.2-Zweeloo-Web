@@ -1,9 +1,5 @@
-const JSONValidation = require("./JSONValidation");
-const XMLValidation = require("./XMLValidation");
-const HCS = require("http-status-codes");
-const XMLRefactor = require("./XMLRefactors");
-
 const JOIValidator = require("./JOIValidator");
+const HCS = require("http-status-codes");
 
 class ContentTypeCheck {
     static checkLogin = (req, res, next) => {
@@ -11,19 +7,20 @@ class ContentTypeCheck {
         const data = req.body;
         const checkValidity = JOIValidator.validateLogin(data);
 
-        //If valid move to the next handler
+        //If valid, move on, else give a validation error
         if (checkValidity === true) {
             return next();
         } else {
-            //Return an error with code 400
             return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/login/login_failed_validation`);
         }
     };
 
     static checkRegister = (req, res, next) => {
+        //Validate the register info
         const data = req.body;
         const checkValidity = JOIValidator.validateRegister(data);
 
+        //If valid, move on, else give a validation error
         if (checkValidity === true) {
             return next();
         } else {
@@ -32,107 +29,27 @@ class ContentTypeCheck {
     };
 
     static checkUserEdit = (req, res, next) => {
-        if (req.is("application/xml")) {
-            try {
-                if (XMLValidation.validateEdit(req, res, next)) {
-                    return next();
-                }
-            } catch (e) {
-                const xmlres = XMLRefactor.apiErrorBuilder(
-                    400,
-                    "Data validation failed"
-                );
-                return res.set("Content-Type", "application/xml").send(xmlres);
+        try {
+            if (JOIValidator.validateUser(req)) {
+                return next();
             }
-        } else {
-            try {
-                if (JSONValidation.validateEdit(req)) {
-                    return next();
-                }
-            } catch (e) {
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .send({ err: "Data validation failed" });
-            }
-        }
-    };
-
-    static checkGeofenceCreate = (req, res, next) => {
-        if (req.is("application/xml")) {
-            try {
-                if (XMLValidation.validateGeofence(req, res, next)) {
-                    return next();
-                }
-            } catch (e) {
-                const xmlres = XMLRefactor.apiErrorBuilder(
-                    400,
-                    "Data validation failed"
-                );
-                return res.set("Content-Type", "application/xml").send(xmlres);
-            }
-        } else {
-            try {
-                if (JSONValidation.validateGeofence(req)) {
-                    return next();
-                }
-            } catch (e) {
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .send({ err: "Data validation failed" });
-            }
-        }
-    };
-
-    static checkGeofenceEdit = (req, res, next) => {
-        if (req.is("application/xml")) {
-            try {
-                if (XMLValidation.validateGeofence(req, res, next)) {
-                    return next();
-                }
-            } catch (e) {
-                const xmlres = XMLRefactor.apiErrorBuilder(
-                    400,
-                    "Data validation failed"
-                );
-                return res.set("Content-Type", "application/xml").send(xmlres);
-            }
-        } else {
-            try {
-                if (JSONValidation.validateGeofence(req)) {
-                    return next();
-                }
-            } catch (e) {
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .send({ err: "Data validation failed" });
-            }
+        } catch (e) {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .send({ err: "Data validation failed" });
         }
     };
 
     static checkRouteCreate = (req, res, next) => {
-        if (req.is("application/xml")) {
-            try {
-                if (XMLValidation.validateCreateRoute(req, res, next)) {
-                    return next();
-                }
-            } catch (e) {
-                const xmlres = XMLRefactor.apiErrorBuilder(
-                    400,
-                    "Data validation failed"
-                );
-                return res.set("Content-Type", "application/xml").send(xmlres);
+        try {
+            if (JOIValidator.validateRoute(req)) {
+                return next();
             }
-        } else {
-            try {
-                if (JSONValidation.validateCreateRoute(req)) {
-                    return next();
-                }
-            } catch (e) {
-                console.log(e);
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .send({ err: "Data validation failed" });
-            }
+        } catch (e) {
+            console.log(e);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .send({ err: "Data validation failed" });
         }
     };
 }

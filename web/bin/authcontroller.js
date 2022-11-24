@@ -2,13 +2,14 @@ const UserController = require("./usercontroller");
 const AuthService = require("../config/AuthService");
 const HCS = require("http-status-codes");
 
+//This class handles the logging in and register database queries
 class AuthController {
-    static login = async (req, res, next) => {
+    static login = async (req, res) => {
         let data = req.body;
 
         try {
             //Get user data from the database
-            const user = await UserController.getUser(data.email);
+            const user = await UserController.getUserByEmail(data.email);
             if (!user) {
                 //Return an error if the user is not in the database
                 return res
@@ -55,7 +56,7 @@ class AuthController {
 
         try {
             //Try to find the email in the database to check if the email is taken
-            const user = await UserController.getUser(data.email);
+            const user = await UserController.getUserByEmail(data.email);
             if (user) {
                 return res
                     .status(HCS.StatusCodes.CONFLICT)
