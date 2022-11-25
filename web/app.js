@@ -13,8 +13,7 @@ app.use(express.urlencoded({extended : true}));
 
 
 app.use('/scripts', express.static('public/assets/scripts'));
-app.use("/styles", express.static("public/assets/styles"))
-app.use('/validations', express.static('validation'));
+app.use("/styles", express.static("public/assets/styles"));
 app.use('/images', express.static('public/assets/img'));
 
 app.use('/', require('./routes'));
