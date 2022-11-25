@@ -56,7 +56,7 @@ if (success == "register_success") {
     swal({
         icon: "error",
         toast: true,
-        title: "E-mail en wacthwoord komen niet overeen",
+        title: "E-mail en wachtwoord komen niet overeen",
         text: "U zal nu worden doorgestuurd naar de inlog pagina",
     }).then(() => {
         window.location = "/login";
