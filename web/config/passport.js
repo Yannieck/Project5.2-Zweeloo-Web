@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // Register custom strategy
 passport.use(
     "jwt-authentication",
-    new CustomStrategy((req, done) => {
+    new CustomStrategy((req, callback) => {
         try {
             const token = req.cookies.jwt;
 
@@ -27,9 +27,9 @@ passport.use(
                 throw new Error("Token expired");
             }
 
-            done(null, payload);
+            callback(null, payload);
         } catch {
-            done(null, false);
+            callback(null, false);
         }
     })
 );
