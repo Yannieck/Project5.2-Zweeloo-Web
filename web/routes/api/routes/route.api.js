@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const RouteController = require("../../../bin/routecontroller");
 const HSC = require("http-status-codes");
-const auth = require("../../../middleware/auth");
+const Auth = require("../../../middleware/auth");
 const ContentTypeCheck = require("../../../middleware/contenttypecheck");
 
 router.get("/route/:id", async (req, res) => {
@@ -54,7 +54,7 @@ router.get("/allroutesnames", async (req, res) => {
 
 router.post(
     "/createroute",
-    auth,
+    Auth.authenticate,
     ContentTypeCheck.checkRouteCreate,
     async (req, res) => {
         let data = req.body;

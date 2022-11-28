@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../../../bin/usercontroller");
-const auth = require("../../../middleware/auth");
+const Auth = require("../../../middleware/auth");
 const authservice = require("../../../config/authservice");
 const HSC = require("http-status-codes");
 const ContentTypeCheck = require("../../../middleware/contenttypecheck");
 
-router.get("/allUsers", auth, async (req, res) => {
+router.get("/allUsers", Auth.authenticate, async (req, res) => {
     try {
         const users = await UserController.getAllUsers();
         if (!users || users.length === 0) {
@@ -19,7 +19,7 @@ router.get("/allUsers", auth, async (req, res) => {
     }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", Auth.authenticate, async (req, res) => {
     const id = parseInt(req.params.id);
 
     try {
@@ -37,7 +37,7 @@ router.get("/:id", auth, async (req, res) => {
 
 router.post(
     "/edit/:id",
-    auth,
+    Auth.authenticate,
     ContentTypeCheck.checkUserEdit,
     async (req, res) => {
         const id = parseInt(req.params.id);
@@ -59,7 +59,7 @@ router.post(
     }
 );
 
-router.delete("/deleteuser/:id", auth, async (req, res) => {
+router.delete("/deleteuser/:id", Auth.authenticate, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const result = await UserController.deleteUser(id);
