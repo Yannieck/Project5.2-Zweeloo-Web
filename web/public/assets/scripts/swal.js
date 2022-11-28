@@ -1,91 +1,79 @@
-if (success == "register_success") {
-    swal({
+const messages = {
+    register_success: {
         icon: "success",
-        toast: true,
         title: "Account succesvol aangemaakt",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "failed_create_account") {
-    swal({
+        redirect: "/register",
+    },
+    failed_create_account: {
         icon: "error",
-        toast: true,
-        title: "Account kon niet worden aangemaakt",
+        title: "Account kon niet worden aangemaak",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "register_unknown_error") {
-    swal({
+        redirect: "/register",
+    },
+    register_unknown_error: {
         icon: "error",
-        toast: true,
         title: "Onbekende fout opgetreden",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "unequal_password") {
-    swal({
+        redirect: "/register",
+    },
+    unequal_password: {
         icon: "error",
-        toast: true,
         title: "Wachtwoorden zijn niet gelijk",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "email_taken") {
-    swal({
+        redirect: "/register",
+    },
+    email_taken: {
         icon: "error",
-        toast: true,
         title: "Dit E-mail adres is al in gebruik",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "login_successfull") {
-    swal({
+        redirect: "/register",
+    },
+    login_successfull: {
         icon: "success",
-        toast: true,
         title: "U bent ingelogd",
         text: "U zal nu worden doorgestuurd naar de home pagina",
-    }).then(() => {
-        window.location = "/";
-    });
-} else if (success == "invalid_credentials") {
-    swal({
+        redirect: "/",
+    },
+    invalid_credentials: {
         icon: "error",
-        toast: true,
         title: "E-mail en wachtwoord komen niet overeen",
         text: "U zal nu worden doorgestuurd naar de inlog pagina",
-    }).then(() => {
-        window.location = "/login";
-    });
-} else if (success == "login_unknown_error") {
-    swal({
+        redirect: "/login",
+    },
+    login_unknown_error: {
         icon: "error",
-        toast: true,
         title: "Onbekende fout opgetreden",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-    }).then(() => {
-        window.location = "/register";
-    });
-} else if (success == "login_failed_validation") {
-    swal({
+        redirect: "/register",
+    },
+    login_failed_validation: {
         icon: "error",
-        toast: true,
         title: "Ingevulde gegevens zijn niet valide",
         text: "U zal nu worden doorgestuurd naar de inlog pagina",
-    }).then(() => {
-        window.location = "/login";
-    });
-} else if (success == "register_failed_validation") {
-    swal({
+        redirect: "/login",
+    },
+    register_failed_validation: {
         icon: "error",
-        toast: true,
         title: "Ingevulde gegevens zijn niet valide",
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
+        redirect: "/register",
+    },
+    login_required: {
+        icon: "error",
+        title: "Toegang geweigerd",
+        text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de aanmeld pagina",
+        redirect: "/login",
+    },
+};
+
+if (messages.hasOwnProperty(message)) {
+    swal({
+        icon: messages[message].icon,
+        toast: true,
+        title: messages[message].title,
+        text: messages[message].text,
     }).then(() => {
-        window.location = "/register";
+        window.location = messages[message].redirect;
     });
 }
