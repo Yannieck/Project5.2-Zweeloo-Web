@@ -1,17 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Auth = require("../../middleware/auth");
+const auth = require("../../middleware/auth");
 
 router.get("/", (req, res) => {
-    res.render("index", { logedIn: false });
-});
-
-router.get("/", Auth.authenticate, (req, res) => {
-    res.render("index", { logedIn: true });
+    res.render("index", { logedIn: req.cookies.hasOwnProperty("jwt") });
 });
 
 router.get("/login", (req, res) => {
-    res.render("login", { logedIn: Auth.checkValidJWT("/login") });
+    res.render("login", { logedIn: req.cookies.hasOwnProperty("jwt") });
 });
 
 router.get("/login/:status", (req, res) => {
@@ -21,7 +17,7 @@ router.get("/login/:status", (req, res) => {
     });
 });
 
-router.get("/routeselection", Auth.authenticate, (req, res) => {
+router.get("/routeselection", auth, (req, res) => {
     res.render("route-selection", {
         logedIn: Auth.checkValidJWT(req),
     });
@@ -32,18 +28,18 @@ router.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
-router.get("/profile", Auth.authenticate, (req, res) => {
+router.get("/profile", auth, (req, res) => {
     res.render("profile", {
         user: req.user.user,
         logedIn: Auth.checkValidJWT(req),
     });
 });
 
-router.get("/register", Auth.authenticate, (req, res) => {
+router.get("/register", auth, (req, res) => {
     res.render("register", { logedIn: Auth.checkValidJWT(req) });
 });
 
-router.get("/register/:status", Auth.authenticate, (req, res) => {
+router.get("/register/:status", auth, (req, res) => {
     res.render("register", {
         logedIn: Auth.checkValidJWT(req),
         status: req.params.status,
