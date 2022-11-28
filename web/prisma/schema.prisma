@@ -16,15 +16,19 @@ model poi_img {
 }
 
 model poi {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(255)
-  lat         Decimal   @db.Decimal()
-  lon         Decimal   @db.Decimal()
-  description String    @db.VarChar(255)
-  audio_src   String    @db.VarChar(255)
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  lat         Decimal  @db.Decimal()
+  lon         Decimal  @db.Decimal()
+  description String   @db.VarChar(2048)
+  type        poi_type @default(POI)
+  audio_src   String?  @db.VarChar(255)
+  radius      Int      @db.Int()
+  icon        String   @db.VarChar(255)
   route_id    Int
-  route       route     @relation(fields: [route_id], references: [id])
-  poi_img     poi_img[]
+
+  route   route     @relation(fields: [route_id], references: [id])
+  poi_img poi_img[]
 }
 
 model node {
@@ -33,7 +37,8 @@ model node {
   lat      Decimal @db.Decimal()
   lon      Decimal @db.Decimal()
   route_id Int
-  route    route   @relation(fields: [route_id], references: [id])
+
+  route route @relation(fields: [route_id], references: [id])
 }
 
 model route {
@@ -42,12 +47,13 @@ model route {
   route       Json
   type        route_type @default(WALK)
   distance    Float      @db.Float()
-  extra       String     @db.VarChar(255)
-  description String     @db.VarChar(255)
+  extra       String?    @db.VarChar(255)
+  description String     @db.VarChar(2048)
   wheelchair  Boolean    @default(false)
-  poi         poi[]
-  node        node[]
-  log         log[]
+
+  poi  poi[]
+  node node[]
+  log  log[]
 }
 
 model log {
@@ -55,9 +61,10 @@ model log {
   type     crud_type
   datetime DateTime  @default(now()) @db.DateTime(0)
   user_id  Int
-  user     user      @relation(fields: [user_id], references: [id])
-  route    route     @relation(fields: [route_id], references: [id])
   route_id Int
+
+  user  user  @relation(fields: [user_id], references: [id])
+  route route @relation(fields: [route_id], references: [id])
 }
 
 model user {
@@ -66,15 +73,16 @@ model user {
   first_name String @db.VarChar(255)
   last_name  String @db.VarChar(255)
   password   String @db.VarChar(512)
-  log        log[]
+
+  log log[]
 }
 
 model sponsor {
   id     Int    @id @default(autoincrement())
   name   String @db.VarChar(255)
   adress String @db.VarChar(255)
-  info   String @db.VarChar(255)
   logo   String @db.VarChar(255)
+  link   String @db.VarChar(255)
 }
 
 enum route_type {
@@ -86,4 +94,11 @@ enum crud_type {
   CREATE
   UPDATE
   DELETE
+}
+
+enum poi_type {
+  POI
+  INFO
+  INVIS
+  CAFE
 }
