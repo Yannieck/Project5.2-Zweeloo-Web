@@ -13,42 +13,31 @@ router.get("/route/:id", async (req, res) => {
         if (!route) {
             return res
                 .status(HSC.StatusCodes.NOT_FOUND)
-                .json({ message: "A route with this id does not exist!" });
+                .json({ message: "A route with this id does not exist" });
         }
 
-        return res.status(HSC.StatusCodes.OK).send(route);
+        return res.status(HSC.StatusCodes.OK).json(route);
     } catch (e) {
-        return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send(e);
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting route failed" });
     }
 });
 
-router.get("/allroutes", async (req, res) => {
+router.get("/all", async (req, res) => {
     try {
         const routes = await RouteController.getAllRoutes();
         if (!routes || routes.length === 0) {
-            return res.send({ message: "Routes not found!" });
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "Routes not found" });
         } else {
             return res.status(HSC.StatusCodes.OK).json(routes);
         }
     } catch (e) {
         return res
             .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-            .send({ err: "Getting all routes failed" });
-    }
-});
-
-router.get("/allroutesnames", async (req, res) => {
-    try {
-        const routes = await RouteController.getAllRoutesNames();
-        if (!routes || routes.length === 0) {
-            return res.send({ message: "Routes not found!" });
-        } else {
-            return res.status(HSC.StatusCodes.OK).json(routes);
-        }
-    } catch (e) {
-        return res
-            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-            .send({ err: "Getting all routes with names failed" });
+            .json({ message: "Getting all routes failed" });
     }
 });
 
@@ -62,10 +51,9 @@ router.post(
         try {
             const route = await RouteController.getRoute(data);
             if (route) {
-                return res.send({
-                    code: 409,
-                    error: "Route already exists!",
-                });
+                return res
+                    .status(HSC.StatusCodes.CONFLICT)
+                    .json({ message: "Route already exists" });
             }
             const new_route = await RouteController.createRoute(
                 data.name,
@@ -79,13 +67,14 @@ router.post(
                 );
                 return res.status(HSC.StatusCodes.OK).json(created_route);
             } else {
-                return res.send({
-                    code: 400,
-                    message: "Bad request!",
-                });
+                return res
+                    .status(HSC.StatusCodes.BAD_REQUEST)
+                    .json({ message: "Bad request" });
             }
         } catch (e) {
-            return res.status(HSC.StatusCodes.BAD_REQUEST).send(e);
+            return res
+                .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+                .json({ message: "Could not create route" });
         }
     }
 );
@@ -98,15 +87,16 @@ router.delete("/deleteroute/:id", async (req, res) => {
         if (result) {
             return res
                 .status(HSC.StatusCodes.OK)
-                .send({ message: "User deleted succesfully!" });
+                .json({ message: "User deleted succesfully" });
         } else {
-            return res.send({
-                code: 400,
-                message: "Bad request!",
-            });
+            return res
+                .status(HSC.StatusCodes.BAD_REQUEST)
+                .send({ message: "Bad request" });
         }
     } catch (e) {
-        return res.status(HSC.StatusCodes.BAD_REQUEST).send(e);
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Could not delete route" });
     }
 });
 

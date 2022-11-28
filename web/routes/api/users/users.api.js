@@ -2,36 +2,44 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../../../bin/usercontroller");
 const auth = require("../../../middleware/auth");
-const authservice = require("../../../config/authservice");
+const AuthService = require("../../../config/authservice");
 const HSC = require("http-status-codes");
 const ContentTypeCheck = require("../../../middleware/contenttypecheck");
 
-router.get("/allUsers", auth, async (req, res) => {
+router.get("/all", auth, async (req, res) => {
     try {
         const users = await UserController.getAllUsers();
         if (!users || users.length === 0) {
-            return res.json({ message: "No users found!" });
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "No users found!" });
         } else {
             return res.status(HSC.StatusCodes.OK).json(users);
         }
     } catch (e) {
-        return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting all routes failed" });
     }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/user/:id", auth, async (req, res) => {
     const id = parseInt(req.params.id);
 
     try {
         const user = await UserController.getUserById(id);
         if (user) {
-            const safe_user = authservice.getSafeData(user);
+            const safe_user = AuthService.getSafeData(user);
             return res.status(HSC.StatusCodes.OK).json(safe_user);
         } else {
-            return res.send({ message: "User not found" });
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "User not found" });
         }
     } catch (e) {
-        return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting route failed" });
     }
 });
 
@@ -52,9 +60,11 @@ router.post(
             );
             const user = await UserController.getUserById(id);
 
-            return res.status(HSC.StatusCodes.OK).send(user);
+            return res.status(HSC.StatusCodes.OK).json(user);
         } catch (e) {
-            return res.status(500).send({ err: "Updating data failed!" });
+            return res
+                .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+                .json({ message: "Updating data failed!" });
         }
     }
 );
@@ -69,13 +79,14 @@ router.delete("/deleteuser/:id", auth, async (req, res) => {
                 .status(HSC.StatusCodes.OK)
                 .send({ message: "User deleted succesfully!" });
         } else {
-            return res.send({
-                code: 400,
-                message: "Bad request!",
-            });
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .json({ message: "Bad request!" });
         }
     } catch (e) {
-        return res.status(HSC.StatusCodes.BAD_REQUEST).send(e);
+        return res
+        .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "Deleting data failed!" });
     }
 });
 

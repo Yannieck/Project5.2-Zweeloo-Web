@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 class SponsorController {
@@ -8,9 +8,9 @@ class SponsorController {
                 id: true,
                 name: true,
                 adress: true,
-                info: true,
-                logo: true
-            }
+                logo: true,
+                link: true
+            },
         });
     }
 
@@ -20,31 +20,31 @@ class SponsorController {
                 name: name,
                 adress: adress,
                 info: info,
-                logo: logo
-            }
-        })
+                logo: logo,
+            },
+        });
     }
 
     static async updateSponsor(id, name, adress, info, logo) {
         return await prisma.sponsor.update({
             where: {
-                id: id
+                id: id,
             },
             data: {
                 name: name,
                 adress: adress,
                 info: info,
-                logo: logo
-            }
-        })
+                logo: logo,
+            },
+        });
     }
 
     static async deleteSponsor(id) {
         return await prisma.sponsor.delete({
             where: {
-                id: id
-            }
-        })
+                id: id,
+            },
+        });
     }
 }
 

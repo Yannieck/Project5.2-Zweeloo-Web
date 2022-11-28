@@ -13,7 +13,7 @@ class PoiImgController {
         });
     }
 
-    static async createPoi(poi_id, src) {
+    static async createPoiImg(poi_id, src) {
         return prisma.poi_img.create({
             data: {
                 poi_id: poi_id,
@@ -22,7 +22,7 @@ class PoiImgController {
         })
     }
 
-    static async updatePoi(poi_id, src) {
+    static async updatePoiImg(poi_id, src) {
         return await prisma.poi_img.update({
             where: {
                 poi_id: poi_id
@@ -33,7 +33,7 @@ class PoiImgController {
         })
     }
 
-    static async deletePoi(poi_id, src) {
+    static async deletePoiImg(poi_id, src) {
         return await prisma.poi_img.delete({
             where: {
                 poi_id: poi_id,
