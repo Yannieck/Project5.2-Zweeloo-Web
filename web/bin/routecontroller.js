@@ -2,18 +2,14 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 class RouteController {
-    static async getRoute(route) {
-        return prisma.route.findUnique({
-            where: {
-                route: route,
-            },
-        });
-    }
-
     static async getRouteById(id) {
         return prisma.route.findUnique({
             where: {
                 id,
+            },
+            include: {
+                poi: true,
+                node: true,
             },
         });
     }
@@ -33,16 +29,15 @@ class RouteController {
         });
     }
 
-    static async getAllRoutesNames() {
-        return prisma.route.findMany({
-            select: {
-                id: true,
-                name: true,
-            },
-        });
-    }
-
-    static async createRoute(name, route, description, distance, extra, type, wheelchair) {
+    static async createRoute(
+        name,
+        route,
+        description,
+        distance,
+        extra,
+        type,
+        wheelchair
+    ) {
         return prisma.route.create({
             data: {
                 name: name,
