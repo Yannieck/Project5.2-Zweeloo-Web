@@ -1,1 +1,1 @@
-module.exports.authenticate = require('./auth');
+module.exports.authenticate = require('./authenticator');

@@ -1,4 +1,4 @@
-const UserController = require("./usercontroller");
+const UserController = require("./db_user_controller");
 const AuthService = require("../config/AuthService");
 const HCS = require("http-status-codes");
 

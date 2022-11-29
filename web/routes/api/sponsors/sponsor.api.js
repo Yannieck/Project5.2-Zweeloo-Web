@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const SponsorController = require("../../../bin/sponsorcontroller");
+const SponsorController = require("../../../bin/db_sponsor_controller");
 const HSC = require("http-status-codes");
 
 router.get("/all", async (req, res) => {
