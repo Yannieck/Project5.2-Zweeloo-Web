@@ -1,0 +1,49 @@
+html
+    head
+        include head.pug
+        title index
+
+    body.clr-bg-main(class='border-[20px] clr-border-sec')
+        include header.pug
+        block content
+            .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                .px-16
+                    h1.text-4xl.font-bold.mb-6 Voeg route informatie toe
+                    h2.text-xl.mb-2 Upload het gpx bestand 
+                    form(action="/route-info-editor/upload" method="post")
+                        input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
+                        button(type="submit").btn Upload bestand
+
+                .line
+                .px-16
+                    form(action="/" method="post")
+                        fieldset.mb-4
+                            legend.font-bold Route type
+                            label.block
+                                input(type="radio" name="routetype" value="walk" checked)
+                                | Wandelroute
+                            label.block
+                                input(type="radio" name="routetype" value="bike")
+                                | Fietsroute
+
+                        fieldset.mb-4
+                            legend.font-bold Rolstoeltoegankelijk
+                            label.block
+                                input(type="radio" name="wheelchair" value="yes")
+                                | Ja
+                            label.block
+                                input(type="radio" name="wheelchair" value="no" checked)
+                                | Nee
+
+                        label.font-bold.block(for="name") Route naam
+                        input.py-2.px-4.mb-4.w-full#name(type="text" name="routename" placeholder="Route naam...")
+                        
+                        label.font-bold.block(for="desc") Beschrijving
+                        textarea.py-2.px-4.mb-4.w-full.resize-none#desc(type="text" name="description" placeholder="Description..." rows="6")
+
+                        label.font-bold.block(for="extra") Toevoeging
+                        input.py-2.px-4.mb-4.w-full#extra(type="text" name="extra" placeholder="Toevoeging...")
+
+                        input.btn.mt-4(type="submit", value="Voeg route toe")
+                        
+                .line
