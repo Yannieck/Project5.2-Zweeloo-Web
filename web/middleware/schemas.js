@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-class JSONValidator {
+class JOISchemas {
     //Login schema
     static login_schema = Joi.object({
         email: Joi.string()
@@ -99,4 +99,4 @@ class JSONValidator {
     });
 }
 
-module.exports = JSONValidator;
+module.exports = JOISchemas;
