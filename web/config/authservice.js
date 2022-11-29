@@ -1,43 +1,46 @@
-const { hashSync, compareSync } = require('bcrypt');
+const { hashSync, compareSync } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class Authservice {
+    //Compare passwords
     static validatePasswords = (password, user_password) => {
         return compareSync(password, user_password);
-    }
+    };
 
+    //Create JSON Web Token
     static issueJWT = (user) => {
-        const expiresIn = '2h';
+        const expiresIn = "2h";
         delete user.password;
         const payload = {
-            user: user
+            user: user,
         };
 
-        const signedToken = jwt.sign(payload, process.env.APP_SECRET, { expiresIn: expiresIn, algorithm: 'HS256' });
+        const signedToken = jwt.sign(payload, process.env.APP_SECRET, {
+            expiresIn: expiresIn,
+            algorithm: "HS256",
+        });
 
         return {
             token: signedToken,
-            expires: expiresIn
-        }
-    }
+            expires: expiresIn,
+        };
+    };
 
+    //Decode the JSON Web Token
     static decodeJWT = (token) => {
         const decoded = jwt.verify(token, process.env.APP_SECRET);
         return decoded.user;
-    }
-
-    static comparePasswords = (password, password_rp) => {
-        return password === password_rp;
-    }
+    };
 
     static hashPassword = (password) => {
-        return hashSync(password, 10)
-    }
+        return hashSync(password, 10);
+    };
 
+    //Get a user without the password
     static getSafeData = (user) => {
         delete user.password;
         return user;
-    }
+    };
 }
 
 module.exports = Authservice;

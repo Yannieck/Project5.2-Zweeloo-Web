@@ -1,23 +1,22 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-class Usercontroller {
+class UserController {
     static async getAllUsers() {
         return prisma.user.findMany({
             select: {
+                id: true,
                 email: true,
                 first_name: true,
-                last_name: true,
-                created_at: true,
-                updated_at: true
+                last_name: true
             }
         });
     }
 
-    static async getUser(email) {
+    static async getUserByEmail(email) {
         return prisma.user.findUnique({
             where: {
-                email
+                email: email
             }
         });
     }
@@ -25,7 +24,7 @@ class Usercontroller {
     static async getUserById(id) {
         return prisma.user.findUnique({
             where: {
-                id
+                id: id
             }
         });
     }
@@ -41,27 +40,26 @@ class Usercontroller {
         })
     }
 
-    static async updateUser(id, data) {
+    static async updateUser(id, email, first_name, last_name) {
         return await prisma.user.update({
             where: {
-                id
+                id: id
             },
             data: {
-                email: data.email,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                updated_at: new Date(Date.now())
+                email: email,
+                first_name: first_name,
+                last_name: last_name
             }
         })
     }
 
     static async deleteUser(id) {
-        return await prisma.geofence.delete({
+        return await prisma.user.delete({
             where: {
-                id
+                id: id
             }
         })
     }
 }
 
-module.exports = Usercontroller;
+module.exports = UserController;

@@ -2,42 +2,24 @@ html
     head
         include head.pug
         title login
-        script(src='/scripts/login.js' type='module' defer)
 
-    body.clr-bg-main
+    body.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
         block content
-            .w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
-                .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]').clr-bg-sec
-                    .flex.overflow-hidden.rounded-lg.justify-center.items-center(class='w-[40%] h-4/6').clr-bg-main
-                        .flex.items-center.justify-center
-                            .w-full.max-w-md
-                                .shadow-lg.rounded.px-12.pt-6.pb-8.mb-4.clr-bg-sec
-                                    .text-gray-800.text-2xl.flex.justify-center.border-b-2.py-2.mb-4.text-center
-                                        | Stichting Kunstenaarsdorp Zweeloo App Login
-                                    .mb-4
-                                        label.block.text-gray-700.text-sm.font-normal.mb-2
-                                            | Email
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight(class='focus:outline-none focus:shadow-outline' name='email' type='email' required='' autofocus='' placeholder='Email')#email
-                                    .mb-6
-                                        label.block.text-gray-700.text-sm.font-normal.mb-2
-                                            | Password
-                                        input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight(class='focus:outline-none focus:shadow-outline'  type='password' placeholder='Password' name='password' required='' autocomplete='current-password')#password
-                                    .flex.items-center.justify-between
-                                        button.px-4.py-2.rounded.text-white.inline-block.shadow-lg.clr-acc-blue#login_button Login
+            .w-full.flex.flex-col.justify-center.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                .w-full.flex.justify-center
+                    .justify-center(class="w-1/2").clr-bg-sec.px-16.py-8
+                        script.
+                            let message = "#{status}";
+                        script(src="/scripts/swal.js")
 
+                        h1.text-4xl.font-bold.mb-5 Log In
 
-            //.w-full.flex.justify-center.overflow-hidden(class='h-[92%]')
-            //    .flex.flex-wrap.rounded-lg.items-center.justify-center(class='w-[99%] h-[100%]')#main_container
-            //        .overflow-hidden.rounded-lg.justify-center.items-center(class='w-[40%] h-5/6')#content
-            //            .flex.justify-center.items-center
-            //                h1.text-6xl.m-4 Login pagina
-            //            .flex.flex-col.justify-center.align-center.items-center.my-4
-            //                label.m-3
-            //                    b Email
-            //                input( value='hylke.sijbesma@student.nhlstenden.com' class="md:w-[40%]" type='text' placeholder='Enter Email' name='email' required='')#email.px-4.py-2.rounded-lg.text-left
-            //                label.mt-5
-            //                    b Password
-            //                input(value='test' type='password' placeholder='Enter Password' class="md:w-[40%]" name='password' required='')#password.px-4.m-3.py-2.rounded-lg
-            //
-            //                button.m-3.h-9(class="md:w-[40%]" type='button')#login_button Login
+                        form(method="post" action="/auth/login")
+                            label.text-gray-700.text-sm.font-normal.mb-2(for="email") Email
+                            input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight.mb-4(class='focus:outline-none focus:shadow-outline' name='email' type='email' placeholder='Email' required autofocus )#email
+
+                            label.text-gray-700.text-sm.font-normal.mb-2(for="password") Wachtwoord
+                            input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight.mb-6(class='focus:outline-none focus:shadow-outline' name='password' type='password' placeholder='Password' required autocomplete='current-password')#password
+
+                            button(type="submit").px-4.py-2.rounded.text-white.inline-block.shadow-lg.clr-acc-blue#login_button Log In
