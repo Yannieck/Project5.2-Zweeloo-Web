@@ -1,44 +1,17 @@
 html
     head
         include head.pug
-        title routeEditor
+        title Route aanmaken - 1
 
-        link(rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' integrity='sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==' crossorigin='')
-        script(src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' integrity='sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==' crossorigin='')
-
-    body.clr-bg-main(class='border-[20px] clr-border-sec')
+    body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
-                .rounded-lg#map.h-96.w-96
-                    head
-                        title Add Map
-                        script(src='https://polyfill.io/v3/polyfill.min.js?features=default')
-                    h3 De map is aan het laden... even geduld!
-                        map
-                        script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDROcKPidV0pTzGZvZmKJlhmJTT-SHZaiQ&callback=initMap&v=weekly' defer='')
-                        script.
-                            const geojson = !{JSON.stringify(route.route)}
-
-                            function initMap() {
-                                const uluru = { lat: 52.793964, lng: 6.728638 };
-                                const map = new google.maps.Map(document.getElementById("map"), {
-                                zoom: 15,
-                                center: uluru,
-                                });
-
-                                map.data.addGeoJson(geojson);
-
-                                map.addListener('click', (clickevent) => {
-                                    const marker = new google.maps.Marker({
-                                        position: clickevent.latLng.toJSON(),
-                                        map: map
-                                    });
-                                    const input = document.getElementById('justin');
-                                    const latLng = clickevent.latLng.toJSON();
-                                    input.value = JSON.stringify(latLng.lat) + ", " + JSON.stringify(latLng.lng);
-                                    console.log(clickevent.latLng.toJSON())
-                                });
-                            }
-
-                            window.initMap = initMap;
+                .w-full
+                    h1.text-4xl.font-bold.mb-5 Route aanmaken - 1
+                .rounded-lg#map.h-full.w-full
+                        iframe(src='https://gpx.studio/l/nl/' width='100%' height='95%' frameborder='0' allowfullscreen='')
+                            p
+                                a(href='https://gpx.studio/l/nl/?state=%7B%7D')
+                .w-full
+                    a.px-5.py-3.mt-4.rounded-lg.clr-border-dark.text-xs.font-extrabold.tracking-wider.uppercase(class="border-[3px]")(href="/") Volgende

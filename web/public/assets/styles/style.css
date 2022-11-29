@@ -87,6 +87,10 @@ label {
     border-color: var(--clr-bg-300);
 }
 
+.clr-border-dark {
+    border-color: var(--clr-txt-900);
+}
+
 .btn {
     background-color: transparent;
     border-radius: 10px;
