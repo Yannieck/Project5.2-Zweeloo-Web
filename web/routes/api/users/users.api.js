@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../../../bin/usercontroller");
-const auth = require("../../../middleware/auth");
+const UserController = require("../../../bin/db_user_controller");
+const auth = require("../../../middleware/authenticator");
 const AuthService = require("../../../config/authservice");
 const HSC = require("http-status-codes");
-const ContentTypeCheck = require("../../../middleware/contenttypecheck");
+const JSONValidator = require("../../../middleware/JSONValidator");
 
 router.get("/all", auth, async (req, res) => {
     try {
@@ -46,7 +46,7 @@ router.get("/user/:id", auth, async (req, res) => {
 router.post(
     "/edit/:id",
     auth,
-    ContentTypeCheck.checkUserEdit,
+    JSONValidator.checkUserEdit,
     async (req, res) => {
         const id = parseInt(req.params.id);
         let data = req.body;

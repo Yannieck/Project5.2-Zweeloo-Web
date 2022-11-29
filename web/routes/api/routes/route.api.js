@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const RouteController = require("../../../bin/routecontroller");
+const RouteController = require("../../../bin/db_route_controller");
 const HSC = require("http-status-codes");
-const auth = require("../../../middleware/auth");
-const ContentTypeCheck = require("../../../middleware/contenttypecheck");
+const auth = require("../../../middleware/authenticator");
+const JSONValidator = require("../../../middleware/JSONValidator");
 
 router.get("/route/:id", async (req, res) => {
     const id = parseInt(req.params.id);
@@ -44,7 +44,7 @@ router.get("/all", async (req, res) => {
 router.post(
     "/createroute",
     auth,
-    ContentTypeCheck.checkRouteCreate,
+    JSONValidator.checkRouteCreate,
     async (req, res) => {
         let data = req.body;
 

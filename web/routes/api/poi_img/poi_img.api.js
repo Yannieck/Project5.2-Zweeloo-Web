@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const PoiImgController = require("../../../bin/poiimgcontroller");
+const PoiImgController = require("../../../bin/db_poi_controller");
 const HSC = require("http-status-codes");
 
 router.get("/poi/:poi_id", async (req, res) => {

@@ -1,7 +1,7 @@
 const JOIValidator = require("./JOIValidator");
 const HCS = require("http-status-codes");
 
-class ContentTypeCheck {
+class JSONValidator {
     static checkLogin = (req, res, next) => {
         //Validate json
         const data = req.body;
@@ -55,4 +55,4 @@ class ContentTypeCheck {
     };
 }
 
-module.exports = ContentTypeCheck;
+module.exports = JSONValidator;
