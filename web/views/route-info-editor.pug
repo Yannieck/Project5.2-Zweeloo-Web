@@ -9,42 +9,45 @@ html
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
                 .px-16
                     h1.text-4xl.font-bold.mb-6 Voeg route informatie toe
-                    h2.text-xl.mb-2 Upload het gpx bestand 
-                    //- form(action="/route-info-editor/upload" method="post")
-                    form(action="/auth/file" method="post" enctype="multipart/form-data")
-                        input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
-                        button(type="submit").btn Upload bestand
 
-                .line
-                .px-16
-                    form(action="/" method="post")
+                    form(action="/form/addroute" method="post" enctype="multipart/form-data")
+                        label.font-bold(for="gpxfileupload") Kies GPX bestand
+                            span.clr-text-red  *
+                        input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
+
                         fieldset.mb-4
                             legend.font-bold Route type
+                                span.clr-text-red  *
                             label.block
-                                input(type="radio" name="routetype" value="walk" checked)
+                                input(type="radio" name="routetype" value="walk" checked required)
                                 | Wandelroute
                             label.block
-                                input(type="radio" name="routetype" value="bike")
+                                input(type="radio" name="routetype" value="bike" required)
                                 | Fietsroute
 
                         fieldset.mb-4
                             legend.font-bold Rolstoeltoegankelijk
+                                span.clr-text-red  *
                             label.block
-                                input(type="radio" name="wheelchair" value="yes")
+                                input(type="radio" name="wheelchair" value="yes" required)
                                 | Ja
                             label.block
-                                input(type="radio" name="wheelchair" value="no" checked)
+                                input(type="radio" name="wheelchair" value="no" checked required)
                                 | Nee
 
                         label.font-bold.block(for="name") Route naam
-                        input.py-2.px-4.mb-4.w-full#name(type="text" name="routename" placeholder="Route naam...")
-                        
+                            span.clr-text-red  *
+                        input.py-2.px-4.mb-4.w-full#name(type="text" name="name" placeholder="Route naam..." required)
+
                         label.font-bold.block(for="desc") Beschrijving
-                        textarea.py-2.px-4.mb-4.w-full.resize-none#desc(type="text" name="description" placeholder="Description..." rows="6")
+                            span.clr-text-red  *
+                        textarea.py-2.px-4.mb-4.w-full.resize-none#desc(type="text" name="description" placeholder="Description..." rows="6" required)
 
                         label.font-bold.block(for="extra") Toevoeging
                         input.py-2.px-4.mb-4.w-full#extra(type="text" name="extra" placeholder="Toevoeging...")
 
-                        input.btn.mt-4(type="submit", value="Voeg route toe")
-                        
+                        p.clr-text-red.text-sm.mb-4 * verplichte velden
+
+                        input.btn.mt-4(type="submit" value="Voeg route toe")
+
                 .line
