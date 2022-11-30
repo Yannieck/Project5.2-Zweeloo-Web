@@ -10,7 +10,8 @@ html
                 .px-16
                     h1.text-4xl.font-bold.mb-6 Voeg route informatie toe
                     h2.text-xl.mb-2 Upload het gpx bestand 
-                    form(action="/route-info-editor/upload" method="post")
+                    //- form(action="/route-info-editor/upload" method="post")
+                    form(action="/auth/file" method="post" enctype="multipart/form-data")
                         input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
                         button(type="submit").btn Upload bestand
 
