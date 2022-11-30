@@ -77,9 +77,7 @@ class JOISchemas {
             .max(255)
             .required(),
 
-        route: Joi.object().required(),
-
-        route_type: Joi.string().valid("WALK", "BIKE").required(),
+        routetype: Joi.string().valid("walk", "bike").required(),
 
         description: Joi.string()
             .pattern(new RegExp("^[a-zA-Z]{1,}$"))
@@ -91,11 +89,9 @@ class JOISchemas {
             .pattern(new RegExp("^[a-zA-Z]{1,}$"))
             .min(1)
             .max(255)
-            .required(),
+            .allow(null, ''),
 
-        distance: Joi.number().greater(0).required(),
-
-        wheelchair: Joi.boolean().required(),
+        wheelchair: Joi.string().valid("yes", "no").required(),
     });
 }
 

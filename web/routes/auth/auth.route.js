@@ -11,31 +11,6 @@ router.use(express.urlencoded({ extended: true }));
 router.post("/login", JSONValidator.checkLogin, AuthController.login);
 
 //Check register
-router.post(
-    "/register",
-    auth,
-    JSONValidator.checkRegister,
-    AuthController.register
-);
-
-const multer = require("multer");
-const togeojson = require('@tmcw/togeojson');
-const DOMParser = require("xmldom").DOMParser;
-
-router.post(
-    "/file",
-    auth,
-    multer().single("gpxfileupload"),
-    async (req, res) => {
-        const multerText = Buffer.from(req.file.buffer).toString();
-        
-        const xml = new DOMParser().parseFromString(multerText);
-        const json = togeojson.gpx(xml);
-
-        res.type("application/json");
-        res.send(json);
-        
-    }
-);
+router.post("/register", auth, JSONValidator.checkRegister, AuthController.register);
 
 module.exports = router;

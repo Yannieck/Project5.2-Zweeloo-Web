@@ -29,7 +29,7 @@ class JSONValidator {
     };
 
     static checkUserEdit = (req, res, next) => {
-        //Validate the register info
+        //Validate the user info
         const data = req.body;
         const checkValidity = JOIValidator.validateUser(data);
 
@@ -42,7 +42,7 @@ class JSONValidator {
     };
 
     static checkRouteCreate = (req, res, next) => {
-        //Validate the register info
+        //Validate the route info
         const data = req.body;
         const checkValidity = JOIValidator.validateRoute(data);
 
@@ -50,7 +50,8 @@ class JSONValidator {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/routes/route_failed_validation`);
+            return res.status(HCS.StatusCodes.BAD_REQUEST).send(checkValidity);
+            // return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/routes/route_failed_validation`);
         }
     };
 }
