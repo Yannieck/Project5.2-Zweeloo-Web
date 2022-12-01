@@ -33,6 +33,12 @@ router.get("/routeselection", auth, (req, res) => {
     });
 });
 
+router.get("/route-editor", auth, (req, res) => {
+    res.render("route-editor", {
+        logedIn: getCookie(req),
+    });
+});
+
 router.get("/logout", (req, res) => {
     res.clearCookie("jwt");
     res.redirect("/login");
