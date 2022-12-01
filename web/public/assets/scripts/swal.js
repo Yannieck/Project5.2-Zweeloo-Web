@@ -1,4 +1,5 @@
 const messages = {
+    //Registering
     register_success: {
         icon: "success",
         title: "Account succesvol aangemaakt",
@@ -29,6 +30,14 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
         redirect: "/register",
     },
+    register_failed_validation: {
+        icon: "error",
+        title: "Ingevulde gegevens zijn niet valide",
+        text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
+        redirect: "/register",
+    },
+
+    //Login
     login_successfull: {
         icon: "success",
         title: "U bent ingelogd",
@@ -44,8 +53,8 @@ const messages = {
     login_unknown_error: {
         icon: "error",
         title: "Onbekende fout opgetreden",
-        text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-        redirect: "/register",
+        text: "U zal nu worden doorgestuurd naar de inlog pagina",
+        redirect: "/login",
     },
     login_failed_validation: {
         icon: "error",
@@ -53,17 +62,43 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de inlog pagina",
         redirect: "/login",
     },
-    register_failed_validation: {
-        icon: "error",
-        title: "Ingevulde gegevens zijn niet valide",
-        text: "U zal nu worden doorgestuurd naar de aanmeld pagina",
-        redirect: "/register",
-    },
     login_required: {
         icon: "error",
         title: "Toegang geweigerd",
         text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de aanmeld pagina",
         redirect: "/login",
+    },
+
+    //Route creation
+    route_failed_validation: {
+        icon: "error",
+        title: "Ingevulde gegevens zijn niet valide",
+        text: "U zal nu worden doorgestuurd naar de route editor pagina",
+        redirect: "/route-info-editor",
+    },
+    no_file: {
+        icon: "error",
+        title: "Er is geen GPX bestand geupload",
+        text: "U zal nu worden doorgestuurd naar de route editor pagina",
+        redirect: "/route-info-editor",
+    },
+    failed_create_route: {
+        icon: "error",
+        title: "Route aanmaken is mislukt",
+        text: "U zal nu worden doorgestuurd naar de route editor pagina",
+        redirect: "/route-info-editor",
+    },
+    route_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de route editor pagina",
+        redirect: "/route-info-editor",
+    },
+    register_success: {
+        icon: "success",
+        title: "Route succesvol aangemaakt",
+        text: "U zal nu worden doorgestuurd naar de home pagina",
+        redirect: "/",
     },
 };
 

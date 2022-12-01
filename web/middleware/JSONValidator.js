@@ -1,5 +1,7 @@
 const JOIValidator = require("./JOIValidator");
 const HCS = require("http-status-codes");
+const togeojson = require("@tmcw/togeojson");
+const DOMParser = require("xmldom").DOMParser;
 
 class JSONValidator {
     static checkLogin = (req, res, next) => {
@@ -11,7 +13,9 @@ class JSONValidator {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/login/login_failed_validation`);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/login/login_failed_validation`);
         }
     };
 
@@ -24,7 +28,9 @@ class JSONValidator {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/register/register_failed_validation`);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/register/register_failed_validation`);
         }
     };
 
@@ -37,7 +43,9 @@ class JSONValidator {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/account/account_failed_validation`);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/account/account_failed_validation`);
         }
     };
 
@@ -50,8 +58,34 @@ class JSONValidator {
         if (checkValidity === true) {
             return next();
         } else {
-            return res.status(HCS.StatusCodes.BAD_REQUEST).send(checkValidity);
-            // return res.status(HCS.StatusCodes.BAD_REQUEST).redirect(`/routes/route_failed_validation`);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/routes-editor/route_failed_validation`);
+        }
+    };
+
+    static checkGeoJSON = (req, res, next) => {
+        //Check if there is a gpx file
+        if (!req.hasOwnProperty("file")) {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/routes-editor/no_file`);
+        }
+
+        //Get the data from the gpx file, parse to XML and convert to JSON
+        const gpxString = Buffer.from(req.file.buffer).toString();
+        const gpx = new DOMParser().parseFromString(gpxString);
+        const geojson = togeojson.gpx(gpx);
+
+        const checkValidity = JOIValidator.validateGeoJson(geojson);
+
+        //If valid, move on, else give a validation error
+        if (checkValidity === true) {
+            return next();
+        } else {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/routes-editor/route_failed_validation`);
         }
     };
 }
