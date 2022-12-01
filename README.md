@@ -1,207 +1,109 @@
-<h1 align="center" id="logo">
-  <a href="https://kunstenaarsdorpzweeloo.nl">
-    <img style="background-color:#fff; padding: 15px; border-radius: 5px" src="https://kunstenaarsdorpzweeloo.nl/wp-content/uploads/2017/06/logohighres.png" alt="Stichting Kunstenaarsdorp Zweeloo" title="Stichting Kunstenaarsdorp Zweeloo" height="60" />
-  </a>
-</h1>
+# Stichting Kunstenaarsdorp Zweeloo Route Editor
 
-<p align="center">
-  <a href="#about">About</a> •    
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#documentation">Documentation</a> •
-  <a href="#extra">Extra</a>
-</p>
+The Stichting Kunstenaarsdorp Zweeloo Route Editor is a web editor for creating routes. These routes will be used in the [Stichting Kunstenaarsdorp Zweeloo Mobile App](https://github.com/BroederToon/Project5.2-Zweeloo).
 
-<hr/>
+![](https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white) ![](https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens) ![](https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white)
 
-<h1 align="center" id="about">About</h1>
+![](https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E) ![](https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white) ![](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white) ![](https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454)
 
-<hr/>
-
-<h2 align="center" id="about">Used Techniques</h2>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white" alt=""/>
-  <img src="https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens" alt=""/>
-  <img src="https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white" alt=""/>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E" alt=""/>
-  <img src="https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white" alt=""/>
-  <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white" alt=""/>
-  <img src="https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454" alt=""/>
-</p>
-
-<br/>
-
-<h2 align="center" id="about">The Teams</h2>
-
-<p align="center">
-  <b>Phase 1</b><br/>
-  ⛹ Hylke Sijbesma<br />
-  ⛹ Justin Heijne<br />
-  ⛹ Niels Stevens <br />
-  ⛹ Arjan Loof <br />
-  <br />
-  <b>Phase 2</b><br/>
-  ⛹ Thijs Janse<br />
-  ⛹ Robin van Dijk<br />
-  ⛹ Dennis Schomaker<br />
-  ⛹ Franca Baars<br />
-  ⛹ Yannieck Blaauw<br />
-  <br/>
-</p>
-
-<hr />
-
-<h1 align="center" id="getting-started">Getting Started </h1>
-
-<hr />
-
-<h2>Requirements</h2>
+## Requirements
 
 This project runs with Nodejs and NPM.
+You can download NodeJS and NPM (comes with Nodejs) from the [Nodejs downloads page](https://nodejs.org/en/download/). During the development phase, version [v16.17.0](https://nodejs.org/download/release/v16.17.0/) of Node was used.
+You will also need an Apache Webserver and a MySQL database. For this we recommend using [XAMPP](https://www.apachefriends.org/).
 
-It also requires you to have a sql server running.
+## Installation
 
-A JAVA_HOME environment variable is required for XSD datavalidations.
-
-You can download the NodeJS runtime and the NPM package manager that comes with Nodejs from [Nodejs downloads page](https://nodejs.org/en/download/). During the first development phase of this project version 16.x of Node was used.
-
-You can download a JDK file from the [Oracle docs website](https://www.oracle.com/java/technologies/downloads/#jdk18-windows).
-
-> **Please note:**
-> this project is **not compatible** with NodeJS **versions < 16.x**.
-> this project **needs** a **JAVA_HOME** environment variable (which contains a path to a JDK).
-
-<br/>
-<h2> Installation </h2>
-
-1. Make sure you meet the requirements.
+1. Make sure you have read and meet the requirements.
 2. Clone this repository to your local machine.
-3. Make sure your JAVA_HOME environment variable is set.
-4. Make sure your MySQL server is running.
-5. Create a new database called `skz`.
-6. CD into the root folder of this project.
-7. Add a new file called `.env` to the root folder.
-8. Add the <a href="#extra">.env content</a> to the .env file.
-9. Run the following command:
-
-```shell
-npm install
-```
-
-10. If you are pulling new commits, make sure you have the latest version of the project by running the install command again.
-
-<br/>
-
-<h2>Running</h2>
-
-> **Please note:**
-> This project is NOT shipped with an SQL export of the database.
-> [Prisma ORM](https://www.prisma.io/) handles the database connection and schema management.
-> This means you should either generate the client, or push the database schema to the server.
-
-To push the database schema to the server, use the following command. Make sure that you have a database called 'skz'.
+3. Make sure your MySQL and Apache servers are running.
+4. Create a new database called `skz`. If you use XAMPP you can create it via PHPMyAdmin.
+5. Open the terminal and CD into the root folder of this project.
+6. Import the database by running:
 
 ```shell
 npm run database:push
-```
 
-<br/>
-If you want to pull the schema from the existing database, updating the prisma.schema, run:
-
-```shell
-npm run database:pull
-```
-
-<br/>
-Prisma requires database clients to be generated, and the database schema to be pushed to the server (which you have already done in the first step).
-Execute the following command to generate the database client:
-
-```shell
 npm run @prismaclient:generate
 ```
 
-<br/>
-We now have set up the database client and the database schema has been pushed to the server. Start the development server by running the following command:
+6. Add a new file called `.env` to the root folder.
+7. Add the content to the .env file following the [.env-template](#env-template).
+8. Run the following command:
+
+```shell
+npm i
+```
+
+> If you are pulling new commits, make sure you have the latest version of the project by running the install command again.
+
+## Running
+
+Start the development server by running the following command:
 
 ```shell
 npm run startdev
 ```
 
-This will run a development environment server, which uses nodemon for restarting after changes.
-<br/>
-
-After you've completed the above steps, you can run the project by running the following command:
+To start the production server, use the following command:
 
 ```shell
-npm run <SCRIPT NAME>
+npm run <NAME>
 ```
 
-**You can also run the scripts from the package.json file, this requires you to have IntelliJ installed.**
-<br/><br/>
+## Stakeholders
 
-<hr>
+#### Organisers
 
-<h1 align="center" id="documentation">Documentation </h1>
+-   Stichting Kunstenaarsdorp Zweeloo
+-   NHL Stenden Emmen - Informatica
 
-<hr />
+#### Project Group Phase 1
 
-This project is written in JavaScript (ES6) and uses the JSDoc tool to generate the documentation.
+-   Hylke Sijbesma
+-   Justin Heijne
+-   Niels Stevens
+-   Arjan Loof
 
-**You can read more advanced info about the used frameworks here.**
+#### Project Group Phase 2
 
-http://expressjs.com/en/api.html
+-   Thijs Janse
+-   Robin van Dijk
+-   Dennis Schomaker
+-   Franca Baars
+-   Yannieck Blaauw
 
-https://tailwindcss.com/
+## References
 
-https://pugjs.org/
+-   [Node.js](https://nodejs.org/en/)
+-   [Node.js v16.17.0](https://nodejs.org/download/release/v16.17.0/)
+-   [XAMPP](https://www.apachefriends.org/)
 
-https://ajv.js.org/
+<br/>
 
-https://github.com/nikku/node-xsd-schema-validator
+-   [Json Web Tokens](https://jwt.io/)
+-   [Express docs](http://expressjs.com/en/api.html)
+-   [Prisma docs](https://www.prisma.io/)
+-   [Tailwind docs](https://tailwindcss.com/)
+-   [Pug docs](https://pugjs.org/)
+-   [Joi docs](https://joi.dev/api/?v=17.7.0)
+-   [Sweet Alert docs](https://sweetalert.js.org/)
+-   [Passport docs](http://www.passportjs.org/)
+-   [Nodemon docs](https://nodemon.io/)
+-   [HTTP Status Codes](https://www.npmjs.com/package/http-status-codes)
+-   [Bcrypt](https://github.com/kelektiv/node.bcrypt.js#readme)
+-   [Axios docs](https://axios-http.com/docs/intro)
 
-https://sweetalert.js.org/
-
-https://html-to-pug.com/
-
-https://devhints.io/pug
-
-http://www.passportjs.org/
-
-https://axios-http.com/docs/intro
-
-https://nodemon.io/
-
-https://github.com/prettymuchbryce/http-status-codes
-
-https://github.com/kelektiv/node.bcrypt.js#readme
-
-https://github.com/NaturalIntelligence/fast-xml-parser
-
-<hr />
-
-<h1 align="center" id="extra">Extra</h1>
-
-Make sure to change the `.env` file (app secret, domain and database_url) when running the project in a production environment. <br>
-
-Template for a `.env` file:
+### .env Template
 
 ```shell
 DOMAIN = 'localhost'
 NODE_ENV = development
 APP_SECRET = <app_secret>
-DATABASE_URL = "mysql://root@localhost:3306/skz"
+DATABASE_URL = "mysql://username:password@domain:port/db-name"
 ```
 
 `DOMAIN`: The server domain
-`NODE_ENV`: Express environment variable for production status
-`APP_SECRET`: JWS secret
-`DATABASE_URL`: Link to the database
-
-<hr />
-
-<p align="center">
-  <a href="#logo">Back to top</a>
-</p>
+`NODE_ENV`: Will be either `production` or `development` depending on the status of the project
+`APP_SECRET`: [JWS secret](https://jwt.io/)
+`DATABASE_URL`: Link to the database. In the case of this project, it will be `mysql://root@localhost:3306/skz`
