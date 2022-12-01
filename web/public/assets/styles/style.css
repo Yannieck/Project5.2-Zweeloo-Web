@@ -92,8 +92,14 @@ label {
 
 .btn {
     background-color: transparent;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
     border: 3px solid var(--clr-txt-900);
     color: var(--clr-txt-900);
+    transition: all .3s ease-in-out;
+    padding: .75em 1.4em;
 }
 
 .btn:hover {
