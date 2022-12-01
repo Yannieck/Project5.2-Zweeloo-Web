@@ -8,6 +8,10 @@ html
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
                 .px-16
+                    script.
+                        let message = "#{status}";
+                    script(src="/scripts/swal.js")
+                    
                     h1.text-4xl.font-bold.mb-6 Voeg route informatie toe
 
                     form(action="/form/addroute" method="post" enctype="multipart/form-data")
