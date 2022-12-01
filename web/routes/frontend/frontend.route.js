@@ -34,7 +34,11 @@ router.get("/routeselection", auth, (req, res) => {
 });
 
 router.get("/route-info-editor", auth, (req, res) => {
-    res.render("route-info-editor", {
+    res.render("route-info-editor", { logedIn: getCookie(req) });
+});
+
+router.get("/route-editor", auth, (req, res) => {
+    res.render("route-editor", {
         logedIn: getCookie(req),
     });
 });
