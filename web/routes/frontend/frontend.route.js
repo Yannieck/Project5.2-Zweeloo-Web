@@ -37,16 +37,16 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
-router.get("/route-editor", auth, (req, res) => {
-    res.render("route-editor", {
-        logedIn: getCookie(req),
-    });
-});
-
-router.get("/routes-editor/:status", auth, (req, res) => {
+router.get("/route-info-editor/:status", auth, (req, res) => {
     res.render("route-info-editor", {
         logedIn: getCookie(req),
         status: req.params.status,
+    });
+});
+
+router.get("/route-editor", auth, (req, res) => {
+    res.render("route-editor", {
+        logedIn: getCookie(req),
     });
 });
 

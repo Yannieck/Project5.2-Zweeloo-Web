@@ -60,17 +60,17 @@ class RouteController {
             //Redirect when done
             if (new_route) {
                 res.status(HCS.StatusCodes.OK).redirect(
-                    `/routes-editor/register_success`
+                    `/route-info-editor/register_success`
                 );
             } else {
                 return res
                     .status(HCS.StatusCodes.BAD_REQUEST)
-                    .redirect(`/routes-editor/failed_create_route`);
+                    .redirect(`/route-info-editor/failed_create_route`);
             }
         } catch (e) {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/routes-editor/unknown_error`);
+                .redirect(`/route-info-editor/unknown_error`);
         }
     };
 
