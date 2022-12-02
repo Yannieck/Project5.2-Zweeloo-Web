@@ -2,9 +2,9 @@
 
 The Stichting Kunstenaarsdorp Zweeloo Route Editor is a web editor for creating routes. These routes will be used in the [Stichting Kunstenaarsdorp Zweeloo Mobile App](https://github.com/BroederToon/Project5.2-Zweeloo).
 
-![](https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white) ![](https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens) ![](https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=&logo=npm&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=&logo=JSON%20web%20tokens) ![NODE](https://img.shields.io/badge/node.js-6DA55F?style=&logo=node.js&logoColor=white)
 
-![](https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E) ![](https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white) ![](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white) ![](https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454)
+![JS](https://img.shields.io/badge/javascript-%23323330.svg?style=&logo=javascript&logoColor=%23F7DF1E) ![PRISMA](https://img.shields.io/badge/Prisma-3982CE?style=&logo=Prisma&logoColor=white) ![TAILWIND](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=&logo=tailwind-css&logoColor=white) ![PUG](https://img.shields.io/badge/Pug-FFF?style=&logo=pug&logoColor=A86454)
 
 ## Requirements
 
@@ -27,9 +27,9 @@ npm run database:push
 npm run @prismaclient:generate
 ```
 
-6. Add a new file called `.env` to the root folder.
-7. Add the content to the .env file following the [.env-template](#env-template).
-8. Run the following command:
+7. Add a new file called `.env` to the root folder.
+8. Add the content to the .env file following the [.env-template](#env-template).
+9. Run the following command:
 
 ```shell
 npm i
@@ -53,46 +53,43 @@ npm run <NAME>
 
 ## Stakeholders
 
-#### Organisers
+### Organisers
 
--   Stichting Kunstenaarsdorp Zweeloo
--   NHL Stenden Emmen - Informatica
+- Stichting Kunstenaarsdorp Zweeloo
+- NHL Stenden Emmen - Informatica
 
 #### Project Group Phase 1
 
--   Hylke Sijbesma
--   Justin Heijne
--   Niels Stevens
--   Arjan Loof
+- Hylke Sijbesma
+- Justin Heijne
+- Niels Stevens
+- Arjan Loof
 
 #### Project Group Phase 2
 
--   Thijs Janse
--   Robin van Dijk
--   Dennis Schomaker
--   Franca Baars
--   Yannieck Blaauw
+- Thijs Janse
+- Robin van Dijk
+- Dennis Schomaker
+- Franca Baars
+- Yannieck Blaauw
 
 ## References
 
--   [Node.js](https://nodejs.org/en/)
--   [Node.js v16.17.0](https://nodejs.org/download/release/v16.17.0/)
--   [XAMPP](https://www.apachefriends.org/)
-
-<br/>
-
--   [Json Web Tokens](https://jwt.io/)
--   [Express docs](http://expressjs.com/en/api.html)
--   [Prisma docs](https://www.prisma.io/)
--   [Tailwind docs](https://tailwindcss.com/)
--   [Pug docs](https://pugjs.org/)
--   [Joi docs](https://joi.dev/api/?v=17.7.0)
--   [Sweet Alert docs](https://sweetalert.js.org/)
--   [Passport docs](http://www.passportjs.org/)
--   [Nodemon docs](https://nodemon.io/)
--   [HTTP Status Codes](https://www.npmjs.com/package/http-status-codes)
--   [Bcrypt](https://github.com/kelektiv/node.bcrypt.js#readme)
--   [Axios docs](https://axios-http.com/docs/intro)
+- [Node.js](https://nodejs.org/en/)
+- [Node.js v16.17.0](https://nodejs.org/download/release/v16.17.0/)
+- [XAMPP](https://www.apachefriends.org/)
+- [Json Web Tokens](https://jwt.io/)
+- [Express docs](http://expressjs.com/en/api.html)
+- [Prisma docs](https://www.prisma.io/)
+- [Tailwind docs](https://tailwindcss.com/)
+- [Pug docs](https://pugjs.org/)
+- [Joi docs](https://joi.dev/api/?v=17.7.0)
+- [Sweet Alert docs](https://sweetalert.js.org/)
+- [Passport docs](http://www.passportjs.org/)
+- [Nodemon docs](https://nodemon.io/)
+- [HTTP Status Codes](https://www.npmjs.com/package/http-status-codes)
+- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js#readme)
+- [Axios docs](https://axios-http.com/docs/intro)
 
 ### .env Template
 
@@ -103,7 +100,7 @@ APP_SECRET = <app_secret>
 DATABASE_URL = "mysql://username:password@domain:port/db-name"
 ```
 
-`DOMAIN`: The server domain
-`NODE_ENV`: Will be either `production` or `development` depending on the status of the project
-`APP_SECRET`: [JWS secret](https://jwt.io/)
-`DATABASE_URL`: Link to the database. In the case of this project, it will be `mysql://root@localhost:3306/skz`
+- `DOMAIN`: The server domain
+- `NODE_ENV`: Will be either `production` or `development` depending on the status of the project
+- `APP_SECRET`: [JWS secret](https://jwt.io/)
+- `DATABASE_URL`: Link to the database. In the case of this project, it will be `mysql://root@localhost:3306/skz`
