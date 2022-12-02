@@ -18,8 +18,8 @@ model poi_img {
 model poi {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(255)
-  lat         Decimal  @db.Decimal()
-  lon         Decimal  @db.Decimal()
+  lat         Decimal  @db.Decimal(33, 30)
+  lon         Decimal  @db.Decimal(33, 30)
   description String   @db.VarChar(2048)
   type        poi_type @default(POI)
   audio_src   String?  @db.VarChar(255)
@@ -34,8 +34,8 @@ model poi {
 model node {
   id       Int     @id @default(autoincrement())
   index    Int
-  lat      Decimal @db.Decimal()
-  lon      Decimal @db.Decimal()
+  lat      Decimal @db.Decimal(33, 30)
+  lon      Decimal @db.Decimal(33, 30)
   route_id Int
 
   route route @relation(fields: [route_id], references: [id])
