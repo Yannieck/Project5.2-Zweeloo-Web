@@ -60,7 +60,7 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/routes-editor/route_failed_validation`);
+                .redirect(`/route-info-editor/route_failed_validation`);
         }
     };
 
@@ -69,7 +69,7 @@ class JSONValidator {
         if (!req.hasOwnProperty("file")) {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/routes-editor/no_file`);
+                .redirect(`/route-info-editor/no_file`);
         }
 
         //Get the data from the gpx file, parse to XML and convert to JSON
@@ -85,7 +85,7 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/routes-editor/route_failed_validation`);
+                .redirect(`/route-info-editor/route_failed_validation`);
         }
     };
 }
