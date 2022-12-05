@@ -1,6 +1,3 @@
-//JOI DOCS:
-//https://joi.dev/api/?v=17.7.0
-
 const schemas = require("./schemas");
 
 class Validator {

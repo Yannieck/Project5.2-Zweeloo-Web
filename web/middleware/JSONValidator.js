@@ -65,7 +65,7 @@ class JSONValidator {
     };
 
     static checkGeoJSON = (req, res, next) => {
-        //Check if there is a gpx file
+        //Check if there is a file
         if (!req.hasOwnProperty("file")) {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
