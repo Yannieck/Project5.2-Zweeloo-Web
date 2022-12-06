@@ -1,7 +1,4 @@
-//JOI DOCS:
-//https://joi.dev/api/?v=17.7.0
-
-const schemas = require('./schemas');
+const schemas = require("./schemas");
 
 class Validator {
     //If no errors occured, return true, else return the error message
@@ -18,7 +15,8 @@ class Validator {
         if (schemas.register_schema.validate(json).error == null) {
             return true;
         } else {
-            return schemas.register_schema.validate(json).error.details[0].message;
+            return schemas.register_schema.validate(json).error.details[0]
+                .message;
         }
     };
 
@@ -29,7 +27,7 @@ class Validator {
         } else {
             return schemas.user_schema.validate(json).error.details[0].message;
         }
-    }
+    };
 
     //If no errors occured, return true, else return the error message
     static validateRoute = (json) => {
@@ -38,7 +36,15 @@ class Validator {
         } else {
             return schemas.route_schema.validate(json).error.details[0].message;
         }
-    }
+    };
+
+    static validateGeoJson = (json) => {
+        if (schemas.geojson.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.geojson.validate(json).error.details[0].message;
+        }
+    };
 }
 
 module.exports = Validator;
