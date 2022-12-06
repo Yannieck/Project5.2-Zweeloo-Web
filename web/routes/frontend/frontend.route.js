@@ -37,6 +37,10 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
+router.get("/route-poi-editor", auth, (req, res) => {
+    res.render("route-poi-editor", { logedIn: getCookie(req) });
+});
+
 router.get("/route-info-editor/:status", auth, (req, res) => {
     res.render("route-info-editor", {
         logedIn: getCookie(req),

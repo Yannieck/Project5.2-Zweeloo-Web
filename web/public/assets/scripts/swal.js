@@ -98,7 +98,7 @@ const messages = {
         icon: "success",
         title: "Route succesvol aangemaakt",
         text: "U zal nu worden doorgestuurd naar de home pagina.",
-        redirect: "/",
+        redirect: "/route-poi-editor",
     },
 };
 
