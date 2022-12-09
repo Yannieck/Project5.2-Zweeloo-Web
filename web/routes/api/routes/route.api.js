@@ -41,6 +41,41 @@ router.get("/all", async (req, res) => {
     }
 });
 
+router.get("/bikeroutes", async (req, res) => {
+    try {
+        const routes = await RouteController.getBikeRoutes();
+        if (!routes || routes.length === 0) {
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "Routes not found" });
+        } else {
+            return res.status(HSC.StatusCodes.OK).json(routes);
+        }
+    } catch (e) {
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting bike routes failed" });
+    }
+});
+
+router.get("/walkroutes", async (req, res) => {
+    try {
+        const routes = await RouteController.getWalkRoutes();
+        if (!routes || routes.length === 0) {
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "Routes not found" });
+        } else {
+            return res.status(HSC.StatusCodes.OK).json(routes);
+        }
+    } catch (e) {
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting walk routes failed" });
+    }
+});
+
+
 router.post(
     "/createroute",
     auth,
