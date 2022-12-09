@@ -17,6 +17,42 @@ class RouteController {
         });
     }
 
+    static async getBikeRoutes() {
+        return prisma.route.findMany({
+            select: {
+                id: true,
+                name: true,
+                route: true,
+                description: true,
+                distance: true,
+                extra: true,
+                type: true,
+                wheelchair: true,
+            },
+            where: {
+                type: "BIKE",
+            },
+        });
+    }
+
+    static async getWalkRoutes() {
+        return prisma.route.findMany({
+            select: {
+                id: true,
+                name: true,
+                route: true,
+                description: true,
+                distance: true,
+                extra: true,
+                type: true,
+                wheelchair: true,
+            },
+            where: {
+                type: "WALK",
+            },
+        });
+    }
+
     static async getAllRoutes() {
         return prisma.route.findMany({
             select: {
