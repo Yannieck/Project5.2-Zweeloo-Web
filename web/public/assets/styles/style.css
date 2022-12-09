@@ -52,7 +52,7 @@ h6,
 legend,
 label {
     font-family: "Poppins", sans-serif !important;
-    color: var(--clr-txt-900) !important;
+    color: var(--clr-txt-900);
 }
 
 .clr-bg-main {
@@ -119,7 +119,7 @@ nav .btn {
 }
 
 nav .btn:hover {
-    color: var(--clr-acc-600);
+    color: var(--clr-acc-600) !important;
     background-color: transparent;
 }
 

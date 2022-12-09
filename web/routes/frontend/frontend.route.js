@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/authenticator");
+const RouteController = require("../../bin/db_route_controller");
 
 const getCookie = (req) => {
     if (!req.cookies) return false;
@@ -37,8 +38,14 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
-router.get("/route-poi-editor", auth, (req, res) => {
-    res.render("route-poi-editor", { logedIn: getCookie(req) });
+router.get("/route-poi-editor/:id", auth, async (req, res) => {
+    const id = parseInt(req.params.id);
+    if(id){
+        const route = await RouteController.getRouteById(id);
+        res.render("route-poi-editor", { logedIn: getCookie(req), route: route });
+    } else {
+        res.redirect("/route-info-editor/route_unknown_error");
+    }
 });
 
 router.get("/route-info-editor/:status", auth, (req, res) => {

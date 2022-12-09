@@ -17,33 +17,9 @@ html
 
                     .flex.gap-2
                         .h-screen.overflow-y-auto.scroll-clr(class="w-1/4")
-                            script(src="/scripts/loadpois.js")
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
-                            a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
+                            each feature in route.route.features
+                                if feature.geometry.type === "Point"
+                                    a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
 
                         .h-screen.clr-border-sec.border-4(class="w-3/4")
 
