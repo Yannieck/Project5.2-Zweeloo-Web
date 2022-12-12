@@ -127,3 +127,7 @@ nav .btn:hover {
     scrollbar-color: gray var(--clr-bg-300);
     scrollbar-width: thin;
 }
+
+.selected {
+    background-color: white !important;
+}
