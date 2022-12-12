@@ -3,7 +3,6 @@ html
         include head.pug
         title index
 
-
     body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
         block content
@@ -17,10 +16,75 @@ html
 
                     .flex.gap-2
                         .h-screen.overflow-y-auto.scroll-clr(class="w-1/4")
-                            each feature in route.route.features
+                            each feature, index in route.route.features
                                 if feature.geometry.type === "Point"
-                                    a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class="h-[3rem]" href="") test
+                                    a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class=`h-[3rem] ${selected == index ? 'selected' : ''}` href=`/route-poi-editor/${route.id}/${index}`) 
+                                        | !{feature.properties.name}
 
-                        .h-screen.clr-border-sec.border-4(class="w-3/4")
+                        .h-screen.clr-border-sec.border-4.p-5(class="w-3/4")                        
+                            label(for="poitype") Kies een type punt
+                            select(name="poitype" id="poitype").block.p-1
+                                option(value="poi") Bezienswaardigheid
+                                option(value="node") Knooppunt
+                                option(value="info") Informatiepunt
+                                option(value="cafe") Horecagelegenheid
+                                option(value="invis") Onzichtbaar punt
+
+                            form(action=`/form/addpoi/${selected}` method="post" enctype="multipart/form-data" id="pointForm")
+
+                                label.font-bold(id="name") Naam
+                                    input(type="text" min=0 name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}`).block
+                                
+                                label.font-bold(id="desc") Beschrijving
+                                    textarea(name="desc" placeholder="Beschrijving...").block
+                                
+                                input.btn.mt-4(type="submit" value="Voeg punt toe")
+
+                            form(action=`/form/addnode/${selected}` method="post" id="nodeForm" hidden)
+                                label.font-bold Kies GPX bestand
+                                    input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr...").block
+
+                                input.btn.mt-4(type="submit" value="Voeg knooppunt toe")
+
+                            script(src="/scripts/changePoiNode.js")
+
+                            //-     label.font-bold(for="gpxfileupload") Kies GPX bestand
+                            //-         span.clr-text-red  *
+                            //-     input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
+
+                            //-     fieldset.mb-4
+                            //-         legend.font-bold Route type
+                            //-             span.clr-text-red  *
+                            //-         label.block
+                            //-             input(type="radio" name="routetype" value="walk" checked required)
+                            //-             | Wandelroute
+                            //-         label.block
+                            //-             input(type="radio" name="routetype" value="bike" required)
+                            //-             | Fietsroute
+
+                            //-     fieldset.mb-4
+                            //-         legend.font-bold Rolstoeltoegankelijk
+                            //-             span.clr-text-red  *
+                            //-         label.block
+                            //-             input(type="radio" name="wheelchair" value="yes" required)
+                            //-             | Ja
+                            //-         label.block
+                            //-             input(type="radio" name="wheelchair" value="no" checked required)
+                            //-             | Nee
+
+                            //-     label.font-bold.block(for="name") Route naam
+                            //-         span.clr-text-red  *
+                            //-     input.py-2.px-4.mb-4.w-full#name(type="text" name="name" placeholder="Route naam..." required)
+
+                            //-     label.font-bold.block(for="desc") Beschrijving
+                            //-         span.clr-text-red  *
+                            //-     textarea.py-2.px-4.mb-4.w-full.resize-none#desc(type="text" name="description" placeholder="Description..." rows="6" required)
+
+                            //-     label.font-bold.block(for="extra") Toevoeging
+                            //-     input.py-2.px-4.mb-4.w-full#extra(type="text" name="extra" placeholder="Toevoeging...")
+
+                            //-     p.clr-text-red.text-sm.mb-4 * verplichte velden
+
+                            //-     input.btn.mt-4(type="submit" value="Voeg route toe")
 
                 .line
