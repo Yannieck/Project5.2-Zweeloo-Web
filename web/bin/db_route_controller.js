@@ -96,8 +96,7 @@ class RouteController {
             //Redirect when done
             if (new_route) {
                 res.status(HCS.StatusCodes.OK).redirect(
-                    // `/route-info-editor/register_success`
-                    `/route-poi-editor/${new_route.id}`
+                    `/route-poi-editor/${new_route.id}/1`
                 );
             } else {
                 return res

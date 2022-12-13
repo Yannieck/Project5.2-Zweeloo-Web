@@ -21,13 +21,21 @@ class JOISchemas {
             .required(),
 
         password: Joi.string()
-            .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"))
+            .pattern(
+                new RegExp(
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"
+                )
+            )
             .min(8)
             .max(50)
             .required(),
 
         password_repeat: Joi.string()
-            .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"))
+            .pattern(
+                new RegExp(
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"
+                )
+            )
             .min(8)
             .max(50)
             .required()
@@ -104,7 +112,9 @@ class JOISchemas {
                     properties: Joi.object({
                         _gpxType: Joi.string(),
                         name: Joi.string()
-                            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+                            .pattern(
+                                new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$")
+                            )
                             .required(),
                         type: Joi.string().valid("Cycling", "Running"),
                         coordinateProperties: Joi.object(),
@@ -133,6 +143,29 @@ class JOISchemas {
                 }).required()
             )
             .required(),
+    });
+
+    static poi = Joi.object({
+        selected: Joi.number().min(0).required(),
+        lat: Joi.number().min(0).max(360).required(),
+        lon: Joi.number().min(0).max(360).required(),
+        routeid: Joi.number().integer().min(0).required(),
+        type: Joi.string().valid("POI", "INFO", "INVIS", "CAFE").required(),
+        name: Joi.string()
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .required(),
+        desc: Joi.string()
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .required(),
+        radius: Joi.number().min(0).required(),
+    });
+
+    static node = Joi.object({
+        selected: Joi.number().min(0).required(),
+        lat: Joi.number().min(0).max(360).required(),
+        lon: Joi.number().min(0).max(360).required(),
+        routeid: Joi.number().integer().min(0).required(),
+        nodenr: Joi.number().integer().min(0).required(),
     });
 }
 
