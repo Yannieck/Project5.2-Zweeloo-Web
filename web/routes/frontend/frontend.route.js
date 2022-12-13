@@ -38,19 +38,6 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
-router.get("/route-poi-editor/:id", auth, async (req, res) => {
-    const id = parseInt(req.params.id);
-    if (id) {
-        const route = await RouteController.getRouteById(id);
-        res.render("route-poi-editor", {
-            logedIn: getCookie(req),
-            route: route,
-        });
-    } else {
-        res.redirect("/route-info-editor/route_unknown_error");
-    }
-});
-
 router.get("/route-poi-editor/:id/:feature", auth, async (req, res) => {
     const id = parseInt(req.params.id);
     const feature = parseInt(req.params.feature);
@@ -65,6 +52,30 @@ router.get("/route-poi-editor/:id/:feature", auth, async (req, res) => {
                 logedIn: getCookie(req),
                 route: route,
                 selected: feature,
+            });
+        } else {
+            res.redirect("/route-info-editor/route_unknown_error");
+        }
+    } else {
+        res.redirect("/route-info-editor/route_unknown_error");
+    }
+});
+
+router.get("/route-poi-editor/:id/:feature/:status", auth, async (req, res) => {
+    const id = parseInt(req.params.id);
+    const feature = parseInt(req.params.feature);
+    if (id) {
+        //Get the route from the database
+        const route = await RouteController.getRouteById(id);
+
+        //Check if the feature index is not the route and is within the feature array range
+        if (feature > 0 && feature < route.route.features.length) {
+            //Send the route json and the feature index to the page
+            res.render("route-poi-editor", {
+                logedIn: getCookie(req),
+                route: route,
+                selected: feature,
+                status: req.params.status,
             });
         } else {
             res.redirect("/route-info-editor/route_unknown_error");

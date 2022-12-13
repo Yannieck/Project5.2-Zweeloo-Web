@@ -88,6 +88,36 @@ class JSONValidator {
                 .redirect(`/route-info-editor/route_failed_validation`);
         }
     };
+
+    static checkPoiCreate = (req, res, next) => {
+        //Validate the route info
+        const data = req.body;
+        const checkValidity = JOIValidator.validatePoi(data);
+
+        //If valid, move on, else give a validation error
+        if (checkValidity === true) {
+            return next();
+        } else {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`);
+        }
+    };
+
+    static checkNodeCreate = (req, res, next) => {
+        //Validate the route info
+        const data = req.body;
+        const checkValidity = JOIValidator.validateNode(data);
+
+        //If valid, move on, else give a validation error
+        if (checkValidity === true) {
+            return next();
+        } else {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`);
+        }
+    };
 }
 
 module.exports = JSONValidator;

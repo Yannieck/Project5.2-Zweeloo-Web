@@ -10,37 +10,54 @@ html
                 .px-16.w-full
                     script.
                         let message = "#{status}";
+                        let additions = "/#{route.id}/#{selected}";
                     script(src="/scripts/swal.js")
 
                     h1.text-4xl.font-bold.mb-5 Bezienswaardigheid informatie toevoegen - 3
 
                     .flex.gap-2
-                        .h-screen.overflow-y-auto.scroll-clr(class="w-1/4")
+                        .max-h-screen.overflow-y-auto.scroll-clr(class="w-1/4")
                             each feature, index in route.route.features
                                 if feature.geometry.type === "Point"
                                     a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class=`h-[3rem] ${selected == index ? 'selected' : ''}` href=`/route-poi-editor/${route.id}/${index}`) 
                                         | !{feature.properties.name}
 
-                        .h-screen.clr-border-sec.border-4.p-5(class="w-3/4")                        
-                            label(for="poitype") Kies een type punt
+                        .max-h-screen.clr-border-sec.border-4.p-5(class="w-3/4")                        
+                            label(for="poitype").font-bold Kies een type punt
                             select(name="poitype" id="poitype").block.p-1
-                                option(value="poi") Bezienswaardigheid
-                                option(value="node") Knooppunt
-                                option(value="info") Informatiepunt
-                                option(value="cafe") Horecagelegenheid
-                                option(value="invis") Onzichtbaar punt
+                                option(value="POI") Bezienswaardigheid
+                                option(value="NODE") Knooppunt
+                                option(value="INFO") Informatiepunt
+                                option(value="CAFE") Horecagelegenheid
+                                option(value="INVIS") Onzichtbaar punt
+                            //- Form for the poi
+                            form(action=`/form/addpoi` enctype="multipart/form-data" method="post" id="pointForm")
+                                input(type="hidden" name="selected" value=`${selected}` )
+                                input(type="hidden" name="lat" value=`${route.route.features[selected].geometry.coordinates[1]}` )
+                                input(type="hidden" name="lon" value=`${route.route.features[selected].geometry.coordinates[0]}` )
+                                input(type="hidden" name="routeid" value=`${route.id}` )
+                                input(type="hidden" name="type" id="poitypefield" )
 
-                            form(action=`/form/addpoi/${selected}` method="post" enctype="multipart/form-data" id="pointForm")
+                                label.font-bold Naam
+                                    input(type="text" name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}`).block.p-1.font-normal.w-full
 
-                                label.font-bold(id="name") Naam
-                                    input(type="text" min=0 name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}`).block
-                                
-                                label.font-bold(id="desc") Beschrijving
-                                    textarea(name="desc" placeholder="Beschrijving...").block
-                                
+                                label.font-bold Beschrijving
+                                    textarea(name="desc" placeholder="Beschrijving..." class="min-h-[6rem]").block.p-1.font-normal.w-full
+
+                                label.font-bold Beschrijving
+                                    input(type="file" name="audio_src").block.p-1.font-normal.w-full
+
+                                label.font-bold Radius
+                                    input(type="number" min=0 placeholder="Nummer..." name="radius").block.p-1.font-normal.w-full
+
                                 input.btn.mt-4(type="submit" value="Voeg punt toe")
+                            //- Form for the node
+                            form(action=`/form/addnode` method="post" id="nodeForm" hidden)
+                                input(type="hidden" name="selected" value=`${selected}` )
+                                input(type="hidden" name="lat" value=`${route.route.features[selected].geometry.coordinates[1]}` )
+                                input(type="hidden" name="lon" value=`${route.route.features[selected].geometry.coordinates[0]}` )
+                                input(type="hidden" name="routeid" value=`${route.id}` )
 
-                            form(action=`/form/addnode/${selected}` method="post" id="nodeForm" hidden)
                                 label.font-bold Kies GPX bestand
                                     input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr...").block
 

@@ -45,6 +45,22 @@ class Validator {
             return schemas.geojson.validate(json).error.details[0].message;
         }
     };
+
+    static validatePoi = (json) => {
+        if (schemas.poi.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.geojson.validate(json).error.details[0].message;
+        }
+    };
+
+    static validateNode = (json) => {
+        if (schemas.node.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.geojson.validate(json).error.details[0].message;
+        }
+    };
 }
 
 module.exports = Validator;

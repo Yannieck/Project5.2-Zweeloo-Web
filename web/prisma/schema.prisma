@@ -24,7 +24,6 @@ model poi {
   type        poi_type @default(POI)
   audio_src   String?  @db.VarChar(255)
   radius      Int      @db.Int()
-  icon        String   @db.VarChar(255)
   route_id    Int
 
   route   route     @relation(fields: [route_id], references: [id])

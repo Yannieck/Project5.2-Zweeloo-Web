@@ -27,9 +27,10 @@ npm run database:push
 npm run @prismaclient:generate
 ```
 
-7. Add a new file called `.env` to the root folder.
-8. Add the content to the .env file following the [.env-template](#env-template).
-9. Run the following command:
+7. Add a new folder called `uploads` to the root folder.
+8. Add a new file called `.env` to the root folder.
+9. Add the content to the .env file following the [.env-template](#env-template).
+10.  Run the following command:
 
 ```shell
 npm i
