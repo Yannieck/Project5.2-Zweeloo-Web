@@ -28,12 +28,27 @@ class PoiController {
                     lat: parseFloat(req.body.lat),
                     lon: parseFloat(req.body.lon),
                     description: req.body.desc,
-                    audio_src: req.file.filename,
+                    audio_src: req.files.audio_src[0].filename,
                     route_id: parseInt(req.body.routeid),
                     radius: parseInt(req.body.radius),
                     type: req.body.type,
                 },
             });
+            //Put all images in the database
+            req.files.img_src.forEach(async (img) => {
+                const image = await prisma.poi_img.create({
+                    data: {
+                        poi_id: poi.id,
+                        src: img.filename,
+                    }
+                })
+                //If file creation failed throw error
+                if(!image){
+                    return res
+                        .status(HCS.StatusCodes.BAD_REQUEST)
+                        .redirect(`/route-poi-editor/${req.body.routeid}/${req.body.selected}/failed_create_poi`);
+                }
+            })
             //Redirect when done
             if (poi) {
                 //Redirect to the selected point by adding the routeid and selected point to the url
