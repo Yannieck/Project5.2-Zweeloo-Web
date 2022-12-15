@@ -26,7 +26,7 @@ html
                         .max-h-screen.clr-border-sec.border-4.p-5(class="w-3/4")
                             //- Choose between poi type and display the form accordingly
                             label(for="poitype").font-bold Kies een type punt
-                            select(name="poitype" id="poitype").block.p-1
+                            select(name="poitype" id="poitype").block.p-1.mb-4
                                 option(value="POI") Bezienswaardigheid
                                 option(value="NODE") Knooppunt
                                 option(value="INFO") Informatiepunt
@@ -41,21 +41,21 @@ html
                                 input(type="hidden" name="type" id="poitypefield" required)
 
                                 label.font-bold Naam
-                                    input(type="text" name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}` required).block.p-1.font-normal.w-full
+                                    input(type="text" name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}` required).block.p-1.font-normal.w-full.mb-4
 
                                 label.font-bold Beschrijving
-                                    textarea(name="desc" placeholder="Beschrijving..." class="min-h-[6rem]" required).block.p-1.font-normal.w-full
+                                    textarea(name="desc" placeholder="Beschrijving..." class="min-h-[6rem]" required).block.p-1.font-normal.w-full.mb-4
 
                                 label.font-bold Audio bestand
-                                    input(type="file" name="audio_src" accept="audio/*").block.p-1.font-normal.w-full
+                                    input(type="file" name="audio_src" accept="audio/*").block.p-1.font-normal.w-full.mb-4
 
                                 label.font-bold Afbeeldingen
-                                    input(type="file" name="img_src" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif, image/webp" multiple required).block.p-1.font-normal.w-full
+                                    input(type="file" name="img_src" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif, image/webp" multiple required).block.p-1.font-normal.w-full.mb-4
 
                                 label.font-bold Radius
-                                    input(type="number" min=0 placeholder="Nummer..." name="radius" required).block.p-1.font-normal.w-full
+                                    input(type="number" min=0 placeholder="Nummer..." name="radius" required).block.p-1.font-normal.w-full.mb-4
 
-                                input.btn.mt-4(type="submit" value="Voeg punt toe")
+                                input.btn(type="submit" value="Voeg punt toe")
                             //- Form for the node
                             form(action=`/form/addnode` method="post" id="nodeForm" hidden)
                                 input(type="hidden" name="selected" value=`${selected}` required)
@@ -64,49 +64,13 @@ html
                                 input(type="hidden" name="routeid" value=`${route.id}` required)
 
                                 label.font-bold Kies GPX bestand
-                                    input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr..." required).block
+                                    input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr..." required).block.w-full.mb-4
 
-                                input.btn.mt-4(type="submit" value="Voeg knooppunt toe")
+                                input.btn(type="submit" value="Voeg knooppunt toe")
 
                             script(src="/scripts/changePoiNode.js")
 
-                            //-     label.font-bold(for="gpxfileupload") Kies GPX bestand
-                            //-         span.clr-text-red  *
-                            //-     input.block.mb-6#gpxfileupload(type="file" name="gpxfileupload" accept=".gpx")
-
-                            //-     fieldset.mb-4
-                            //-         legend.font-bold Route type
-                            //-             span.clr-text-red  *
-                            //-         label.block
-                            //-             input(type="radio" name="routetype" value="walk" checked required)
-                            //-             | Wandelroute
-                            //-         label.block
-                            //-             input(type="radio" name="routetype" value="bike" required)
-                            //-             | Fietsroute
-
-                            //-     fieldset.mb-4
-                            //-         legend.font-bold Rolstoeltoegankelijk
-                            //-             span.clr-text-red  *
-                            //-         label.block
-                            //-             input(type="radio" name="wheelchair" value="yes" required)
-                            //-             | Ja
-                            //-         label.block
-                            //-             input(type="radio" name="wheelchair" value="no" checked required)
-                            //-             | Nee
-
-                            //-     label.font-bold.block(for="name") Route naam
-                            //-         span.clr-text-red  *
-                            //-     input.py-2.px-4.mb-4.w-full#name(type="text" name="name" placeholder="Route naam..." required)
-
-                            //-     label.font-bold.block(for="desc") Beschrijving
-                            //-         span.clr-text-red  *
-                            //-     textarea.py-2.px-4.mb-4.w-full.resize-none#desc(type="text" name="description" placeholder="Description..." rows="6" required)
-
-                            //-     label.font-bold.block(for="extra") Toevoeging
-                            //-     input.py-2.px-4.mb-4.w-full#extra(type="text" name="extra" placeholder="Toevoeging...")
-
-                            //-     p.clr-text-red.text-sm.mb-4 * verplichte velden
-
-                            //-     input.btn.mt-4(type="submit" value="Voeg route toe")
+                    .w-full.flex.flex-row-reverse.mt-4
+                        a(href="/").btn Voltooi route aanmaken
 
                 .line
