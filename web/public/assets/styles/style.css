@@ -129,5 +129,5 @@ nav .btn:hover {
 }
 
 .selected {
-    background-color: white !important;
+    background-color: var(--clr-bg-300) !important;
 }
