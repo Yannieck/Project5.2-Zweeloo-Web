@@ -24,7 +24,7 @@ html
                                         a.block.clr-border-sec.clr-bg-main.clr-border-sec.border-4.w-full.mb-1.text-center(class=`h-[3rem] ${selected == index ? 'selected' : ''}` href=`/route-poi-editor/${route.id}/${index}`) 
                                             | !{feature.properties.name}
 
-                            .max-h-screen.clr-border-sec.border-4.p-5(class="w-3/4")
+                            .clr-border-sec.border-4.p-5(class="w-3/4")
                                 //- Choose between poi type and display the form accordingly
                                 label(for="poitype").font-bold Kies een type punt
                                 select(name="poitype" id="poitype").block.p-1.mb-4
