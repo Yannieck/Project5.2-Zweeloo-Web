@@ -42,18 +42,22 @@ html
                                     input(type="hidden" name="type" id="poitypefield" required)
 
                                     label.font-bold Naam
+                                        span.clr-text-red  *
                                         input(type="text" name="name" placeholder="Naam..." value=`${route.route.features[selected].properties.name}` required).block.p-1.font-normal.w-full.mb-4
 
                                     label.font-bold Beschrijving
+                                        span.clr-text-red  *
                                         textarea(name="desc" placeholder="Beschrijving..." class="min-h-[6rem]" required).block.p-1.font-normal.w-full.mb-4
 
                                     label.font-bold Audio bestand
                                         input(type="file" name="audio_src" accept="audio/*").block.p-1.font-normal.w-full.mb-4
 
                                     label.font-bold Afbeeldingen
+                                        span.clr-text-red  *
                                         input(type="file" name="img_src" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif, image/webp" multiple required).block.p-1.font-normal.w-full.mb-4
 
                                     label.font-bold Radius
+                                        span.clr-text-red  *
                                         input(type="number" min=0 placeholder="Nummer..." name="radius" required).block.p-1.font-normal.w-full.mb-4
 
                                     input.btn(type="submit" value="Voeg punt toe")
@@ -65,6 +69,7 @@ html
                                     input(type="hidden" name="routeid" value=`${route.id}` required)
 
                                     label.font-bold Kies GPX bestand
+                                        span.clr-text-red  *
                                         input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr..." required).block.w-full.mb-4
 
                                     input.btn(type="submit" value="Voeg knooppunt toe")
