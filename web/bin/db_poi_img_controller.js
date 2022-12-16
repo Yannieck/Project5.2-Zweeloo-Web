@@ -2,6 +2,11 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 class PoiImgController {
+    /**
+     * Get the images for a specific POI
+     * @param {int} poi_id
+     * @returns all images for the POI
+     */
     static async getAllImgFromPoi(poi_id) {
         return prisma.poi_img.findMany({
             where: {
@@ -13,6 +18,12 @@ class PoiImgController {
         });
     }
 
+    /**
+     * Create a image for a POI
+     * @param {int} poi_id 
+     * @param {string} src
+     * @returns the created image
+     */
     static async createPoiImg(poi_id, src) {
         return prisma.poi_img.create({
             data: {
@@ -23,7 +34,7 @@ class PoiImgController {
     }
 
     static async updatePoiImg(poi_id, src) {
-        return await prisma.poi_img.update({
+        return prisma.poi_img.update({
             where: {
                 poi_id: poi_id
             },
@@ -34,7 +45,7 @@ class PoiImgController {
     }
 
     static async deletePoiImg(poi_id, src) {
-        return await prisma.poi_img.delete({
+        return prisma.poi_img.delete({
             where: {
                 poi_id: poi_id,
                 src: src

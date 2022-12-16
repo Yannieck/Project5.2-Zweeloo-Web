@@ -5,7 +5,12 @@ const HSC = require("http-status-codes");
 const auth = require("../../../middleware/authenticator");
 const JSONValidator = require("../../../middleware/JSONValidator");
 
-removeGeoJsonMarkers = (geojson) => {
+/**
+ * Removes the markers from a GeoJSON object
+ * @param {GeoJSON} geojson
+ * @returns a geojson object without markers
+ */
+const removeGeoJsonMarkers = (geojson) => {
     if (Array.isArray(geojson)) {
         geojson.forEach((obj) => {
             obj.route.features.length = 1;
@@ -16,6 +21,9 @@ removeGeoJsonMarkers = (geojson) => {
     return geojson;
 };
 
+/**
+ * API endpoint for getting singular route by id, from the database
+ */
 router.get("/route/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -34,6 +42,9 @@ router.get("/route/:id", async (req, res) => {
     }
 });
 
+/**
+ * API endpoint for getting all routes from the database
+ */
 router.get("/all", async (req, res) => {
     try {
         const routes = await RouteController.getAllRoutes();
@@ -53,6 +64,9 @@ router.get("/all", async (req, res) => {
     }
 });
 
+/**
+ * API endpoint for getting all bike routes from the database
+ */
 router.get("/bikeroutes", async (req, res) => {
     try {
         const routes = await RouteController.getBikeRoutes();
@@ -72,6 +86,9 @@ router.get("/bikeroutes", async (req, res) => {
     }
 });
 
+/**
+ * API endpoint for getting all walking routes from the database
+ */
 router.get("/walkroutes", async (req, res) => {
     try {
         const routes = await RouteController.getWalkRoutes();
@@ -88,67 +105,6 @@ router.get("/walkroutes", async (req, res) => {
         return res
             .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
             .json({ message: "Getting walk routes failed" });
-    }
-});
-
-router.post(
-    "/createroute",
-    auth,
-    JSONValidator.checkRouteCreate,
-    async (req, res) => {
-        let data = req.body;
-
-        try {
-            const route = await RouteController.getRoute(data);
-            if (route) {
-                return res
-                    .status(HSC.StatusCodes.CONFLICT)
-                    .json({ message: "Route already exists" });
-            }
-            const new_route = await RouteController.createRoute(
-                data.name,
-                data.route_type,
-                data.route,
-                data.user_id
-            );
-            if (new_route) {
-                const created_route = await RouteController.getRouteById(
-                    data.id
-                );
-                return res
-                    .status(HSC.StatusCodes.OK)
-                    .json(removeGeoJsonMarkers(created_route));
-            } else {
-                return res
-                    .status(HSC.StatusCodes.BAD_REQUEST)
-                    .json({ message: "Bad request" });
-            }
-        } catch (e) {
-            return res
-                .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-                .json({ message: "Could not create route" });
-        }
-    }
-);
-
-router.delete("/deleteroute/:id", async (req, res) => {
-    try {
-        const id = parseInt(req.params.id);
-        const result = await RouteController.deleteRoute(id);
-
-        if (result) {
-            return res
-                .status(HSC.StatusCodes.OK)
-                .json({ message: "User deleted succesfully" });
-        } else {
-            return res
-                .status(HSC.StatusCodes.BAD_REQUEST)
-                .send({ message: "Bad request" });
-        }
-    } catch (e) {
-        return res
-            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-            .json({ message: "Could not delete route" });
     }
 });
 

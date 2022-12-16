@@ -18,6 +18,9 @@ You can load this data in react native with the following syntax:
 It is nessecery to specify the "data:image/png;base64," part to make sure the image reads the source properly
 */
 
+/**
+ * API endpoint for getting images from poi
+ */
 router.get("/poi/:poi_id", async (req, res) => {
     try {
         //Get the poi images from the poi id
