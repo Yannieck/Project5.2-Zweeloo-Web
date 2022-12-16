@@ -1,3 +1,4 @@
+//For JOI references, see: https://joi.dev/api/?v=17.7.0
 const Joi = require("joi");
 
 class JOISchemas {
@@ -80,7 +81,7 @@ class JOISchemas {
     //Route schema
     static route_schema = Joi.object({
         name: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
             .min(1)
             .max(255)
             .required(),
@@ -88,13 +89,13 @@ class JOISchemas {
         routetype: Joi.string().valid("walk", "bike").required(),
 
         description: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"\'\s]{1,}$"))
             .min(1)
-            .max(255)
+            .max(2048)
             .required(),
 
         extra: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
             .min(1)
             .max(255)
             .allow(""),
@@ -102,42 +103,56 @@ class JOISchemas {
         wheelchair: Joi.string().valid("yes", "no").required(),
     });
 
+    //GeoJson schema
     static geojson = Joi.object({
         type: Joi.string().valid("FeatureCollection").required(),
 
         features: Joi.array()
-            .items(
+            .has(
+                //LineString
                 Joi.object({
-                    type: Joi.string().valid("Feature"),
+                    type: Joi.string().valid("Feature").required(),
                     properties: Joi.object({
-                        _gpxType: Joi.string(),
-                        name: Joi.string()
-                            .pattern(
-                                new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$")
+                        _gpxType: Joi.string().required(),
+                        name: Joi.string().required(),
+                        type: Joi.string()
+                            .valid("Cycling", "Running")
+                            .required(),
+                        coordinateProperties: Joi.object().required(),
+                    }).required(),
+                    geometry: Joi.object({
+                        type: Joi.string().valid("LineString").required(),
+                        coordinates: Joi.array()
+                            .min(2)
+                            .items(
+                                Joi.array()
+                                    .length(3)
+                                    .items(
+                                        Joi.number().min(0).max(360).required(),
+                                        Joi.number().min(0).max(360).required(),
+                                        Joi.number().required()
+                                    )
+                                    .required()
                             )
                             .required(),
-                        type: Joi.string().valid("Cycling", "Running"),
-                        coordinateProperties: Joi.object(),
-                        desc: Joi.string().pattern(
-                            new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$")
-                        ),
-                        sym: Joi.string(),
+                    }).required(),
+                }).required()
+            )
+            .has(
+                //Markers
+                Joi.object({
+                    type: Joi.string().valid("Feature").required(),
+                    properties: Joi.object({
+                        name: Joi.string().required(),
+                        desc: Joi.string().required(),
+                        sym: Joi.string().required(),
                     }),
                     geometry: Joi.object({
-                        type: Joi.string().valid("LineString", "Point"),
-                        coordinates: Joi.alternatives(
-                            Joi.array().items(
-                                Joi.array().items(
-                                    Joi.number().min(0).max(360),
-                                    Joi.number().min(0).max(360),
-                                    Joi.number()
-                                )
-                            ),
-                            Joi.array().items(
-                                Joi.number().min(0).max(360),
-                                Joi.number().min(0).max(360),
-                                Joi.number()
-                            )
+                        type: Joi.string().valid("Point").required(),
+                        coordinates: Joi.array().items(
+                            Joi.number().min(0).max(360).required(),
+                            Joi.number().min(0).max(360).required(),
+                            Joi.number().required()
                         ),
                     }),
                 }).required()
@@ -145,6 +160,7 @@ class JOISchemas {
             .required(),
     });
 
+    //Poi schema
     static poi = Joi.object({
         selected: Joi.number().min(0).required(),
         lat: Joi.number().min(0).max(360).required(),
@@ -152,14 +168,15 @@ class JOISchemas {
         routeid: Joi.number().integer().min(0).required(),
         type: Joi.string().valid("POI", "INFO", "INVIS", "CAFE").required(),
         name: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
             .required(),
         desc: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9_@./#&+-]{1,}$"))
+            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"\'\s]{1,}$"))
             .required(),
         radius: Joi.number().min(0).required(),
     });
 
+    //Node schema
     static node = Joi.object({
         selected: Joi.number().min(0).required(),
         lat: Joi.number().min(0).max(360).required(),

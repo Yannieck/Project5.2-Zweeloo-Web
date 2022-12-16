@@ -76,7 +76,7 @@ class JSONValidator {
         const gpxString = Buffer.from(req.file.buffer).toString();
         const gpx = new DOMParser().parseFromString(gpxString);
         const geojson = togeojson.gpx(gpx);
-
+        
         const checkValidity = JOIValidator.validateGeoJson(geojson);
 
         //If valid, move on, else give a validation error
@@ -85,7 +85,7 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/route-info-editor/route_failed_validation`);
+                .redirect(`/route-info-editor/route_invalid_geojson`);
         }
     };
 

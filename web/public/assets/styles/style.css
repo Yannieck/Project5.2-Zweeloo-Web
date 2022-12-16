@@ -11,6 +11,7 @@
     padding: 0;
 }
 
+/* The deviding line element styled like on the main website */
 .line {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -19,6 +20,7 @@
     position: relative;
 }
 
+/* The diamonds left and right of the line */
 .line::before {
     content: "";
     position: absolute;
@@ -91,6 +93,7 @@ label {
     border-color: var(--clr-txt-900) !important;
 }
 
+/* Styling for buttons */
 .btn {
     background-color: transparent;
     border-radius: 10px;
@@ -108,6 +111,7 @@ label {
     color: var(--clr-bg-400);
 }
 
+/* Make buttons in navbars different from the normal buttons */
 nav .btn {
     background-color: transparent;
     border: none;
@@ -123,11 +127,7 @@ nav .btn:hover {
     background-color: transparent;
 }
 
-.scroll-clr {
-    scrollbar-color: gray var(--clr-bg-300);
-    scrollbar-width: thin;
-}
-
+/* Selected poi */
 .selected {
     background-color: var(--clr-bg-300) !important;
 }

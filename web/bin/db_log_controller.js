@@ -42,7 +42,7 @@ class LogController {
     }
 
     static async updateUser(id, type, datetime, user_id, route_id) {
-        return await prisma.log.update({
+        return prisma.log.update({
             where: {
                 id: id
             },
@@ -56,7 +56,7 @@ class LogController {
     }
 
     static async deleteUser(id) {
-        return await prisma.log.delete({
+        return prisma.log.delete({
             where: {
                 id: id
             }
