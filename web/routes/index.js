@@ -10,6 +10,7 @@ router.use('/api/routes', APIRouter.Routes);
 router.use('/api/sponsors', APIRouter.Sponsors);
 router.use('/api/users', APIRouter.Users);
 router.use('/api/poi_img', APIRouter.PoiImg);
+router.use('/api/poi', APIRouter.Poi);
 
 router.use('/', FrontendRouter);
 

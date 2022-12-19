@@ -21,7 +21,7 @@ It is nessecery to specify the "data:image/png;base64," part to make sure the im
 /**
  * API endpoint for getting images from poi
  */
-router.get("/poi/:poi_id", async (req, res) => {
+router.get("/:poi_id", async (req, res) => {
     try {
         //Get the poi images from the poi id
         const id = parseInt(req.params.poi_id);

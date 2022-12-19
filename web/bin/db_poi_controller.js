@@ -3,15 +3,28 @@ const prisma = new PrismaClient();
 
 class PoiController {
     /**
+     * Gets a POI from the database
+     * @param {int} id
+     * @returns the poi with the id
+     */
+    static async getPoi(id) {
+        return prisma.poi.findUnique({
+            where: {
+                id,
+            },            
+        });
+    }
+
+    /**
      * Creates a POI in the database
-     * @param {string} name 
-     * @param {float} lat 
-     * @param {float} lon 
-     * @param {string} description 
-     * @param {string} audio_src 
-     * @param {int} route_id 
-     * @param {int} radius 
-     * @param {Enum(POI, INFO, INVIS, CAFE)} type 
+     * @param {string} name
+     * @param {float} lat
+     * @param {float} lon
+     * @param {string} description
+     * @param {string} audio_src
+     * @param {int} route_id
+     * @param {int} radius
+     * @param {Enum(POI, INFO, INVIS, CAFE)} type
      * @returns the created POI
      */
     static async createPoi(name, lat, lon, description, audio_src, route_id, radius, type) {
@@ -29,7 +42,15 @@ class PoiController {
         });
     }
 
-    static async updatePoi(id, name, lat, lon, description, audio_src, route_id) {
+    static async updatePoi(
+        id,
+        name,
+        lat,
+        lon,
+        description,
+        audio_src,
+        route_id
+    ) {
         return prisma.poi.update({
             where: {
                 id: id,
