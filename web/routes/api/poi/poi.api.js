@@ -21,13 +21,19 @@ router.get("/:poi_id", async (req, res) => {
                 .status(HSC.StatusCodes.NOT_FOUND)
                 .json({ message: "No poi found" });
         } else {
-            //Get the buffer from the audio file
-            const buffer = fs.readFileSync(
-                path.join(__dirname, "../../../uploads/audio/", poi.audio_src)
-            );
-            //Convert to base 64 and set the audiosrc to the base 64 value
-            poi.audio_src = Buffer.from(buffer).toString("base64");
-
+            if (poi.audio_src) {
+                //Get the buffer from the audio file
+                const buffer = fs.readFileSync(
+                    path.join(
+                        __dirname,
+                        "../../../uploads/audio/",
+                        poi.audio_src
+                    )
+                );
+                //Convert to base 64 and set the audiosrc to the base 64 value
+                poi.audio_src = Buffer.from(buffer).toString("base64");
+            }
+            
             //Loop through the poi images in the poi
             poi.poi_img.forEach((img) => {
                 //Get the buffer for each image file, based of of the path in the database
@@ -46,7 +52,7 @@ router.get("/:poi_id", async (req, res) => {
     } catch (e) {
         return res
             .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-            .json({ message: "Getting all pois failed"});
+            .json({ message: "Getting all pois failed" });
     }
 });
 
