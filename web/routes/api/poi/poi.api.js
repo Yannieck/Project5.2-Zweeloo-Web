@@ -29,7 +29,7 @@ router.get("/:poi_id", async (req, res) => {
             poi.audio_src = Buffer.from(buffer).toString("base64");
 
             //Loop through the poi images in the poi
-            poi.poi_img.forEach((img, index) => {
+            poi.poi_img.forEach((img) => {
                 //Get the buffer for each image file, based of of the path in the database
                 const buffer = fs.readFileSync(
                     path.join(__dirname, "../../../uploads/img/", img.src)
