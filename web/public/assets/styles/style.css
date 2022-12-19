@@ -11,14 +11,16 @@
     padding: 0;
 }
 
+/* The deviding line element styled like on the main website */
 .line {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     min-height: 3px;
     background-color: var(--clr-bg-300);
     position: relative;
 }
 
+/* The diamonds left and right of the line */
 .line::before {
     content: "";
     position: absolute;
@@ -51,24 +53,24 @@ h5,
 h6,
 legend,
 label {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif !important;
     color: var(--clr-txt-900);
 }
 
 .clr-bg-main {
-    background-color: var(--clr-bg-400);
+    background-color: var(--clr-bg-400) !important;
 }
 
 .clr-bg-sec {
-    background-color: var(--clr-bg-300);
+    background-color: var(--clr-bg-300) !important;
 }
 
 .clr-bg-black {
-    background-color: var(--clr-txt-900);
+    background-color: var(--clr-txt-900) !important;
 }
 
 .clr-acc-red {
-    background-color: var(--clr-acc-600);
+    background-color: var(--clr-acc-600) !important;
 }
 
 .clr-acc-blue {
@@ -80,17 +82,18 @@ label {
 }
 
 .clr-text {
-    background-color: var(--clr-txt-900);
+    background-color: var(--clr-txt-900) !important;
 }
 
 .clr-border-sec {
-    border-color: var(--clr-bg-300);
+    border-color: var(--clr-bg-300) !important;
 }
 
 .clr-border-dark {
-    border-color: var(--clr-txt-900);
+    border-color: var(--clr-txt-900) !important;
 }
 
+/* Styling for buttons */
 .btn {
     background-color: transparent;
     border-radius: 10px;
@@ -99,8 +102,8 @@ label {
     text-transform: uppercase;
     border: 3px solid var(--clr-txt-900);
     color: var(--clr-txt-900);
-    transition: all .3s ease-in-out;
-    padding: .75em 1.4em;
+    transition: all 0.3s ease-in-out;
+    padding: 0.75em 1.4em;
 }
 
 .btn:hover {
@@ -108,6 +111,7 @@ label {
     color: var(--clr-bg-400);
 }
 
+/* Make buttons in navbars different from the normal buttons */
 nav .btn {
     background-color: transparent;
     border: none;
@@ -119,11 +123,11 @@ nav .btn {
 }
 
 nav .btn:hover {
-    color: var(--clr-acc-600);
+    color: var(--clr-acc-600) !important;
     background-color: transparent;
 }
 
-/* nav {
-    border-top: 1px solid var(--clr-bg-300);
-    border-bottom: 1px solid var(--clr-bg-300);
-} */
+/* Selected poi */
+.selected {
+    background-color: var(--clr-bg-300) !important;
+}

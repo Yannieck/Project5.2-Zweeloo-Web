@@ -88,27 +88,65 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route editor pagina.",
         redirect: "/route-info-editor",
     },
+    route_invalid_geojson: {
+        icon: "error",
+        title: "GPX validatie mislukt",
+        text: "Controleer of uw GPX bestand zowel een route als punten bevat.",
+        redirect: "/route-info-editor",
+    },
     route_unknown_error: {
         icon: "error",
         title: "Onbekende fout opgetreden",
         text: "U zal nu worden doorgestuurd naar de route editor pagina.",
         redirect: "/route-info-editor",
     },
-    register_success: {
+    //POI
+    poi_success: {
         icon: "success",
-        title: "Route succesvol aangemaakt",
-        text: "U zal nu worden doorgestuurd naar de home pagina.",
-        redirect: "/",
+        title: "Bezienswaardigheid succesvol aangemaakt",
+        text: "U zal nu worden doorgestuurd naar de bezienswaardigheid toevoegen pagina.",
+        redirect: "/route-poi-editor",
     },
+    failed_create_poi: {
+        icon: "error",
+        title: "Bezienswaardigheid aanmaken is mislukt",
+        text: "U zal nu worden doorgestuurd naar de bezienswaardigheid toevoegen pagina.",
+        redirect: "/route-poi-editor",
+    },
+    poi_failed_validation: {
+        icon: "error",
+        title: "Ingevulde gegevens zijn niet valide",
+        text: "U zal nu worden doorgestuurd naar de bezienswaardigheid toevoegen pagina.",
+        redirect: "/route-poi-editor",
+    },
+    poi_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de bezienswaardigheid toevoegen pagina.",
+        redirect: "/route-poi-editor",
+    },
+    poi_invalid_id: {
+        icon: "error",
+        title: "Route ID niet valide",
+        text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
+        redirect: "/routes",
+    }
 };
 
 if (messages.hasOwnProperty(message)) {
+    let redirect = "";
+    if(typeof additions !== 'undefined'){
+        if(additions != null){
+            redirect = additions;
+        }
+    }
+
     swal({
         icon: messages[message].icon,
         toast: true,
         title: messages[message].title,
         text: messages[message].text,
     }).then(() => {
-        window.location = messages[message].redirect;
+        window.location = messages[message].redirect + redirect;
     });
 }

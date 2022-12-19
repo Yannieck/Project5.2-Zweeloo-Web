@@ -1,10 +1,12 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const togeojson = require("@tmcw/togeojson");
-const DOMParser = require("xmldom").DOMParser;
-const HCS = require("http-status-codes");
 
 class RouteController {
+    /**
+     * Get a specific route from the database
+     * @param {int} id 
+     * @returns a route object
+     */
     static async getRouteById(id) {
         return prisma.route.findUnique({
             where: {
@@ -17,6 +19,10 @@ class RouteController {
         });
     }
 
+    /**
+     * Get all bike routes from the database
+     * @returns an array with all bike route objects
+     */
     static async getBikeRoutes() {
         return prisma.route.findMany({
             select: {
@@ -35,6 +41,10 @@ class RouteController {
         });
     }
 
+    /**
+     * Get all walk routes from the database
+     * @returns an array with all walk route objects
+     */
     static async getWalkRoutes() {
         return prisma.route.findMany({
             select: {
@@ -53,6 +63,10 @@ class RouteController {
         });
     }
 
+    /**
+     * Get all routes from the database
+     * @returns an array with all route objects
+     */
     static async getAllRoutes() {
         return prisma.route.findMany({
             select: {
@@ -68,46 +82,29 @@ class RouteController {
         });
     }
 
-    static createRoute = async (req, res) => {
-        try {
-            //Convert the form data to data the database wants
-            const type = req.body.routetype === "walk" ? "WALK" : "BIKE";
-            const wheelchair = req.body.wheelchair === "yes" ? true : false;
-            const distance = 10;
-
-            //Get the json data from the GPX file
-            const gpxString = Buffer.from(req.file.buffer).toString();
-            const gpx = new DOMParser().parseFromString(gpxString);
-            const route = togeojson.gpx(gpx);
-
-            //Create route
-            const new_route = await prisma.route.create({
-                data: {
-                    name: req.body.name,
-                    route: route,
-                    description: req.body.description,
-                    distance: distance,
-                    extra: req.body.extra,
-                    type: type,
-                    wheelchair: wheelchair,
-                },
-            });
-
-            //Redirect when done
-            if (new_route) {
-                res.status(HCS.StatusCodes.OK).redirect(
-                    `/route-info-editor/register_success`
-                );
-            } else {
-                return res
-                    .status(HCS.StatusCodes.BAD_REQUEST)
-                    .redirect(`/route-info-editor/failed_create_route`);
-            }
-        } catch (e) {
-            return res
-                .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/route-info-editor/unknown_error`);
-        }
+    /**
+     * Creates a route in the database
+     * @param {string} name 
+     * @param {GeoJSON object} route 
+     * @param {string} description 
+     * @param {float} distance 
+     * @param {string} extra 
+     * @param {Enum(WALK, BIKE)} type 
+     * @param {boolean} wheelchair 
+     * @returns the created route object
+     */
+    static createRoute = async (name, route, description, distance, extra, type, wheelchair) => {
+        return prisma.route.create({
+            data: {
+                name: name,
+                route: route,
+                description: description,
+                distance: distance,
+                extra: extra,
+                type: type,
+                wheelchair: wheelchair,
+            },
+        });
     };
 
     static async deleteRoute(id) {
