@@ -11,7 +11,10 @@ class PoiController {
         return prisma.poi.findUnique({
             where: {
                 id,
-            },            
+            },
+            include: {
+                poi_img: true,
+            },
         });
     }
 
