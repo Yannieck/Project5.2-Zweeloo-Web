@@ -72,8 +72,6 @@ router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
 router.get("/route-poi-editor/:id/:selected/:status", auth, async (req, res) => {
     const id = parseInt(req.params.id);
     const selected = parseInt(req.params.selected);
-    console.log(id);
-    console.log(selected);
 
     res.render("route-poi-editor", {
         logedIn: getCookie(req),

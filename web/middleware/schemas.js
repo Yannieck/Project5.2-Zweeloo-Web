@@ -89,7 +89,7 @@ class JOISchemas {
         routetype: Joi.string().valid("walk", "bike").required(),
 
         description: Joi.string()
-            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"\'\s]{1,}$"))
+            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,\/#&+-=?!€%*():;~\"\'\\s]{1,}$"))
             .min(1)
             .max(2048)
             .required(),
@@ -144,7 +144,7 @@ class JOISchemas {
                     type: Joi.string().valid("Feature").required(),
                     properties: Joi.object({
                         name: Joi.string().required(),
-                        desc: Joi.string().required(),
+                        desc: Joi.string(),
                         sym: Joi.string().required(),
                     }),
                     geometry: Joi.object({
@@ -171,7 +171,7 @@ class JOISchemas {
             .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
             .required(),
         desc: Joi.string()
-            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"\'\s]{1,}$"))
+            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,\/#&+-=?!€%*():;~\"\'\\s]{1,}$"))
             .required(),
         radius: Joi.number().min(0).required(),
     });

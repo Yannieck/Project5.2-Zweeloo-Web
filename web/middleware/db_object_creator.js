@@ -87,7 +87,6 @@ class DBObjectCreator {
                     );
             }
         } catch (e) {
-            console.log(e);
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
                 .redirect(
@@ -161,7 +160,6 @@ class DBObjectCreator {
                     );
             }
         } catch (e) {
-            console.log(e);
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
                 .redirect(
