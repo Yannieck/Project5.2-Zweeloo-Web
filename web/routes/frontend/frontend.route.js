@@ -28,10 +28,18 @@ router.get("/login/:status", (req, res) => {
     });
 });
 
-router.get("/routeselection", auth, (req, res) => {
-    res.render("route-selection", {
-        logedIn: getCookie(req),
-    });
+router.get("/route-selection", auth, async (req, res) => {
+    const routes = await RouteController.getAllRoutes();
+
+    if (routes) {
+        res.render("route-selection", {
+            logedIn: getCookie(req),
+            routes: routes,
+        });
+    } else {
+        //Invalid route id
+        res.redirect(`/`); //send to home
+    }
 });
 
 router.get("/route-info-editor", auth, (req, res) => {
@@ -69,18 +77,22 @@ router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
     }
 });
 
-router.get("/route-poi-editor/:id/:selected/:status", auth, async (req, res) => {
-    const id = parseInt(req.params.id);
-    const selected = parseInt(req.params.selected);
+router.get(
+    "/route-poi-editor/:id/:selected/:status",
+    auth,
+    async (req, res) => {
+        const id = parseInt(req.params.id);
+        const selected = parseInt(req.params.selected);
 
-    res.render("route-poi-editor", {
-        logedIn: getCookie(req),
-        route: null,
-        selected: null,
-        status: req.params.status,
-        additions: `/${id}/${selected}`
-    });
-});
+        res.render("route-poi-editor", {
+            logedIn: getCookie(req),
+            route: null,
+            selected: null,
+            status: req.params.status,
+            additions: `/${id}/${selected}`,
+        });
+    }
+);
 
 router.get("/route-info-editor/:status", auth, (req, res) => {
     res.render("route-info-editor", {
@@ -116,6 +128,10 @@ router.get("/register/:status", auth, (req, res) => {
         logedIn: getCookie(req),
         status: req.params.status,
     });
+});
+
+router.get("/route-selection", auth, (req, res) => {
+    res.render("route-selection", { logedIn: getCookie(req) });
 });
 
 module.exports = router;
