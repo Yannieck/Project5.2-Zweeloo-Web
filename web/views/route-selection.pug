@@ -11,19 +11,16 @@ html
                     div(class="basis-5/6")
                         h1.text-4xl.font-bold.mb-5 Routes
                     .border-2.flex.justify-center.items-center(class="basis-1/6")
-                        a Voeg route toe
+                        a(href='/route-editor') Voeg route toe
                 .line
                 - console.log(routes[1])
                 - for(let i = 0; i < routes.length; i ++)
-                    .flex.flex-row.self-center.m-3.clr-border-sec.border-2(class="w-5/6")
-                        .place-content-center.flex-initial.m-1(class="basis-1/6")
+                    .flex.flex-row.self-center.m-3.clr-border-sec.border-4.h-32.rounded-md(class="w-5/6")
+                        .place-content-center.flex-initial.m-1.p-2(class="basis-1/6")
                             p #{routes[i].name}
-                        .flex-initial.m-1.text-clip(class="basis-4/6 ...")
+                        .flex-initial.m-1.text-clip.overflow-hidden.flex.p-2(class="basis-4/6 ...")
                             p #{routes[i].description}
-                        .flex-initial.m-1(class="basis-1/12")
-                            a Bewerken
-                        .flex-initial.m-1(class="basis-1/12") 
-                            a Verwijderen
-                    
-
-                
+                        .flex-initial.m-1.flex.justify-center.items-center(class="basis-1/12")
+                            a(href='') Bewerken
+                        .flex-initial.m-1.flex.justify-center.items-center(class="basis-1/12") 
+                            a(href='') Verwijderen
