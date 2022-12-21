@@ -28,7 +28,6 @@ router.get("/all", async (req, res) => {
             return res.status(HSC.StatusCodes.OK).json(sponsors);
         }
     } catch (e) {
-        console.log(e); 
         return res
             .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
             .json({ message: "Getting all routes failed" });
