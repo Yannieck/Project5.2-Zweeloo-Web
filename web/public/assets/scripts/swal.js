@@ -100,6 +100,21 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route editor pagina.",
         redirect: "/route-info-editor",
     },
+    //route deletion
+    confirm_delete_route: {
+        icon: "warning",
+        title: "Let op",
+        text: "Weet u zeker dat u deze route wilt verwijderen?",
+        redirect: "/api/routes/delete/",
+        cancelRedirect: "/route-selection",
+        buttons: [true, true],
+    },
+    successful_deletion_route: {
+        icon: "success",
+        title: "Route succesvol verwijderd",
+        text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
+        redirect: "/route-selection",
+    },
     //POI
     poi_success: {
         icon: "success",

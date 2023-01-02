@@ -46,6 +46,7 @@ router.get("/route-selection", auth, async (req, res) => {
 });
 
 //normal swal
+
 router.get("/route-selection/:status", auth, async (req, res) => {
         res.render("route-selection", {
             logedIn: getCookie(req),
@@ -54,13 +55,13 @@ router.get("/route-selection/:status", auth, async (req, res) => {
         });
 });
 
-//swal with status and id for deleting a route
 router.get("/route-selection/:status/:id", auth, async (req, res) => {
+    const id = parseInt(req.params.id);
     res.render("route-selection", {
         logedIn: getCookie(req),
         routes: [],
         status: req.params.status,
-        additions: req.params.id,
+        additions: id,
     });
 });
 

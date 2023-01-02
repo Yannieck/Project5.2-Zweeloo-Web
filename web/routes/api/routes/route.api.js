@@ -119,7 +119,7 @@ router.get("/delete/:id", auth, async (req, res) => {
         console.log("We zijn bij de delete route hopelijk");
         let deleteRoute = await RouteController.deleteRoute(id);
         if(deleteRoute) {
-            return res.redirect("/route-selection/succesful_delection");
+            return res.redirect("/route-selection/successful_deletion_route");
         }
     } else {
         res.redirect(`/route-selection/invalid_id`);
