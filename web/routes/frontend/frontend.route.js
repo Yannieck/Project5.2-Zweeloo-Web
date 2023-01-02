@@ -127,11 +127,22 @@ router.get("/sponsors", auth, async (req, res) => {
     }
 });
 
+// Normal swal status
 router.get("/sponsors/:status", auth, (req, res) => {
     res.render("sponsors", {
         logedIn: getCookie(req),
         sponsors: [],
         status: req.params.status,
+    });
+});
+
+// Swal status with id to parse the id for deletion
+router.get("/sponsors/:status/:id", auth, (req, res) => {
+    res.render("sponsors", {
+        logedIn: getCookie(req),
+        sponsors: [],
+        status: req.params.status,
+        additions: req.params.id,
     });
 });
 

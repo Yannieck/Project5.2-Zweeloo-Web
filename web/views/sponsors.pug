@@ -10,6 +10,7 @@ html
                 .px-16.w-full.relative
                     script.
                         let message = "#{status}";
+                        let additions = "#{additions}";
                     script(src="/scripts/swal.js")
 
                     h1.text-4xl.font-bold.mb-5 Sponsoren
@@ -33,11 +34,15 @@ html
                                             p Link:
                                         .w-full
                                             p !{sponsor.adress}
+                                            //- Add a double slash in front of the url if the link does not contain a http or https
+                                            //- This makes it so the link redirects to http://google.com instead of localhost:3000/google.com
+                                            - if(!sponsor.link.includes("http://", 0) && !sponsor.link.includes("https://", 0)) sponsor.link = "//" + sponsor.link;
+
                                             a.link(href=sponsor.link, target="_blank" rel="noopener noreferrer") !{sponsor.link}
                                 //- Edit/Delete buttons
                                 .p-1.flex.justify-center.flex-col.gap-2
                                     .text-center
                                         a.btn.w-40.block(href='') Bewerken
                                     .text-center
-                                        a.btn.w-40.block.btn-delete(href=`/api/sponsors/delete/${sponsor.id}`) Verwijderen
+                                        a.btn.w-40.block.btn-delete(href=`/sponsors/confirm_delete/${sponsor.id}`) Verwijderen
                 .line
