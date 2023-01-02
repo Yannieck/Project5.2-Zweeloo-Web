@@ -108,11 +108,19 @@ router.get("/walkroutes", async (req, res) => {
     }
 });
 
-router.delete("/route-selection/:id", auth, (req, res) => {
-    const id = parseInt(req, params.id);
+/**
+ * Delete a sponsor from the database with an ID
+ * @param {Int} id
+ */
+router.get("/delete/:id", auth, async (req, res) => {
+    const id = parseInt(req.params.id);
     if (!isNaN(id)) {
+        console.log(id);
         console.log("We zijn bij de delete route hopelijk");
-        RouteController.deleteRoute(id);
+        let deleteRoute = await RouteController.deleteRoute(id);
+        if(deleteRoute) {
+            return res.redirect("/route-selection/succesful_delection");
+        }
     } else {
         res.redirect(`/route-selection/invalid_id`);
     }

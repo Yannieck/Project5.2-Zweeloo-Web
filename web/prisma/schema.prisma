@@ -9,7 +9,7 @@ datasource db {
 
 model poi_img {
   src    String @db.VarChar(255)
-  poi    poi    @relation(fields: [poi_id], references: [id])
+  poi    poi    @relation(fields: [poi_id], references: [id], onDelete: Cascade)
   poi_id Int
 
   @@id([src, poi_id])
@@ -26,7 +26,7 @@ model poi {
   radius      Int      @db.Int()
   route_id    Int
 
-  route   route     @relation(fields: [route_id], references: [id])
+  route   route     @relation(fields: [route_id], references: [id], onDelete: Cascade)
   poi_img poi_img[]
 }
 
@@ -37,7 +37,7 @@ model node {
   lon      Decimal @db.Decimal(33, 30)
   route_id Int
 
-  route route @relation(fields: [route_id], references: [id])
+  route route @relation(fields: [route_id], references: [id], onDelete: Cascade)
 }
 
 model route {

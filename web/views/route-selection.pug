@@ -26,8 +26,6 @@ html
                             .mx-4.my-2.text-center
                                 a.btn.w-40.block(href='') Bewerken
                             .mx-4.my-2.text-center
-                                p
-                                    form(method='POST' action=`/route-selection/${routes[i].id}?_method=DELETE`)
-                                        button.btn.w-40.block.btn-delete(type='submit') Verwijderen
+                                a.btn.w-40.block.btn-delete(href=`/api/routes/delete/${routes[i].id}`) Verwijderen
                                       
                     .line

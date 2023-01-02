@@ -42,6 +42,25 @@ router.get("/route-selection", auth, async (req, res) => {
     }
 });
 
+//normal swal
+router.get("/route-selection/:status", auth, async (req, res) => {
+        res.render("route-selection", {
+            logedIn: getCookie(req),
+            routes: [],
+            status: req.params.status
+        });
+});
+
+//swal with status and id for deleting a route
+router.get("/route-selection/:status/:id", auth, async (req, res) => {
+    res.render("route-selection", {
+        logedIn: getCookie(req),
+        routes: [],
+        status: req.params.status,
+        additions: req.params.id,
+    });
+});
+
 router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
@@ -128,10 +147,6 @@ router.get("/register/:status", auth, (req, res) => {
         logedIn: getCookie(req),
         status: req.params.status,
     });
-});
-
-router.get("/route-selection", auth, (req, res) => {
-    res.render("route-selection", { logedIn: getCookie(req) });
 });
 
 module.exports = router;

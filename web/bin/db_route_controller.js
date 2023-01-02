@@ -108,7 +108,7 @@ class RouteController {
     };
 
     static async deleteRoute(id) {
-        return prisma.route.delete({
+        return prisma.route.deleteMany({
             where: {
                 id: id,
             },
