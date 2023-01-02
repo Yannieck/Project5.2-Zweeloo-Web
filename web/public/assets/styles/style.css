@@ -122,6 +122,15 @@ label {
     color: var(--clr-bg-400);
 }
 
+.link {
+    text-decoration: underline;
+    color: var(--clr-txt-900);
+}
+
+.link:hover {
+    transition: border-bottom 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: var(--clr-acc-600) !important;
+}
 
 /* Make buttons in navbars different from the normal buttons */
 nav .btn {

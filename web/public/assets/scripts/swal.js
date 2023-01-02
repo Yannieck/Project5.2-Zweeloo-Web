@@ -100,12 +100,6 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route editor pagina.",
         redirect: "/route-info-editor",
     },
-    invalid_id: {
-        icon: "error",
-        title: "Id van route is niet goed",
-        text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
-        redirect: "/route-selection",
-    },
     //POI
     poi_success: {
         icon: "success",
@@ -137,6 +131,39 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
         redirect: "/routes",
     },
+    //Sponsors
+    successful_deletion: {
+        icon: "success",
+        title: "Sponsor succesvol verwijderd",
+        text: "U zal nu worden doorgestuurd naar de sponsor overzicht pagina.",
+        redirect: "/sponsors",
+    },
+    deletion_error: {
+        icon: "error",
+        title: "Sponsor kon niet verwijderd worden",
+        text: "U zal nu worden doorgestuurd naar de sponsor overzicht pagina.",
+        redirect: "/sponsors",
+    },
+    invalid_img: {
+        icon: "error",
+        title: "Sponsor afbeeldingen konden niet geladen worden",
+        text: "U zal nu worden doorgestuurd naar de home pagina.",
+        redirect: "/",
+    },
+    confirm_delete: {
+        icon: "warning",
+        title: "Let op",
+        text: "Weet u zeker dat u deze sponsor wilt verwijderen?",
+        redirect: "/api/sponsors/delete/",
+        cancelRedirect: "/sponsors",
+        buttons: [true, true],
+    },
+    successful_deletion: {
+        icon: "success",
+        title: "Sponsor succesvol verwijdert",
+        text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
+        redirect: "/sponsors",
+    }
 };
 
 if (messages.hasOwnProperty(message)) {
@@ -147,12 +174,30 @@ if (messages.hasOwnProperty(message)) {
         }
     }
 
-    swal({
-        icon: messages[message].icon,
-        toast: true,
-        title: messages[message].title,
-        text: messages[message].text,
-    }).then(() => {
-        window.location = messages[message].redirect + redirect;
-    });
+    if (typeof messages[message].buttons == "undefined") {
+        // Normal notification swal with single OK button
+        swal({
+            icon: messages[message].icon,
+            toast: true,
+            title: messages[message].title,
+            text: messages[message].text,
+        }).then(() => {
+            window.location = messages[message].redirect + redirect;
+        });
+    } else {
+        // Confirmation swal with OK/Cancel buttons
+        swal({
+            icon: messages[message].icon,
+            toast: true,
+            title: messages[message].title,
+            text: messages[message].text,
+            buttons: messages[message].buttons,
+        }).then((success) => {
+            if (success) {
+                window.location = messages[message].redirect + redirect;
+            } else {
+                window.location = messages[message].cancelRedirect;
+            }
+        });
+    }
 }
