@@ -100,6 +100,12 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route editor pagina.",
         redirect: "/route-info-editor",
     },
+    invalid_id: {
+        icon: "error",
+        title: "Id van route is niet goed",
+        text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
+        redirect: "/route-selection",
+    },
     //POI
     poi_success: {
         icon: "success",
@@ -130,13 +136,13 @@ const messages = {
         title: "Route ID niet valide",
         text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
         redirect: "/routes",
-    }
+    },
 };
 
 if (messages.hasOwnProperty(message)) {
     let redirect = "";
-    if(typeof additions !== 'undefined'){
-        if(additions != null){
+    if (typeof additions !== "undefined") {
+        if (additions != null) {
             redirect = additions;
         }
     }

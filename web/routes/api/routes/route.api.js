@@ -108,4 +108,14 @@ router.get("/walkroutes", async (req, res) => {
     }
 });
 
+router.delete("/route-selection/:id", auth, (req, res) => {
+    const id = parseInt(req, params.id);
+    if (!isNaN(id)) {
+        console.log("We zijn bij de delete route hopelijk");
+        RouteController.deleteRoute(id);
+    } else {
+        res.redirect(`/route-selection/invalid_id`);
+    }
+});
+
 module.exports = router;
