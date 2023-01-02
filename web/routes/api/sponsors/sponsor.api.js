@@ -35,6 +35,10 @@ router.get("/all", async (req, res) => {
     }
 });
 
+/**
+ * Delete a sponsor from the database with an ID
+ * @param {Int} id
+ */
 router.get("/delete/:id", auth, async (req, res) => {
     let sponsors = await SponsorController.deleteSponsor(parseInt(req.params.id));
     if (sponsors) {

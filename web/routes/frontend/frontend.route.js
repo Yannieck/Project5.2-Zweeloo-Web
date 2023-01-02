@@ -103,10 +103,13 @@ router.get("/route-editor", auth, (req, res) => {
 });
 
 router.get("/sponsors", auth, async (req, res) => {
+    //Get all sponsors from the database
     let sponsors = await SponsorController.getAllSponsors();
 
     try {
+        //Get the images for the sponsor
         sponsors.forEach((sponsor) => {
+            //Read the image file data
             const buffer = fs.readFileSync(
                 path.join(__dirname, "../../uploads/img/", sponsor.logo)
             );
@@ -114,13 +117,13 @@ router.get("/sponsors", auth, async (req, res) => {
             sponsor.logo = Buffer.from(buffer).toString("base64");
         });
 
+        //Load the sponsor page with the sponsor data parsed
         res.render("sponsors", {
             logedIn: getCookie(req),
             sponsors: sponsors,
         });
     } catch (error) {
-        console.log(error);
-        res.redirect("sponsors/no_img");
+        res.redirect("sponsors/invalid_img");
     }
 });
 

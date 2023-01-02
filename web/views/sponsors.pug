@@ -16,20 +16,25 @@ html
 
                     a.btn.absolute.right-16.top-0(href="http://") Sponsor Toevoegen
 
+                    //- Loop through all sponsors and generate a tile
                     each sponsor, index in sponsors
                         .w-full.h-24.mb-5.flex.flex-row
+                            //- Load the image data
                             img(src="data:image/jpg;base64," + sponsor.logo).h-full.aspect-video.object-cover.rounded.mr-5
                             .w-full.flex
                                 .flex-row.w-full
+                                    //- Title
                                     p.font-bold.text-lg
                                         | !{sponsor.name}
                                     .flex
+                                        //- Additional sponsor information
                                         .mr-5
                                             p Adres:
                                             p Link:
                                         .w-full
                                             p !{sponsor.adress}
-                                            a.link(href=sponsor.link, target="_blank", rel="noopener noreferrer") !{sponsor.link}
+                                            a.link(href=sponsor.link, target="_blank" rel="noopener noreferrer") !{sponsor.link}
+                                //- Edit/Delete buttons
                                 .p-1.flex.justify-center.flex-col.gap-2
                                     .text-center
                                         a.btn.w-40.block(href='') Bewerken

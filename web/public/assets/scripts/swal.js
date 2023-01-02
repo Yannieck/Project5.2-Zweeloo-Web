@@ -143,6 +143,12 @@ const messages = {
         title: "Sponsor kon niet verwijderd worden",
         text: "U zal nu worden doorgestuurd naar de sponsor overzicht pagina.",
         redirect: "/sponsors",
+    },
+    invalid_img: {
+        icon: "error",
+        title: "Sponsor afbeeldingen konden niet geladen worden",
+        text: "U zal nu worden doorgestuurd naar de home pagina.",
+        redirect: "/",
     }
 };
 
