@@ -130,6 +130,19 @@ const messages = {
         title: "Route ID niet valide",
         text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
         redirect: "/routes",
+    },
+    //Sponsors
+    successful_deletion: {
+        icon: "success",
+        title: "Sponsor succesvol verwijderd",
+        text: "U zal nu worden doorgestuurd naar de sponsor overzicht pagina.",
+        redirect: "/sponsors",
+    },
+    deletion_error: {
+        icon: "error",
+        title: "Sponsor kon niet verwijderd worden",
+        text: "U zal nu worden doorgestuurd naar de sponsor overzicht pagina.",
+        redirect: "/sponsors",
     }
 };
 

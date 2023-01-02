@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/authenticator");
 const RouteController = require("../../bin/db_route_controller");
+const SponsorController = require("../../bin/db_sponsor_controller");
+const fs = require("fs");
+const path = require("path");
 
 const getCookie = (req) => {
     if (!req.cookies) return false;
@@ -69,18 +72,22 @@ router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
     }
 });
 
-router.get("/route-poi-editor/:id/:selected/:status", auth, async (req, res) => {
-    const id = parseInt(req.params.id);
-    const selected = parseInt(req.params.selected);
+router.get(
+    "/route-poi-editor/:id/:selected/:status",
+    auth,
+    async (req, res) => {
+        const id = parseInt(req.params.id);
+        const selected = parseInt(req.params.selected);
 
-    res.render("route-poi-editor", {
-        logedIn: getCookie(req),
-        route: null,
-        selected: null,
-        status: req.params.status,
-        additions: `/${id}/${selected}`
-    });
-});
+        res.render("route-poi-editor", {
+            logedIn: getCookie(req),
+            route: null,
+            selected: null,
+            status: req.params.status,
+            additions: `/${id}/${selected}`,
+        });
+    }
+);
 
 router.get("/route-info-editor/:status", auth, (req, res) => {
     res.render("route-info-editor", {
@@ -92,6 +99,36 @@ router.get("/route-info-editor/:status", auth, (req, res) => {
 router.get("/route-editor", auth, (req, res) => {
     res.render("route-editor", {
         logedIn: getCookie(req),
+    });
+});
+
+router.get("/sponsors", auth, async (req, res) => {
+    let sponsors = await SponsorController.getAllSponsors();
+
+    try {
+        sponsors.forEach((sponsor) => {
+            const buffer = fs.readFileSync(
+                path.join(__dirname, "../../uploads/img/", sponsor.logo)
+            );
+            //Convert the data to base 64
+            sponsor.logo = Buffer.from(buffer).toString("base64");
+        });
+
+        res.render("sponsors", {
+            logedIn: getCookie(req),
+            sponsors: sponsors,
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect("sponsors/no_img");
+    }
+});
+
+router.get("/sponsors/:status", auth, (req, res) => {
+    res.render("sponsors", {
+        logedIn: getCookie(req),
+        sponsors: [],
+        status: req.params.status,
     });
 });
 
