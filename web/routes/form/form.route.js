@@ -31,5 +31,6 @@ router.post("/addpoi", auth, uploadAudioAndImg, JSONValidator.checkPoiCreate, DB
 router.post("/addnode", auth, JSONValidator.checkNodeCreate, DBObjectCreator.createNode);
 
 
+router.post("/addsponsor", auth, multer({storage: storage}).single('imgsrc'), DBObjectCreator.createSponsor);
 
 module.exports = router;

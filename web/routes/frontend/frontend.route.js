@@ -38,6 +38,10 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
+router.get("/sponsor", auth, (req, res) => {
+    res.render("sponsor-editor", { logedIn: getCookie(req) });
+});
+
 router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
     const id = parseInt(req.params.id);
     const selected = parseInt(req.params.selected);
