@@ -14,13 +14,13 @@ class SponsorController {
         });
     }
 
-    static async createSponsor(name, adress, info, logo) {
+    static async createSponsor(name, adress, logo, link) {
         return prisma.sponsor.create({
             data: {
                 name: name,
                 adress: adress,
-                info: info,
                 logo: logo,
+                link: link,
             },
         });
     }

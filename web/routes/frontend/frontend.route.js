@@ -38,8 +38,15 @@ router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { logedIn: getCookie(req) });
 });
 
-router.get("/sponsor", auth, (req, res) => {
+router.get("/sponsor-editor", auth, (req, res) => {
     res.render("sponsor-editor", { logedIn: getCookie(req) });
+});
+
+router.get("/sponsor-editor/:status", auth, (req, res) => {
+    res.render("sponsor-editor", {
+        logedIn: getCookie(req),
+        status: req.params.status,
+    });
 });
 
 router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {

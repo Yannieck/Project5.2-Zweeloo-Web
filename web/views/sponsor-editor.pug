@@ -8,23 +8,27 @@ html
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
                 .px-16
+                    script.
+                        let message = "#{status}";
+                    script(src="/scripts/swal.js")
+                    
                     h1.text-4xl.font-bold.mb-5 Voeg sponsor toe
                     form(action="/form/addsponsor" method="post" enctype="multipart/form-data")
                         label.font-bold(for="sponsorName") Naam
                             span.clr-text-red  *
-                        input.py-2.px-4.mb-4.w-full#sponsorName(type="text" name="sponsorName" placeholder="Sponsor naam...")
+                        input.py-2.px-4.mb-4.w-full#sponsorName(type="text" name="sponsorName" placeholder="Sponsor naam..." required)
 
                         label.font-bold(for="sponsorAddress") Adres
                             span.clr-text-red  *
-                        input.py-2.px-4.mb-4.w-full#sponsorAddress(type="text" name="sponsorAddress" placeholder="Sponsor adres...")
+                        input.py-2.px-4.mb-4.w-full#sponsorAddress(type="text" name="sponsorAddress" placeholder="Sponsor adres..." required)
 
                         label.font-bold(for="link") Linkje
                             span.clr-text-red  *
-                        input.py-2.px-4.mb-4.w-full#link(type="text" name="link" placeholder="Sponsor linkje...")
+                        input.py-2.px-4.mb-4.w-full#link(type="text" name="link" placeholder="Sponsor linkje..." required)
 
                         label.font-bold(for="imgsrc") Upload afbeelding
                             span.clr-text-red  *
-                        input.block.mb-6#imgsrc(type="file" name="imgsrc" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif, image/webp")
+                        input.block.mb-6#imgsrc(type="file" name="imgsrc" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif, image/webp" required)
 
                         input.btn.mt-4(type="submit" value="Voeg sponsor toe")
                     .line

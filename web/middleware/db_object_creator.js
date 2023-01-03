@@ -2,6 +2,7 @@ const RouteController = require("../bin/db_route_controller.js");
 const PoiController = require("../bin/db_poi_controller.js");
 const PoiImgController = require("../bin/db_poi_img_controller.js");
 const NodeController = require("../bin/db_node_controller.js");
+const SponsorController = require("../bin/db_sponsor_controller.js");
 
 const DOMParser = require("xmldom").DOMParser;
 const togeojson = require("@tmcw/togeojson");
@@ -9,6 +10,42 @@ const HCS = require("http-status-codes");
 const GeoDistance = require("geo-distance");
 
 class DBObjectCreator {
+    /**
+    * middleware to create a sponsor in the database
+    * @param {*} req
+    * @param {*} res
+    */
+    static createSponsor = async (req, res) => {
+        console.log(req.body.sponsorName);
+        console.log(req.body.sponsorAddress);
+        console.log(req.body.link);
+        console.log(req.file.filename);
+        try {
+            const createdSponsor = await SponsorController.createSponsor(
+                req.body.sponsorName,
+                req.body.sponsorAddress,
+                req.file.filename,
+                req.body.link
+            );
+
+            if (!createdSponsor) {
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/sponsor-editor/failed_create_route`);
+            }
+
+            res.status(HCS.StatusCodes.OK).redirect(
+                `/sponsor-editor/sponsor_create_succes`
+            );
+        } catch (e) {
+            console.log(e);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/sponsor-editor/sponsor_unkown_error`);
+        }
+    }
+
+
     /**
      * Middleware to create a route in the database
      * @param {*} req
