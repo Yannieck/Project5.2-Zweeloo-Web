@@ -18,18 +18,18 @@ html
                     .flex.justify-center.items-center(class="basis-1/6")
                         a.btn(href='/route-editor') Voeg route toe
                 .line
-                - for(let i = 0; i < routes.length; i ++)
+                each route in routes
                     .flex.flex-row.self-center.m-3(class="w-5/6")
                         .p-2(class="basis-5/6")
                             .p-1
-                                p.text-2xl #{routes[i].name}
+                                p.text-2xl #{route.name}
                             .my-4.clr-acc-red.h-1.w-16.mx-1
                             .p-1
-                                p.text-ellipsis.block.overflow-hidden(class="h-[6em]") #{routes[i].description}
+                                p.text-ellipsis.block.overflow-hidden(class="h-[6em]") #{route.description}
                         .p-1.flex.justify-center.flex-col(class="basis-1/6")
                             .mx-4.my-2.text-center
                                 a.btn.w-40.block(href='') Bewerken
                             .mx-4.my-2.text-center
-                                a.btn.w-40.block.btn-delete(href=`/route-selection/confirm_delete_route/${routes[i].id}`) Verwijderen
+                                a.btn.w-40.block.btn-delete(href=`/route-selection/confirm_delete_route/${route.id}`) Verwijderen
                                       
                     .line
