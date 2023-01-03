@@ -115,11 +115,11 @@ router.get("/walkroutes", async (req, res) => {
 router.get("/delete/:id", auth, async (req, res) => {
     const id = parseInt(req.params.id);
     if (!isNaN(id)) {
-        console.log(id);
-        console.log("We zijn bij de delete route hopelijk");
         let deleteRoute = await RouteController.deleteRoute(id);
-        if(deleteRoute) {
+        if (deleteRoute) {
             return res.redirect("/route-selection/successful_deletion_route");
+        } else {
+            return res.redirect("/route-selection/invalid_deletion_route");
         }
     } else {
         res.redirect(`/route-selection/invalid_id`);
