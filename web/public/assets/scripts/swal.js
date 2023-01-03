@@ -115,6 +115,18 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
         redirect: "/route-selection",
     },
+    invalid_deletion_route: {
+        icon: "error",
+        title: "Onbekende fout route verwijderen",
+        text: "U zal nu worden doorgestuurd naar de route overzicht pagina.",
+        redirect: "/route-selection",
+    },
+    error_routes: {
+        icon: "error",
+        title: "Onbekende fout routes",
+        text: "U zal nu worden doorgestuurd naar de home pagina.",
+        redirect: "/",
+    },
     //POI
     poi_success: {
         icon: "success",
@@ -178,7 +190,7 @@ const messages = {
         title: "Sponsor succesvol verwijdert",
         text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
         redirect: "/sponsors",
-    }
+    },
 };
 
 if (messages.hasOwnProperty(message)) {
