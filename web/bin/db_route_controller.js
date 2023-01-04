@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 class RouteController {
     /**
      * Get a specific route from the database
-     * @param {int} id 
+     * @param {int} id
      * @returns a route object
      */
     static async getRouteById(id) {
@@ -84,16 +84,24 @@ class RouteController {
 
     /**
      * Creates a route in the database
-     * @param {string} name 
-     * @param {GeoJSON object} route 
-     * @param {string} description 
-     * @param {float} distance 
-     * @param {string} extra 
-     * @param {Enum(WALK, BIKE)} type 
-     * @param {boolean} wheelchair 
+     * @param {string} name
+     * @param {GeoJSON object} route
+     * @param {string} description
+     * @param {float} distance
+     * @param {string} extra
+     * @param {Enum(WALK, BIKE)} type
+     * @param {boolean} wheelchair
      * @returns the created route object
      */
-    static createRoute = async (name, route, description, distance, extra, type, wheelchair) => {
+    static createRoute = async (
+        name,
+        route,
+        description,
+        distance,
+        extra,
+        type,
+        wheelchair
+    ) => {
         return prisma.route.create({
             data: {
                 name: name,

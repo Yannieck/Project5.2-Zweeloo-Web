@@ -17,28 +17,54 @@ const getCookie = (req) => {
 };
 
 router.get("/", (req, res) => {
-    res.render("index", { logedIn: getCookie(req) });
+    res.render("index", { loggedIn: getCookie(req) });
 });
 
 router.get("/login", (req, res) => {
-    res.render("login", { logedIn: getCookie(req) });
+    res.render("login", { loggedIn: getCookie(req) });
 });
 
 router.get("/login/:status", (req, res) => {
     res.render("login", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
         status: req.params.status,
     });
 });
 
-router.get("/routeselection", auth, (req, res) => {
+router.get("/route-selection", auth, async (req, res) => {
+    const routes = await RouteController.getAllRoutes();
+
+    if (routes) {
+        res.render("route-selection", {
+            loggedIn: getCookie(req),
+            routes: routes,
+        });
+    } else {
+        res.redirect(`/route-selection/error_routes`);
+    }
+});
+
+//normal swal
+router.get("/route-selection/:status", auth, async (req, res) => {
     res.render("route-selection", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
+        routes: [],
+        status: req.params.status,
+    });
+});
+
+router.get("/route-selection/:status/:id", auth, async (req, res) => {
+    const id = parseInt(req.params.id);
+    res.render("route-selection", {
+        loggedIn: getCookie(req),
+        routes: [],
+        status: req.params.status,
+        additions: id,
     });
 });
 
 router.get("/route-info-editor", auth, (req, res) => {
-    res.render("route-info-editor", { logedIn: getCookie(req) });
+    res.render("route-info-editor", { loggedIn: getCookie(req) });
 });
 
 router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
@@ -54,7 +80,7 @@ router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
             if (selected > 0 && selected < route.route.features.length) {
                 //Send the route json and the selected index to the page
                 res.render("route-poi-editor", {
-                    logedIn: getCookie(req),
+                    loggedIn: getCookie(req),
                     route: route,
                     selected: selected,
                 });
@@ -80,7 +106,7 @@ router.get(
         const selected = parseInt(req.params.selected);
 
         res.render("route-poi-editor", {
-            logedIn: getCookie(req),
+            loggedIn: getCookie(req),
             route: null,
             selected: null,
             status: req.params.status,
@@ -91,14 +117,14 @@ router.get(
 
 router.get("/route-info-editor/:status", auth, (req, res) => {
     res.render("route-info-editor", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
         status: req.params.status,
     });
 });
 
 router.get("/route-editor", auth, (req, res) => {
     res.render("route-editor", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
     });
 });
 
@@ -119,7 +145,7 @@ router.get("/sponsors", auth, async (req, res) => {
 
         //Load the sponsor page with the sponsor data parsed
         res.render("sponsors", {
-            logedIn: getCookie(req),
+            loggedIn: getCookie(req),
             sponsors: sponsors,
         });
     } catch (error) {
@@ -130,7 +156,7 @@ router.get("/sponsors", auth, async (req, res) => {
 // Normal swal status
 router.get("/sponsors/:status", auth, (req, res) => {
     res.render("sponsors", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
         sponsors: [],
         status: req.params.status,
     });
@@ -139,7 +165,7 @@ router.get("/sponsors/:status", auth, (req, res) => {
 // Swal status with id to parse the id for deletion
 router.get("/sponsors/:status/:id", auth, (req, res) => {
     res.render("sponsors", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
         sponsors: [],
         status: req.params.status,
         additions: req.params.id,
@@ -154,17 +180,17 @@ router.get("/logout", (req, res) => {
 router.get("/profile", auth, (req, res) => {
     res.render("profile", {
         user: req.user.user,
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
     });
 });
 
 router.get("/register", auth, (req, res) => {
-    res.render("register", { logedIn: getCookie(req) });
+    res.render("register", { loggedIn: getCookie(req) });
 });
 
 router.get("/register/:status", auth, (req, res) => {
     res.render("register", {
-        logedIn: getCookie(req),
+        loggedIn: getCookie(req),
         status: req.params.status,
     });
 });
