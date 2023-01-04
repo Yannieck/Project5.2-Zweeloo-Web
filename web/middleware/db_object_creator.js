@@ -108,6 +108,13 @@ class DBObjectCreator {
                     ? req.files.audio_src[0].filename
                     : null;
 
+            //If the form data contained an autoplay, set the autoplay to true
+            let autoplay = false;
+
+            if (req.body.autoplay) {
+                autoplay = true;
+            }
+
             //Create the poi in the database
             const poi = await PoiController.createPoi(
                 req.body.name,
@@ -115,6 +122,7 @@ class DBObjectCreator {
                 parseFloat(req.body.lon),
                 req.body.desc,
                 file,
+                autoplay,
                 parseInt(req.body.routeid),
                 parseInt(req.body.radius),
                 req.body.type
@@ -160,6 +168,7 @@ class DBObjectCreator {
                     );
             }
         } catch (e) {
+            console.log(e);
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
                 .redirect(

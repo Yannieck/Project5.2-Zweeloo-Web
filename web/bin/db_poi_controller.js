@@ -25,12 +25,13 @@ class PoiController {
      * @param {float} lon
      * @param {string} description
      * @param {string} audio_src
+     * @param {boolean} autoplay
      * @param {int} route_id
      * @param {int} radius
      * @param {Enum(POI, INFO, INVIS, CAFE)} type
      * @returns the created POI
      */
-    static async createPoi(name, lat, lon, description, audio_src, route_id, radius, type) {
+    static async createPoi(name, lat, lon, description, audio_src, autoplay, route_id, radius, type) {
         return prisma.poi.create({
             data: {
                 name: name,
@@ -38,6 +39,7 @@ class PoiController {
                 lon: lon,
                 description: description,
                 audio_src: audio_src,
+                autoplay: autoplay,
                 route_id: route_id,
                 radius: radius,
                 type: type,
