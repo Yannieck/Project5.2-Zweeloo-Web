@@ -45,7 +45,22 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/account/account_failed_validation`);
+                .redirect(`/profile/account_failed_validation`);
+        }
+    };
+
+    static checkUserPass = (req, res, next) => {
+        //Validate the user info
+        const data = req.body;
+        const checkValidity = JOIValidator.validatePasswords(data);
+
+        //If valid, move on, else give a validation error
+        if (checkValidity === true) {
+            return next();
+        } else {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/profile/account_failed_validation`);
         }
     };
 
@@ -76,7 +91,7 @@ class JSONValidator {
         const gpxString = Buffer.from(req.file.buffer).toString();
         const gpx = new DOMParser().parseFromString(gpxString);
         const geojson = togeojson.gpx(gpx);
-        
+
         const checkValidity = JOIValidator.validateGeoJson(geojson);
 
         //If valid, move on, else give a validation error
@@ -100,7 +115,9 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`);
+                .redirect(
+                    `/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`
+                );
         }
     };
 
@@ -115,7 +132,9 @@ class JSONValidator {
         } else {
             return res
                 .status(HCS.StatusCodes.BAD_REQUEST)
-                .redirect(`/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`);
+                .redirect(
+                    `/route-poi-editor/${req.body.routeid}/${req.body.selected}/poi_failed_validation`
+                );
         }
     };
 }

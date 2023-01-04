@@ -7,10 +7,19 @@ html
         include header.pug
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
-                .px-16.w-full 
+                .px-16.w-full
+                    script.
+                        let message = "#{status}";
+                    script(src="/scripts/swal.js")
+
                     h1.text-4xl.font-bold.mb-5 Profile
+
                     .grid.text-sm(class='md:grid-cols-2').gap-x-32.w-full
                         form(action=`/form/editcredentials` method="post").mb-2
+                            h2.text-2xl.font-bold.mb-4 Profielgegevens aanpassen
+
+                            input(type="number" name="userid" value=user.id hidden)
+
                             label.font-bold.block(for="firstname") First Name
                             input(value=user.first_name name="firstname").block.p-1.font-normal.w-full.mb-4
 
@@ -21,16 +30,20 @@ html
                             input(value=user.email name="email").block.p-1.font-normal.w-full.mb-4
 
                             input.btn(type="submit" value="Update gegevens")
-                            
+
                         form(action=`/form/editpass` method="post").mb-2
-                            label.font-bold.block(for="currentPass")  Huidig wachtwoord
-                            input(value=user.first_name name="currentPass").block.p-1.font-normal.w-full.mb-4
-                            
+                            h2.text-2xl.font-bold.mb-4 Wachtwoord aanpassen
+
+                            input(type="number" name="userid" value=user.id hidden)
+
+                            label.font-bold.block(for="currentPass") Huidig wachtwoord
+                            input(type="password" name="currentPass").block.p-1.font-normal.w-full.mb-4
+
                             label.font-bold.block(for="newPass") Nieuw wachtwoord
-                            input(value=user.last_name name="newPass").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" value="Testtest1!" name="newPass").block.p-1.font-normal.w-full.mb-4
 
                             label.font-bold.block(for="newPassRepeat") Herhaal nieuwe wachtwoord
-                            input(value=user.last_name name="newPassRepeat").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" value="Testtest1!" name="newPassRepeat").block.p-1.font-normal.w-full.mb-4
 
                             input.btn(type="submit" value="Update Wachtwoord")
                 .line

@@ -184,6 +184,14 @@ router.get("/profile", auth, (req, res) => {
     });
 });
 
+router.get("/profile/:status", auth, (req, res) => {
+    res.render("profile", {
+        user: req.user.user,
+        loggedIn: getCookie(req),
+        status: req.params.status,
+    });
+});
+
 router.get("/register", auth, (req, res) => {
     res.render("register", { loggedIn: getCookie(req) });
 });

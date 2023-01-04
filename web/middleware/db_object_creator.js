@@ -2,6 +2,8 @@ const RouteController = require("../bin/db_route_controller.js");
 const PoiController = require("../bin/db_poi_controller.js");
 const PoiImgController = require("../bin/db_poi_img_controller.js");
 const NodeController = require("../bin/db_node_controller.js");
+const UserController = require("../bin/db_user_controller");
+const AuthService = require("../config/authservice");
 
 const DOMParser = require("xmldom").DOMParser;
 const togeojson = require("@tmcw/togeojson");
@@ -191,6 +193,96 @@ class DBObjectCreator {
         const distInKm = Math.round(accurateDist / 100) / 10;
 
         return distInKm;
+    }
+
+    static async editUser(req, res) {
+        try {
+            //Update the user in the database
+            const user = await UserController.updateUser(
+                parseInt(req.body.userid),
+                req.body.email,
+                req.body.firstname,
+                req.body.lastname
+            );
+
+            //Redirect if succeeded
+            if (user) {
+                return res
+                    .status(HCS.StatusCodes.OK)
+                    .redirect(`/profile/profile_updated`);
+            } else {
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/failed_update_credentials`);
+            }
+        } catch (e) {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/profile/profile_unknown_error`);
+        }
+    }
+
+    static async editPassword(req, res) {
+        let data = req.body;
+        try {
+            // Get user data from the database
+            const user = await UserController.getUserById(
+                parseInt(data.userid)
+            );
+
+            if (!user) {
+                // Return an error if the user is not in the database
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/invalid_current_pass`);
+            }
+
+            // Check if the entered passwordt matches the user password
+            if (
+                await AuthService.validatePasswords(
+                    data.currentPass,
+                    user.password
+                )
+            ) {
+                // Check if the new passwords are the same
+                if (data.newPass !== data.newPassRepeat) {
+                    return res
+                        .status(HCS.StatusCodes.BAD_REQUEST)
+                        .redirect(`/profile/invalid_edit_pass_match`);
+                } else {
+                    // Hash the password
+                    const hashed_password = AuthService.hashPassword(
+                        data.newPass
+                    );
+
+                    // Update the password in the database
+                    const user = await UserController.updatePass(
+                        parseInt(req.body.userid),
+                        hashed_password
+                    );
+                    
+                    // Redirect if successfull
+                    if (user) {
+                        return res
+                            .status(HCS.StatusCodes.OK)
+                            .redirect(`/profile/edit_password_changed`);
+                    } else {
+                        return res
+                            .status(HCS.StatusCodes.BAD_REQUEST)
+                            .redirect(`/profile/failed_update_pass`);
+                    }
+                }
+            } else {
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/edit_incorrect_password`);
+            }
+        } catch (e) {
+            console.log(e);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/profile/profile_unknown_error`);
+        }
     }
 }
 

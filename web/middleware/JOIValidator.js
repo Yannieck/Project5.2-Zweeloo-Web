@@ -29,6 +29,14 @@ class Validator {
         }
     };
 
+    static validatePasswords = (json) => {
+        if (schemas.user_pass_schema.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.user_pass_schema.validate(json).error.details[0].message;
+        }
+    };
+
     //If no errors occured, return true, else return the error message
     static validateRoute = (json) => {
         if (schemas.route_schema.validate(json).error == null) {

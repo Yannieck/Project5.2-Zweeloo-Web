@@ -191,6 +191,57 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
         redirect: "/sponsors",
     },
+    //Profile
+    profile_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    //Edit credentials
+    profile_updated: {
+        icon: "success",
+        title: "Accountgegevens succesvol geüpdate",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    account_failed_validation: {
+        icon: "error",
+        title: "Ingevulde gegevens zijn niet valide",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    failed_update_credentials: {
+        icon: "error",
+        title: "Accountgegevens konden niet worden geüpdate",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    //Edit password
+    edit_password_changed: {
+        icon: "success",
+        title: "Wachtwoord succesvol aangepast",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    edit_incorrect_password: {
+        icon: "error",
+        title: "Wachtwoord incorrect",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    invalid_edit_pass_match: {
+        icon: "error",
+        title: "Wachtwoorden komen niet overeen",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    failed_update_pass: {
+        icon: "error",
+        title: "Wachtwoord kon niet worden angepast",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
 };
 
 if (messages.hasOwnProperty(message)) {
