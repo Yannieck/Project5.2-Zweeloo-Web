@@ -23,6 +23,7 @@ model poi {
   description String   @db.VarChar(2048)
   type        poi_type @default(POI)
   audio_src   String?  @db.VarChar(255)
+  autoplay    Boolean  @default(false)
   radius      Int      @db.Int()
   route_id    Int
 
