@@ -61,6 +61,13 @@ class Validator {
             return schemas.geojson.validate(json).error.details[0].message;
         }
     };
+
+    static validateSponsor = (json) => {
+        if (schemas.sponsor_schema.validate(json).error == null) {
+            return true;
+        }
+        return schemas.sponsor_schema.validate(json).error.details[0].message;
+    };
 }
 
 module.exports = Validator;

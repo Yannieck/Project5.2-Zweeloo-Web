@@ -172,6 +172,18 @@ router.get("/sponsors/:status/:id", auth, (req, res) => {
     });
 });
 
+router.get("/sponsor-editor", auth, (req, res) => {
+    res.render("sponsor-editor", { logedIn: getCookie(req) });
+});
+
+//Normal Swal status
+router.get("/sponsor-editor/:status", auth, (req, res) => {
+    res.render("sponsor-editor", {
+        logedIn: getCookie(req),
+        status: req.params.status,
+    });
+});
+
 router.get("/logout", (req, res) => {
     res.clearCookie("jwt");
     res.redirect("/login");

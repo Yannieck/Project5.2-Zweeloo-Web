@@ -30,4 +30,7 @@ router.post("/addpoi", auth, uploadAudioAndImg, JSONValidator.checkPoiCreate, DB
 //Router for adding nodes
 router.post("/addnode", auth, JSONValidator.checkNodeCreate, DBObjectCreator.createNode);
 
+//Router for adding sponsors
+router.post("/addsponsor", auth, multer({storage: storage}).single('imgsrc'), JSONValidator.checkSponsor, DBObjectCreator.createSponsor);
+
 module.exports = router;
