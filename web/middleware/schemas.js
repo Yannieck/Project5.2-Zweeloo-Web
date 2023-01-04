@@ -173,6 +173,7 @@ class JOISchemas {
         desc: Joi.string()
             .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,\/#&+-=?!€%*():;~\"\'\\s]{1,}$"))
             .required(),
+        autoplay: Joi.string().valid("on"),
         radius: Joi.number().min(0).required(),
     });
 
