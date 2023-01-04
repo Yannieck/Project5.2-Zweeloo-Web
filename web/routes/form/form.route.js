@@ -30,4 +30,7 @@ router.post("/addpoi", auth, uploadAudioAndImg, JSONValidator.checkPoiCreate, DB
 //Router for adding nodes
 router.post("/addnode", auth, JSONValidator.checkNodeCreate, DBObjectCreator.createNode);
 
+router.post("/editcredentials", auth);
+router.post("/editpass", auth);
+
 module.exports = router;

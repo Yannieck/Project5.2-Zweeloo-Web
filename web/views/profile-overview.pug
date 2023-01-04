@@ -1,0 +1,13 @@
+html
+    head
+        include head.pug
+        title index
+
+    body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
+        include header.pug
+        block content
+            .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                .px-16
+                    h1.text-4xl.font-bold.mb-5 Profile
+                    
+                .line
