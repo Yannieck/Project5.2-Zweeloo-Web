@@ -185,11 +185,23 @@ const messages = {
         cancelRedirect: "/sponsors",
         buttons: [true, true],
     },
-    successful_deletion: {
+    sponsor_unkown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de sponsor aanmaken pagina.",
+        redirect: "/sponsor-editor",
+    },
+    sponsor_create_succes: {
         icon: "success",
-        title: "Sponsor succesvol verwijdert",
-        text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
+        title: "Sponsor aangemaakt",
+        text: "U zal nu worden doorgestuurd naar het sponsor overzicht",
         redirect: "/sponsors",
+    },
+    failed_validation: {
+        icon: "error",
+        title: "Sponsor info niet valide",
+        text: "U zal nu worden doorgestuurd naar de sponsor aanmaken pagina.",
+        redirect: "/sponsor-editor",
     },
     //Profile
     profile_unknown_error: {

@@ -4,6 +4,20 @@ const togeojson = require("@tmcw/togeojson");
 const DOMParser = require("xmldom").DOMParser;
 
 class JSONValidator {
+    static checkSponsor = (req, res, next) => {
+        const data = req.body;
+        const checkValidity = JOIValidator.validateSponsor(data);
+
+        //If valid, move on, else give a validation error
+        if (checkValidity === true) {
+            return next();
+        } else {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/sponsor-editor/failed_validation`);
+        }
+    };
+
     static checkLogin = (req, res, next) => {
         //Validate json
         const data = req.body;

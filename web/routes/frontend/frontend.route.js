@@ -165,6 +165,7 @@ router.get("/sponsors", auth, async (req, res) => {
     }
 });
 
+// Sponsor page but with a particular status for a Swal
 router.get("/sponsors/:status", auth, (req, res) => {
     res.render("sponsors", {
         loggedIn: getCookie(req),
@@ -179,6 +180,19 @@ router.get("/sponsors/:status/:id", auth, (req, res) => {
         sponsors: [],
         status: req.params.status,
         additions: req.params.id, //Id is used for deletion
+    });
+});
+
+//Sponsor editor
+router.get("/sponsor-editor", auth, (req, res) => {
+    res.render("sponsor-editor", { logedIn: getCookie(req) });
+});
+
+//Sponsor editor page but with a particular status for a Swal
+router.get("/sponsor-editor/:status", auth, (req, res) => {
+    res.render("sponsor-editor", {
+        logedIn: getCookie(req),
+        status: req.params.status,
     });
 });
 

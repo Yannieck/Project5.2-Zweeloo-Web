@@ -36,4 +36,7 @@ router.post("/editcredentials", auth, JSONValidator.checkUserEdit, DBObjectCreat
 //Router for editing the user passwords
 router.post("/editpass", auth, JSONValidator.checkUserPass, DBObjectCreator.editPassword);
 
+//Router for adding sponsors
+router.post("/addsponsor", auth, multer({storage: storage}).single('imgsrc'), JSONValidator.checkSponsor, DBObjectCreator.createSponsor);
+
 module.exports = router;

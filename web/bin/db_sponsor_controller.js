@@ -14,18 +14,18 @@ class SponsorController {
         });
     }
 
-    static async createSponsor(name, adress, info, logo) {
+    static async createSponsor(name, adress, logo, link) {
         return prisma.sponsor.create({
             data: {
                 name: name,
                 adress: adress,
-                info: info,
                 logo: logo,
+                link: link,
             },
         });
     }
 
-    static async updateSponsor(id, name, adress, info, logo) {
+    static async updateSponsor(id, name, adress, logo, link) {
         return await prisma.sponsor.update({
             where: {
                 id: id,
@@ -33,8 +33,8 @@ class SponsorController {
             data: {
                 name: name,
                 adress: adress,
-                info: info,
                 logo: logo,
+                link: link,
             },
         });
     }
