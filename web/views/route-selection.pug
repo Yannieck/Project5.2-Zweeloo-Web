@@ -7,7 +7,7 @@ html
         include header.pug
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
-                .px-16.flex.relative
+                .px-16.flex.relative.w-full
                     script.
                         let message = "#{status}";
                         let additions = "#{additions}";
@@ -20,7 +20,7 @@ html
                     a.btn.absolute.right-16.top-0(href='/route-editor') Voeg route toe
                 .line
 
-                .px-16.flex.flex-col
+                .px-16.flex.flex-col.w-full
                     each route in routes
                         .flex.flex-row.self-center
                             .w-full
