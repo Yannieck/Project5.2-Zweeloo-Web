@@ -191,6 +191,25 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
         redirect: "/sponsors",
     },
+
+    sponsor_unkown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de sponsor aanmaken pagina.",
+        redirect: "/sponsor-editor",
+    },
+    sponsor_create_succes: {
+        icon: "success",
+        title: "Sponsor aangemaakt",
+        text: "U zal nu worden doorgestuurd naar het sponsor overzicht",
+        redirect: "/sponsors",
+    },
+    failed_validation: {
+        icon: "error",
+        title: "Sponsor info niet valide",
+        text: "U zal nu worden doorgestuurd naar de sponsor aanmaken pagina.",
+        redirect: "/sponsor-editor",
+    }
 };
 
 if (messages.hasOwnProperty(message)) {
