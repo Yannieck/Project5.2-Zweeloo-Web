@@ -7,6 +7,7 @@ const UserController = require("../../bin/db_user_controller");
 const fs = require("fs");
 const path = require("path");
 
+//Check if the cookie exists so the correct log button can be displayed
 const getCookie = (req) => {
     if (!req.cookies) return false;
 
@@ -21,6 +22,7 @@ router.get("/", (req, res) => {
     res.render("index", { loggedIn: getCookie(req) });
 });
 
+//Log in/out
 router.get("/login", (req, res) => {
     res.render("login", { loggedIn: getCookie(req) });
 });
@@ -32,6 +34,12 @@ router.get("/login/:status", (req, res) => {
     });
 });
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt");
+    res.redirect("/login");
+});
+
+//Route overview page
 router.get("/route-selection", auth, async (req, res) => {
     const routes = await RouteController.getAllRoutes();
 
@@ -45,7 +53,6 @@ router.get("/route-selection", auth, async (req, res) => {
     }
 });
 
-//normal swal
 router.get("/route-selection/:status", auth, async (req, res) => {
     res.render("route-selection", {
         loggedIn: getCookie(req),
@@ -60,10 +67,18 @@ router.get("/route-selection/:status/:id", auth, async (req, res) => {
         loggedIn: getCookie(req),
         routes: [],
         status: req.params.status,
-        additions: id,
+        additions: id, //Id is used for redirecting to route editor
     });
 });
 
+//Route editor (editor page 1)
+router.get("/route-editor", auth, (req, res) => {
+    res.render("route-editor", {
+        loggedIn: getCookie(req),
+    });
+});
+
+//Route info editor (editor page 2)
 router.get("/route-info-editor", auth, (req, res) => {
     res.render("route-info-editor", { loggedIn: getCookie(req) });
 });
@@ -99,6 +114,14 @@ router.get("/route-poi-editor/:id/:selected", auth, async (req, res) => {
     }
 });
 
+router.get("/route-info-editor/:status", auth, (req, res) => {
+    res.render("route-info-editor", {
+        loggedIn: getCookie(req),
+        status: req.params.status,
+    });
+});
+
+//Route poi editor (editor page 3)
 router.get(
     "/route-poi-editor/:id/:selected/:status",
     auth,
@@ -116,19 +139,7 @@ router.get(
     }
 );
 
-router.get("/route-info-editor/:status", auth, (req, res) => {
-    res.render("route-info-editor", {
-        loggedIn: getCookie(req),
-        status: req.params.status,
-    });
-});
-
-router.get("/route-editor", auth, (req, res) => {
-    res.render("route-editor", {
-        loggedIn: getCookie(req),
-    });
-});
-
+//Sponsor overview page
 router.get("/sponsors", auth, async (req, res) => {
     //Get all sponsors from the database
     let sponsors = await SponsorController.getAllSponsors();
@@ -154,7 +165,6 @@ router.get("/sponsors", auth, async (req, res) => {
     }
 });
 
-// Normal swal status
 router.get("/sponsors/:status", auth, (req, res) => {
     res.render("sponsors", {
         loggedIn: getCookie(req),
@@ -163,21 +173,16 @@ router.get("/sponsors/:status", auth, (req, res) => {
     });
 });
 
-// Swal status with id to parse the id for deletion
 router.get("/sponsors/:status/:id", auth, (req, res) => {
     res.render("sponsors", {
         loggedIn: getCookie(req),
         sponsors: [],
         status: req.params.status,
-        additions: req.params.id,
+        additions: req.params.id, //Id is used for deletion
     });
 });
 
-router.get("/logout", (req, res) => {
-    res.clearCookie("jwt");
-    res.redirect("/login");
-});
-
+//Users own profile page
 router.get("/profile", auth, (req, res) => {
     res.render("profile", {
         user: req.user.user,
@@ -185,6 +190,15 @@ router.get("/profile", auth, (req, res) => {
     });
 });
 
+router.get("/profile/:status", auth, (req, res) => {
+    res.render("profile", {
+        user: req.user.user,
+        loggedIn: getCookie(req),
+        status: req.params.status,
+    });
+});
+
+//Profile overview page
 router.get("/profiles", auth, async (req, res) => {
     res.render("profile-overview", {
         profiles: await UserController.getAllUsers(),
@@ -205,18 +219,11 @@ router.get("/profiles/:status/:id", auth, async (req, res) => {
         profiles: await UserController.getAllUsers(),
         loggedIn: getCookie(req),
         status: req.params.status,
-        additions: req.params.id,
+        additions: req.params.id, //Id is used for deletion
     });
 });
 
-router.get("/profile/:status", auth, (req, res) => {
-    res.render("profile", {
-        user: req.user.user,
-        loggedIn: getCookie(req),
-        status: req.params.status,
-    });
-});
-
+//Create account page
 router.get("/register", auth, (req, res) => {
     res.render("register", { loggedIn: getCookie(req) });
 });
