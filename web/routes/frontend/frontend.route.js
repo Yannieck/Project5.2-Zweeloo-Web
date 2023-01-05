@@ -153,7 +153,7 @@ router.get("/sponsors", auth, async (req, res) => {
     }
 });
 
-// Normal swal status
+// Sponsor page but with a particular status for a Swal
 router.get("/sponsors/:status", auth, (req, res) => {
     res.render("sponsors", {
         loggedIn: getCookie(req),
@@ -176,7 +176,7 @@ router.get("/sponsor-editor", auth, (req, res) => {
     res.render("sponsor-editor", { logedIn: getCookie(req) });
 });
 
-//Normal Swal status
+//Sponsor editor page but with a particular status for a Swal
 router.get("/sponsor-editor/:status", auth, (req, res) => {
     res.render("sponsor-editor", {
         logedIn: getCookie(req),

@@ -1,7 +1,7 @@
 //For JOI references, see: https://joi.dev/api/?v=17.7.0
 const Joi = require("joi");
 
-const URLregex = new RegExp(
+const URL_regex = new RegExp(
     "^" +
     // protocol identifier (optional)
     // short syntax // still required
@@ -45,23 +45,23 @@ const URLregex = new RegExp(
 class JOISchemas {
     //Sponsor schema
     static sponsor_schema = Joi.object({
-        sponsorName: Joi.string()
+        sponsor_name: Joi.string()
             .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
             .min(1)
             .max(255)
             .required(),
-        sponsorAddress: Joi.string()
+        sponsor_address: Joi.string()
             .pattern(new RegExp("^[ a-zA-ZÀ-ž0-9]{1,}$"))
             .min(1)
             .max(255)
             .required(),
         link: Joi.string()
-            .pattern(new RegExp(URLregex))
+            .pattern(new RegExp(URL_regex))
             .min(1)
             .max(255)
             .required()
 
-    }).with("sponsorName", "sponsorAddress").with("sponsorName", "link");
+    }).with("sponsor_name", "sponsor_address").with("sponsor_name", "link");
 
     //Login schema
     static login_schema = Joi.object({

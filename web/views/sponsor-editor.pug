@@ -14,13 +14,13 @@ html
                     
                     h1.text-4xl.font-bold.mb-5 Voeg sponsor toe
                     form(action="/form/addsponsor" method="post" enctype="multipart/form-data")
-                        label.font-bold(for="sponsorName") Naam
+                        label.font-bold(for="sponsor_name") Naam
                             span.clr-text-red  *
-                        input.py-2.px-4.mb-4.w-full#sponsorName(type="text" name="sponsorName" placeholder="Sponsor naam..." required)
+                        input.py-2.px-4.mb-4.w-full#sponsor_name(type="text" name="sponsor_name" placeholder="Sponsor naam..." required)
 
-                        label.font-bold(for="sponsorAddress") Adres
+                        label.font-bold(for="sponsor_address") Adres
                             span.clr-text-red  *
-                        input.py-2.px-4.mb-4.w-full#sponsorAddress(type="text" name="sponsorAddress" placeholder="Sponsor adres..." required)
+                        input.py-2.px-4.mb-4.w-full#sponsor_address(type="text" name="sponsor_address" placeholder="Sponsor adres..." required)
 
                         label.font-bold(for="link") Linkje
                             span.clr-text-red  *
