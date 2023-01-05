@@ -19,13 +19,13 @@ html
                             h2.text-2xl.font-bold.mb-4 Profielgegevens aanpassen
 
                             label.font-bold.block(for="firstname") First Name
-                            input(value=user.first_name name="firstname" placeholder="Voornaam").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.first_name name="firstname" placeholder="Voornaam").py-2.px-4.mb-4.w-full
 
                             label.font-bold.block(for="lastname") Last Name
-                            input(value=user.last_name name="lastname" placeholder="Achternaam").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.last_name name="lastname" placeholder="Achternaam").py-2.px-4.mb-4.w-full
 
                             label.font-bold.block(for="email") Email
-                            input(value=user.email name="email" placeholder="Email").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.email name="email" placeholder="Email").py-2.px-4.mb-4.w-full
 
                             input.btn(type="submit" value="Update gegevens")
 
@@ -33,13 +33,13 @@ html
                             h2.text-2xl.font-bold.mb-4 Wachtwoord aanpassen
 
                             label.font-bold.block(for="currentPass") Huidig wachtwoord
-                            input(type="password" name="currentPass" placeholder="Huidig wachtwoord...").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="currentPass" placeholder="Huidig wachtwoord...").py-2.px-4.mb-4.w-full
 
                             label.font-bold.block(for="newPass") Nieuw wachtwoord
-                            input(type="password" name="newPass" placeholder="Nieuw wachtwoord...").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="newPass" placeholder="Nieuw wachtwoord...").py-2.px-4.mb-4.w-full
 
                             label.font-bold.block(for="newPassRepeat") Herhaal nieuwe wachtwoord
-                            input(type="password" name="newPassRepeat" placeholder="Herhaal niew wachtwoord...").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="newPassRepeat" placeholder="Herhaal niew wachtwoord...").py-2.px-4.mb-4.w-full
 
-                            input.btn(type="submit" value="Update Wachtwoord")
+                            input.btn.mt-4(type="submit" value="Update Wachtwoord")
                 .line
