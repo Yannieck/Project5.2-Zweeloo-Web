@@ -59,8 +59,6 @@ class JOISchemas {
 
     //User schema
     static user_schema = Joi.object({
-        userid: Joi.number(),
-
         email: Joi.string()
             .email({
                 minDomainSegments: 2,
@@ -81,7 +79,6 @@ class JOISchemas {
     });
 
     static user_pass_schema = Joi.object({
-        userid: Joi.number(),
         currentPass: Joi.string().required(),
         newPass: Joi.string()
             .pattern(

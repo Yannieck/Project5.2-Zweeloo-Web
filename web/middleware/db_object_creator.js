@@ -208,7 +208,7 @@ class DBObjectCreator {
         try {
             //Update the user in the database
             const user = await UserController.updateUser(
-                parseInt(req.body.userid),
+                parseInt(req.user.user.id),
                 req.body.email,
                 req.body.firstname,
                 req.body.lastname
@@ -232,11 +232,11 @@ class DBObjectCreator {
     }
 
     static async editPassword(req, res) {
-        let data = req.body;
         try {
+            console.log(req.user);
             // Get user data from the database
             const user = await UserController.getUserById(
-                parseInt(data.userid)
+                parseInt(req.user.user.id)
             );
 
             if (!user) {

@@ -1,7 +1,7 @@
 html
     head
         include head.pug
-        title index
+        title Profiel
 
     body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
@@ -12,38 +12,34 @@ html
                         let message = "#{status}";
                     script(src="/scripts/swal.js")
 
-                    h1.text-4xl.font-bold.mb-5 Profile
+                    h1.text-4xl.font-bold.mb-5 Profiel
 
                     .grid.text-sm(class='md:grid-cols-2').gap-x-32.w-full
                         form(action=`/form/editcredentials` method="post").mb-2
                             h2.text-2xl.font-bold.mb-4 Profielgegevens aanpassen
 
-                            input(type="number" name="userid" value=user.id hidden)
-
                             label.font-bold.block(for="firstname") First Name
-                            input(value=user.first_name name="firstname").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.first_name name="firstname" placeholder="Voornaam").block.p-1.font-normal.w-full.mb-4
 
                             label.font-bold.block(for="lastname") Last Name
-                            input(value=user.last_name name="lastname").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.last_name name="lastname" placeholder="Achternaam").block.p-1.font-normal.w-full.mb-4
 
                             label.font-bold.block(for="email") Email
-                            input(value=user.email name="email").block.p-1.font-normal.w-full.mb-4
+                            input(value=user.email name="email" placeholder="Email").block.p-1.font-normal.w-full.mb-4
 
                             input.btn(type="submit" value="Update gegevens")
 
                         form(action=`/form/editpass` method="post").mb-2
                             h2.text-2xl.font-bold.mb-4 Wachtwoord aanpassen
 
-                            input(type="number" name="userid" value=user.id hidden)
-
                             label.font-bold.block(for="currentPass") Huidig wachtwoord
-                            input(type="password" name="currentPass").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="currentPass" placeholder="Huidig wachtwoord...").block.p-1.font-normal.w-full.mb-4
 
                             label.font-bold.block(for="newPass") Nieuw wachtwoord
-                            input(type="password" value="Testtest1!" name="newPass").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="newPass" placeholder="Nieuw wachtwoord...").block.p-1.font-normal.w-full.mb-4
 
                             label.font-bold.block(for="newPassRepeat") Herhaal nieuwe wachtwoord
-                            input(type="password" value="Testtest1!" name="newPassRepeat").block.p-1.font-normal.w-full.mb-4
+                            input(type="password" name="newPassRepeat" placeholder="Herhaal niew wachtwoord...").block.p-1.font-normal.w-full.mb-4
 
                             input.btn(type="submit" value="Update Wachtwoord")
                 .line
