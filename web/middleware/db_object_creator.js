@@ -204,6 +204,11 @@ class DBObjectCreator {
         return distInKm;
     }
 
+    /**
+     * Middleware to edit a user in the database
+     * @param {*} req
+     * @param {*} res
+     */
     static async editUser(req, res) {
         try {
             //Update the user in the database
@@ -231,6 +236,11 @@ class DBObjectCreator {
         }
     }
 
+    /**
+     * Middleware to edit a user's password in the database
+     * @param {*} req
+     * @param {*} res
+     */
     static async editPassword(req, res) {
         try {
             console.log(req.user);
@@ -269,7 +279,7 @@ class DBObjectCreator {
                         parseInt(req.body.userid),
                         hashed_password
                     );
-                    
+
                     // Redirect if successfull
                     if (user) {
                         return res

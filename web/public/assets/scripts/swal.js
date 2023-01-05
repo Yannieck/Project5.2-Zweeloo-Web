@@ -255,17 +255,20 @@ const messages = {
         icon: "success",
         title: "Profiel succesvol verwijdert",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
-        redirect: "/profiles",},
+        redirect: "/profiles",
+    },
     profile_deletion_error: {
         icon: "error",
         title: "Profiel kon niet worden verwijdert",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
-        redirect: "/profiles",},
+        redirect: "/profiles",
+    },
     profile_unknown_error: {
         icon: "error",
         title: "Onbekende fout opgrtreden",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
-        redirect: "/profiles",},
+        redirect: "/profiles",
+    },
 };
 
 if (messages.hasOwnProperty(message)) {
