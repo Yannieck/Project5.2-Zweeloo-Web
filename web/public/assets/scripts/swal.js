@@ -65,9 +65,14 @@ const messages = {
     login_required: {
         icon: "error",
         title: "Toegang geweigerd",
-        text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de aanmeld pagina.",
+        text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
         redirect: "/login",
     },
+    invalid_token:{
+        icon: "error",
+        title: "Token is niet valide",
+        text: "U zult opnieuw moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
+        redirect: "/login",},
 
     //Route creation
     route_failed_validation: {

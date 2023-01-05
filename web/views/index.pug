@@ -7,6 +7,10 @@ html
         include header.pug
         block content
             .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                script.
+                    let message = "#{status}";
+                script(src="/scripts/swal.js")
+
                 .w-full.flex.justify-center.items-center.text-center.mb-24
                     a(href='/')
                         img(src='./images/logohighres.png')

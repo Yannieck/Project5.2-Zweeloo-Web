@@ -139,6 +139,33 @@ class JOISchemas {
             .required(),
     });
 
+    //Schema for "loged in" token validation
+    static user_token_schema = Joi.object({
+        user: Joi.object({
+            id: Joi.number().min(0),
+
+            email: Joi.string()
+                .email({
+                    minDomainSegments: 2,
+                })
+                .required(),
+    
+            first_name: Joi.string()
+                .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
+                .min(1)
+                .max(255)
+                .required(),
+    
+            last_name: Joi.string()
+                .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
+                .min(1)
+                .max(255)
+                .required(),
+        }),
+        iat: Joi.number().min(0),
+        exp: Joi.number().min(0),        
+    });
+
     static user_pass_schema = Joi.object({
         currentPass: Joi.string().required(),
         newPass: Joi.string()

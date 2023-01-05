@@ -18,14 +18,13 @@ nav.max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
                         a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Account aanmaken
         div.flex.space-x-4
             if loggedIn == false
-                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = loggedIn ? '' : null)
+                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login')
                     | Log In
                     i(class="fa-solid fa-right-to-bracket").ml-2
             else
                 a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profile')
                     | Mijn account
                     i(class="fa-solid fa-user").ml-2
-                a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = loggedIn ? null : '')
+                a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout')
                     | Log Uit
                     i(class="fa-solid fa-right-from-bracket").ml-2
-                

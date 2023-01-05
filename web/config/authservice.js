@@ -1,5 +1,6 @@
 const { hashSync, compareSync } = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const JOIValidator = require("../middleware/JOIValidator");
 
 class Authservice {
     //Compare passwords
@@ -26,10 +27,21 @@ class Authservice {
         };
     };
 
-    //Decode the JSON Web Token
-    static decodeJWT = (token) => {
-        const decoded = jwt.verify(token, process.env.APP_SECRET);
-        return decoded.user;
+    //Decode the JSON Web Token and return is it is valid or not
+    static validateJWT = (token) => {
+        try {
+            const decoded = jwt.verify(token, process.env.APP_SECRET);
+            const valid = JOIValidator.ValidateUserWithId(decoded);
+
+            if (valid) {
+                return valid;
+            } else {
+                console.log(valid);
+                return false;
+            }
+        } catch (e) {
+            return false;
+        }
     };
 
     static hashPassword = (password) => {
