@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/authenticator");
 const RouteController = require("../../bin/db_route_controller");
 const SponsorController = require("../../bin/db_sponsor_controller");
+const UserController = require("../../bin/db_user_controller");
 const fs = require("fs");
 const path = require("path");
 
@@ -181,6 +182,30 @@ router.get("/profile", auth, (req, res) => {
     res.render("profile", {
         user: req.user.user,
         loggedIn: getCookie(req),
+    });
+});
+
+router.get("/profiles", auth, async (req, res) => {
+    res.render("profile-overview", {
+        profiles: await UserController.getAllUsers(),
+        loggedIn: getCookie(req),
+    });
+});
+
+router.get("/profiles/:status", auth, (req, res) => {
+    res.render("profile", {
+        user: req.user.user,
+        loggedIn: getCookie(req),
+        status: req.params.status,
+    });
+});
+
+router.get("/profiles/:status/:id", auth, async (req, res) => {
+    res.render("profile-overview", {
+        profiles: await UserController.getAllUsers(),
+        loggedIn: getCookie(req),
+        status: req.params.status,
+        additions: req.params.id,
     });
 });
 

@@ -242,6 +242,30 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de profiel pagina.",
         redirect: "/profile",
     },
+    //Profiles
+    confirm_delete_profile: {
+        icon: "warning",
+        title: "Let op",
+        text: "Weet u zeker dat u dit profiel wilt verwijderen?",
+        redirect: "/api/users/delete/",
+        cancelRedirect: "/profiles",
+        buttons: [true, true],
+    },
+    profile_successful_deletion: {
+        icon: "success",
+        title: "Profiel succesvol verwijdert",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",},
+    profile_deletion_error: {
+        icon: "error",
+        title: "Profiel kon niet worden verwijdert",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",},
+    profile_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgrtreden",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",},
 };
 
 if (messages.hasOwnProperty(message)) {

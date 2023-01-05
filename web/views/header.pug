@@ -1,18 +1,27 @@
 nav.max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
-        .flex.items-center.justify-between.h-16.border-b-2.clr-border-sec.px-10
-            .flex-1.flex.items-center.justify-center(class='sm:items-stretch sm:justify-start')
-                .flex-shrink-0.flex.items-center
-                    a(href='/')
-                        img.block.h-8.w-auto(class='lg:hidden' src='/images/logohighres.png' alt='SKZ')
-                        img.hidden.h-8.w-auto(class='lg:block' src='/images/logohighres.png' alt='SKZ')
-                .hidden(class='sm:block sm:ml-6')
-                    .flex.space-x-4
-                        // Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/' aria-current='page') Home
-                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profile' aria-current='page') Profiel
-                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/route-selection') Route Overzicht
-                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/sponsors') Sponsoren
-                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Aanmelden
-            div.flex.space-x-4
-                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = loggedIn ? '' : null) Log In
-                a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = loggedIn ? null : '') Log Uit
+    .flex.items-center.justify-between.h-16.border-b-2.clr-border-sec.px-10
+        .flex-1.flex.items-center.justify-center(class='sm:items-stretch sm:justify-start')
+            .flex-shrink-0.flex.items-center
+                a(href='/')
+                    img.block.h-8.w-auto(class='lg:hidden' src='/images/logohighres.png' alt='SKZ')
+                    img.hidden.h-8.w-auto(class='lg:block' src='/images/logohighres.png' alt='SKZ')
+            .hidden(class='sm:block sm:ml-6')
+                .flex.space-x-4
+                    // Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/' aria-current='page')
+                        i(class="fa-solid fa-house").mr-2
+                        | Home
+                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/route-selection') Routes
+                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profiles' aria-current='page') Profielen
+                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/sponsors') Sponsoren
+                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Account aanmaken
+        div.flex.space-x-4
+            a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profile')
+                | Mijn profiel
+                i(class="fa-solid fa-user").ml-2
+            a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = loggedIn ? '' : null)
+                | Log In
+                i(class="fa-solid fa-right-to-bracket").ml-2
+            a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = loggedIn ? null : '')
+                | Log Uit
+                i(class="fa-solid fa-right-from-bracket").ml-2
