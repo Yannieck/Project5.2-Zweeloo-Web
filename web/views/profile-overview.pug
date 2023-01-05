@@ -14,10 +14,15 @@ html
                     script(src="/scripts/swal.js")
 
                     h1.text-4xl.font-bold.mb-5 Profielen
+                    
+                .line 
 
+                .px-16
                     each profile, index in profiles
                         .w-full.mb-5.flex.flex-row.items-center.pl-4.gap-4
-                            p(class="w-2/6").overflow-hidden.text-ellipsis.whitespace-nowrap #{profile.first_name} #{profile.last_name}
+                            .flex.flex-row.items-center(class="w-2/6")
+                                i(class="fa-solid fa-user").mr-2
+                                p.overflow-hidden.text-ellipsis.whitespace-nowrap #{profile.first_name} #{profile.last_name}
                             p(class="w-3/6").overflow-hidden.text-ellipsis.whitespace-nowrap #{profile.email}
                             div(class="w-1/6")
                                 a(href=`/profiles/confirm_delete_profile/${profile.id}`).btn.btn-delete.w-full.text-center.overflow-hidden.text-ellipsis Verwijderen
