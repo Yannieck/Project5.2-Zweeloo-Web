@@ -275,7 +275,6 @@ class DBObjectCreator {
      */
     static async editPassword(req, res) {
         try {
-            console.log(req.user);
             // Get user data from the database
             const user = await UserController.getUserById(
                 parseInt(req.user.user.id)
@@ -291,24 +290,24 @@ class DBObjectCreator {
             // Check if the entered passwordt matches the user password
             if (
                 await AuthService.validatePasswords(
-                    data.currentPass,
+                    req.body.currentPass,
                     user.password
                 )
             ) {
                 // Check if the new passwords are the same
-                if (data.newPass !== data.newPassRepeat) {
+                if (req.body.newPass !== req.body.newPassRepeat) {
                     return res
                         .status(HCS.StatusCodes.BAD_REQUEST)
                         .redirect(`/profile/invalid_edit_pass_match`);
                 } else {
                     // Hash the password
                     const hashed_password = AuthService.hashPassword(
-                        data.newPass
+                        req.body.newPass
                     );
 
                     // Update the password in the database
                     const user = await UserController.updatePass(
-                        parseInt(req.body.userid),
+                        parseInt(req.user.user.id),
                         hashed_password
                     );
 

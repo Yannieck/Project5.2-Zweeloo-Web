@@ -11,17 +11,21 @@ nav.max-w-7xl.mx-auto.px-2(class='sm:px-6 lg:px-8')
                     a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/' aria-current='page')
                         i(class="fa-solid fa-house").mr-2
                         | Home
-                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/route-selection') Routes
-                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/sponsors') Sponsoren
-                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profiles') Accounts
-                    a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Account aanmaken
+                    if loggedIn == true
+                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/route-selection') Routes
+                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/sponsors') Sponsoren
+                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profiles') Accounts
+                        a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/register') Account aanmaken
         div.flex.space-x-4
-            a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profile')
-                | Mijn account
-                i(class="fa-solid fa-user").ml-2
-            a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = loggedIn ? '' : null)
-                | Log In
-                i(class="fa-solid fa-right-to-bracket").ml-2
-            a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = loggedIn ? null : '')
-                | Log Uit
-                i(class="fa-solid fa-right-from-bracket").ml-2
+            if loggedIn == false
+                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/login' hidden = loggedIn ? '' : null)
+                    | Log In
+                    i(class="fa-solid fa-right-to-bracket").ml-2
+            else
+                a.px-3.py-2.rounded-md.text-sm.font-bold.btn(href='/profile')
+                    | Mijn account
+                    i(class="fa-solid fa-user").ml-2
+                a.px-3.py-2.rounded-md.text-sm.font-bold.clr-text-red.btn(href='/logout' hidden = loggedIn ? null : '')
+                    | Log Uit
+                    i(class="fa-solid fa-right-from-bracket").ml-2
+                

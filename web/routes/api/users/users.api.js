@@ -79,7 +79,7 @@ router.get("/delete/:id", auth, async (req, res) => {
             return res.redirect("/profiles/profile_deletion_error");
         }
     } catch (e) {
-        return res.redirect("/profiles/profile_unknown_error");
+        return res.redirect("/profiles/profiles_unknown_error");
     }
 });
 

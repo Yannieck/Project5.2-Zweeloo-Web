@@ -275,7 +275,7 @@ const messages = {
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
         redirect: "/profiles",
     },
-    profile_unknown_error: {
+    profiles_unknown_error: {
         icon: "error",
         title: "Onbekende fout opgrtreden",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
