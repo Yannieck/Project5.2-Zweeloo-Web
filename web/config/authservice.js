@@ -36,7 +36,6 @@ class Authservice {
             if (valid) {
                 return valid;
             } else {
-                console.log(valid);
                 return false;
             }
         } catch (e) {

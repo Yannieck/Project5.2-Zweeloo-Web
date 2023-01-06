@@ -199,7 +199,7 @@ const messages = {
     sponsor_create_succes: {
         icon: "success",
         title: "Sponsor aangemaakt",
-        text: "U zal nu worden doorgestuurd naar het sponsor overzicht",
+        text: "U zal nu worden doorgestuurd naar het sponsor overzicht.",
         redirect: "/sponsors",
     },
     failed_validation: {
@@ -255,7 +255,7 @@ const messages = {
     },
     failed_update_pass: {
         icon: "error",
-        title: "Wachtwoord kon niet worden angepast",
+        title: "Wachtwoord kon niet worden aangepast",
         text: "U zal nu worden doorgestuurd naar de profiel pagina.",
         redirect: "/profile",
     },
@@ -282,7 +282,7 @@ const messages = {
     },
     profiles_unknown_error: {
         icon: "error",
-        title: "Onbekende fout opgrtreden",
+        title: "Onbekende fout opgetreden",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
         redirect: "/profiles",
     },
