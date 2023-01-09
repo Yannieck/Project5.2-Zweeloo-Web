@@ -139,7 +139,7 @@ class JOISchemas {
             .required(),
     });
 
-    //Schema for "loged in" token validation
+    //Schema for "logged in" token validation
     static user_token_schema = Joi.object({
         user: Joi.object({
             id: Joi.number().min(0),
