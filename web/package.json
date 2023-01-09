@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "startdev": "nodemon app.js",
     "database:pull": "prisma db pull",
     "database:push": "prisma db push",

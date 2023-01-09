@@ -71,12 +71,20 @@ router.post(
 
 router.get("/delete/:id", auth, async (req, res) => {
     try {
-        const result = await UserController.deleteUser(parseInt(req.params.id));
+        const allusers = await UserController.getAllUsers();
 
-        if (result) {
-            return res.redirect("/profiles/profile_successful_deletion");
+        if (allusers.length > 1) {
+            const result = await UserController.deleteUser(
+                parseInt(req.params.id)
+            );
+
+            if (result) {
+                return res.redirect("/profiles/profile_successful_deletion");
+            } else {
+                return res.redirect("/profiles/profile_deletion_error");
+            }
         } else {
-            return res.redirect("/profiles/profile_deletion_error");
+            return res.redirect("/profiles/last_profile_delete");
         }
     } catch (e) {
         return res.redirect("/profiles/profiles_unknown_error");

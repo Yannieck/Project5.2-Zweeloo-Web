@@ -49,7 +49,7 @@ npm run startdev
 To start the production server, use the following command:
 
 ```shell
-npm run <NAME>
+npm run start
 ```
 
 ## Stakeholders
