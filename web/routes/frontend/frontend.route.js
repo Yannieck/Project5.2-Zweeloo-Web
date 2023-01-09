@@ -210,7 +210,7 @@ router.get("/sponsor-editor", auth, (req, res) => {
 //Sponsor editor page but with a particular status for a Swal
 router.get("/sponsor-editor/:status", auth, (req, res) => {
     res.render("sponsor-editor", {
-        logedIn: getCookie(req, res),
+        loggedIn: getCookie(req, res),
         status: req.params.status,
     });
 });
