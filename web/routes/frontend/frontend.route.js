@@ -240,8 +240,9 @@ router.get("/profiles", auth, async (req, res) => {
 });
 
 router.get("/profiles/:status", auth, (req, res) => {
-    res.render("profile", {
+    res.render("profile-overview", {
         user: req.user.user,
+        profiles: [],
         loggedIn: getCookie(req, res),
         status: req.params.status,
     });

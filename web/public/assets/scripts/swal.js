@@ -68,11 +68,12 @@ const messages = {
         text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
         redirect: "/login",
     },
-    invalid_token:{
+    invalid_token: {
         icon: "error",
         title: "Token is niet valide",
         text: "U zult opnieuw moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
-        redirect: "/login",},
+        redirect: "/login",
+    },
 
     //Route creation
     route_failed_validation: {
@@ -278,6 +279,12 @@ const messages = {
         icon: "error",
         title: "Profiel kon niet worden verwijdert",
         text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",
+    },
+    last_profile_delete: {
+        icon: "error",
+        title: "Laatste profiel kon niet verwijderd worden",
+        text: "Er moet altijd minimaal één account zijn. U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
         redirect: "/profiles",
     },
     profiles_unknown_error: {
