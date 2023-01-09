@@ -204,7 +204,7 @@ router.get("/sponsors/:status/:id", auth, (req, res) => {
 
 //Sponsor editor
 router.get("/sponsor-editor", auth, (req, res) => {
-    res.render("sponsor-editor", { logedIn: getCookie(req, res) });
+    res.render("sponsor-editor", { loggedIn: getCookie(req, res) });
 });
 
 //Sponsor editor page but with a particular status for a Swal
