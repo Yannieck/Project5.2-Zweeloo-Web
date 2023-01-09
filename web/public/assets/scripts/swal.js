@@ -219,7 +219,7 @@ const messages = {
     profile_updated: {
         icon: "success",
         title: "Accountgegevens succesvol geüpdate",
-        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        text: "Om de veranderingen te zien zal u opniew moeten inloggen. U zal nu worden doorgestuurd naar de profiel pagina.",
         redirect: "/profile",
     },
     account_failed_validation: {
