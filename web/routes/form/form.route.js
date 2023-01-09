@@ -30,6 +30,12 @@ router.post("/addpoi", auth, uploadAudioAndImg, JSONValidator.checkPoiCreate, DB
 //Router for adding nodes
 router.post("/addnode", auth, JSONValidator.checkNodeCreate, DBObjectCreator.createNode);
 
+//Router for editing the user credentials
+router.post("/editcredentials", auth, JSONValidator.checkUserEdit, DBObjectCreator.editUser);
+
+//Router for editing the user passwords
+router.post("/editpass", auth, JSONValidator.checkUserPass, DBObjectCreator.editPassword);
+
 //Router for adding sponsors
 router.post("/addsponsor", auth, multer({storage: storage}).single('imgsrc'), JSONValidator.checkSponsor, DBObjectCreator.createSponsor);
 

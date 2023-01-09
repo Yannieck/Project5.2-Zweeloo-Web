@@ -126,23 +126,74 @@ class JOISchemas {
             })
             .required(),
 
-        first_name: Joi.string()
+        firstname: Joi.string()
             .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
             .min(1)
             .max(255)
             .required(),
 
-        last_name: Joi.string()
+        lastname: Joi.string()
             .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
             .min(1)
             .max(255)
             .required(),
     });
 
+    //Schema for "loged in" token validation
+    static user_token_schema = Joi.object({
+        user: Joi.object({
+            id: Joi.number().min(0),
+
+            email: Joi.string()
+                .email({
+                    minDomainSegments: 2,
+                })
+                .required(),
+    
+            first_name: Joi.string()
+                .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
+                .min(1)
+                .max(255)
+                .required(),
+    
+            last_name: Joi.string()
+                .pattern(new RegExp("^[ a-zA-ZÀ-ž-]{1,}$"))
+                .min(1)
+                .max(255)
+                .required(),
+        }),
+        iat: Joi.number().min(0),
+        exp: Joi.number().min(0),        
+    });
+
+    static user_pass_schema = Joi.object({
+        currentPass: Joi.string().required(),
+        newPass: Joi.string()
+            .pattern(
+                new RegExp(
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"
+                )
+            )
+            .min(8)
+            .max(50)
+            .required(),
+        newPassRepeat: Joi.string()
+            .pattern(
+                new RegExp(
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$"
+                )
+            )
+            .min(8)
+            .max(50)
+            .required(),
+    })
+        .with("newPass", "newPassRepeat")
+        .with("currentPass", "newPass");
+
     //Route schema
     static route_schema = Joi.object({
         name: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"'/]{1,}$"))
             .min(1)
             .max(255)
             .required(),
@@ -150,13 +201,15 @@ class JOISchemas {
         routetype: Joi.string().valid("walk", "bike").required(),
 
         description: Joi.string()
-            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,\/#&+-=?!€%*():;~\"\'\\s]{1,}$"))
+            .pattern(
+                new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"'\\s]{1,}$")
+            )
             .min(1)
             .max(2048)
             .required(),
 
         extra: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"'/]{1,}$"))
             .min(1)
             .max(255)
             .allow(""),
@@ -229,10 +282,12 @@ class JOISchemas {
         routeid: Joi.number().integer().min(0).required(),
         type: Joi.string().valid("POI", "INFO", "INVIS", "CAFE").required(),
         name: Joi.string()
-            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"\'/]{1,}$"))
+            .pattern(new RegExp("^[ A-Za-zÀ-ž0-9\"'/]{1,}$"))
             .required(),
         desc: Joi.string()
-            .pattern(new RegExp("^[A-Za-zÀ-ž0-9_@.,\/#&+-=?!€%*():;~\"\'\\s]{1,}$"))
+            .pattern(
+                new RegExp("^[A-Za-zÀ-ž0-9_@.,/#&+-=?!€%*():;~\"'\\s]{1,}$")
+            )
             .required(),
         autoplay: Joi.string().valid("on"),
         radius: Joi.number().min(0).required(),

@@ -1,7 +1,7 @@
 html
     head
         include head.pug
-        title index
+        title Route aanmaken - 3
 
     body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
@@ -71,7 +71,7 @@ html
                                     input(type="hidden" name="lon" value=`${route.route.features[selected].geometry.coordinates[0]}` required)
                                     input(type="hidden" name="routeid" value=`${route.id}` required)
 
-                                    label.font-bold Kies GPX bestand
+                                    label.font-bold Knooppunt nummer
                                         span.clr-text-red  *
                                         input(type="number" min=0 name="nodenr" placeholder="Knooppunt nr..." required).block.w-full.mb-4
 

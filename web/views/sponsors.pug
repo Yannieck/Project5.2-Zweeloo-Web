@@ -1,7 +1,7 @@
 html
     head
         include head.pug
-        title index
+        title Sponsoren
 
     body.h-full.clr-bg-main(class="border-[20px] clr-border-sec")
         include header.pug
@@ -17,16 +17,19 @@ html
 
                     a.btn.absolute.right-16.top-0(href="/sponsor-editor") Sponsor Toevoegen
 
+                .line
+
+                .px-16.w-full
                     //- Loop through all sponsors and generate a tile
                     each sponsor, index in sponsors
-                        .w-full.h-24.mb-5.flex.flex-row
+                        .w-full.mb-5.flex.flex-row
                             //- Load the image data
-                            img(src="data:image/jpg;base64," + sponsor.logo).h-full.aspect-video.object-cover.rounded.mr-5
+                            img(src="data:image/jpg;base64," + sponsor.logo).h-full.max-h-40.aspect-video.object-cover.rounded.mr-5
                             .w-full.flex
                                 .flex-row.w-full
                                     //- Title
-                                    p.font-bold.text-lg
-                                        | !{sponsor.name}
+                                    p.text-2xl #{sponsor.name}
+                                    .my-4.clr-acc-red(class="w-[10%] h-[3px]")
                                     .flex
                                         //- Additional sponsor information
                                         .mr-5
@@ -38,11 +41,12 @@ html
                                             //- This makes it so the link redirects to http://google.com instead of localhost:3000/google.com
                                             - if(!sponsor.link.includes("http://", 0) && !sponsor.link.includes("https://", 0)) sponsor.link = "//" + sponsor.link;
 
-                                            a.link(href=sponsor.link, target="_blank" rel="noopener noreferrer") !{sponsor.link}
+                                            a.link(href=sponsor.link, target="_blank" rel="noopener noreferrer") #{sponsor.link}
                                 //- Edit/Delete buttons
                                 .p-1.flex.justify-center.flex-col.gap-2
                                     .text-center
                                         a.btn.w-40.block(href='') Bewerken
                                     .text-center
                                         a.btn.w-40.block.btn-delete(href=`/sponsors/confirm_delete/${sponsor.id}`) Verwijderen
+                        .line
                 .line

@@ -1,7 +1,7 @@
 html
     head
         include head.pug
-        title login
+        title Inloggen
 
     body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
         include header.pug
@@ -16,10 +16,10 @@ html
                         h1.text-4xl.font-bold.mb-5 Log In
 
                         form(method="post" action="/auth/login")
-                            label.text-gray-700.text-sm.font-normal.mb-2(for="email") Email
-                            input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight.mb-4(class='focus:outline-none focus:shadow-outline' name='email' type='email' placeholder='Email' required autofocus )#email
+                            label.font-bold.block(for="email") Email
+                            input.py-2.px-4.mb-4.w-full(name='email' type='email' placeholder='Email...' required autofocus )
 
-                            label.text-gray-700.text-sm.font-normal.mb-2(for="password") Wachtwoord
-                            input.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight.mb-6(class='focus:outline-none focus:shadow-outline' name='password' type='password' placeholder='Password' required autocomplete='current-password')#password
+                            label.font-bold.block(for="password") Wachtwoord
+                            input.py-2.px-4.mb-4.w-full(name='password' type='password' placeholder='Wachtwoord...' required autocomplete='current-password')
 
-                            button(type="submit").px-4.py-2.rounded.text-white.inline-block.shadow-lg.clr-acc-blue#login_button Log In
+                            button(type="submit").btn.mt-4 Log In

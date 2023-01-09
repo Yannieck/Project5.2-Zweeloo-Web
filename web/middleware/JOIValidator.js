@@ -28,6 +28,23 @@ class Validator {
             return schemas.user_schema.validate(json).error.details[0].message;
         }
     };
+    
+    //If no errors occured, return true, else return the error message
+    static ValidateUserWithId = (json) =>{
+        if (schemas.user_token_schema.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.user_token_schema.validate(json).error.details[0].message;
+        }
+    }
+
+    static validatePasswords = (json) => {
+        if (schemas.user_pass_schema.validate(json).error == null) {
+            return true;
+        } else {
+            return schemas.user_pass_schema.validate(json).error.details[0].message;
+        }
+    };
 
     //If no errors occured, return true, else return the error message
     static validateRoute = (json) => {

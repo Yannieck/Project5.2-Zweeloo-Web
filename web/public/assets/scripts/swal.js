@@ -65,9 +65,14 @@ const messages = {
     login_required: {
         icon: "error",
         title: "Toegang geweigerd",
-        text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de aanmeld pagina.",
+        text: "U zult eerst moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
         redirect: "/login",
     },
+    invalid_token:{
+        icon: "error",
+        title: "Token is niet valide",
+        text: "U zult opnieuw moeten inloggen. U zal nu worden doorgestuurd naar de inlogpagina.",
+        redirect: "/login",},
 
     //Route creation
     route_failed_validation: {
@@ -185,13 +190,6 @@ const messages = {
         cancelRedirect: "/sponsors",
         buttons: [true, true],
     },
-    successful_deletion: {
-        icon: "success",
-        title: "Sponsor succesvol verwijdert",
-        text: "U zal nu worden doorgestuurd naar de sponsor pagina.",
-        redirect: "/sponsors",
-    },
-
     sponsor_unkown_error: {
         icon: "error",
         title: "Onbekende fout opgetreden",
@@ -201,7 +199,7 @@ const messages = {
     sponsor_create_succes: {
         icon: "success",
         title: "Sponsor aangemaakt",
-        text: "U zal nu worden doorgestuurd naar het sponsor overzicht",
+        text: "U zal nu worden doorgestuurd naar het sponsor overzicht.",
         redirect: "/sponsors",
     },
     failed_validation: {
@@ -209,7 +207,85 @@ const messages = {
         title: "Sponsor info niet valide",
         text: "U zal nu worden doorgestuurd naar de sponsor aanmaken pagina.",
         redirect: "/sponsor-editor",
-    }
+    },
+    //Profile
+    profile_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    //Edit credentials
+    profile_updated: {
+        icon: "success",
+        title: "Accountgegevens succesvol geüpdate",
+        text: "Om de veranderingen te zien zult u opniew moeten inloggen. U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    account_failed_validation: {
+        icon: "error",
+        title: "Ingevulde gegevens zijn niet valide",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    failed_update_credentials: {
+        icon: "error",
+        title: "Accountgegevens konden niet worden geüpdate",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    //Edit password
+    edit_password_changed: {
+        icon: "success",
+        title: "Wachtwoord succesvol aangepast",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    edit_incorrect_password: {
+        icon: "error",
+        title: "Wachtwoord incorrect",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    invalid_edit_pass_match: {
+        icon: "error",
+        title: "Wachtwoorden komen niet overeen",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    failed_update_pass: {
+        icon: "error",
+        title: "Wachtwoord kon niet worden aangepast",
+        text: "U zal nu worden doorgestuurd naar de profiel pagina.",
+        redirect: "/profile",
+    },
+    //Profiles
+    confirm_delete_profile: {
+        icon: "warning",
+        title: "Let op",
+        text: "Weet u zeker dat u dit profiel wilt verwijderen?",
+        redirect: "/api/users/delete/",
+        cancelRedirect: "/profiles",
+        buttons: [true, true],
+    },
+    profile_successful_deletion: {
+        icon: "success",
+        title: "Profiel succesvol verwijdert",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",
+    },
+    profile_deletion_error: {
+        icon: "error",
+        title: "Profiel kon niet worden verwijdert",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",
+    },
+    profiles_unknown_error: {
+        icon: "error",
+        title: "Onbekende fout opgetreden",
+        text: "U zal nu worden doorgestuurd naar de profiel overzicht pagina.",
+        redirect: "/profiles",
+    },
 };
 
 if (messages.hasOwnProperty(message)) {

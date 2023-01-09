@@ -2,6 +2,8 @@ const RouteController = require("../bin/db_route_controller.js");
 const PoiController = require("../bin/db_poi_controller.js");
 const PoiImgController = require("../bin/db_poi_img_controller.js");
 const NodeController = require("../bin/db_node_controller.js");
+const UserController = require("../bin/db_user_controller");
+const AuthService = require("../config/authservice");
 const SponsorController = require("../bin/db_sponsor_controller");
 
 const DOMParser = require("xmldom").DOMParser;
@@ -232,6 +234,105 @@ class DBObjectCreator {
         const distInKm = Math.round(accurateDist / 100) / 10;
 
         return distInKm;
+    }
+
+    /**
+     * Middleware to edit a user in the database
+     * @param {*} req
+     * @param {*} res
+     */
+    static async editUser(req, res) {
+        try {
+            //Update the user in the database
+            const user = await UserController.updateUser(
+                parseInt(req.user.user.id),
+                req.body.email,
+                req.body.firstname,
+                req.body.lastname
+            );
+
+            //Redirect if succeeded
+            if (user) {
+                return res
+                    .status(HCS.StatusCodes.OK)
+                    .redirect(`/profile/profile_updated`);
+            } else {
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/failed_update_credentials`);
+            }
+        } catch (e) {
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/profile/profile_unknown_error`);
+        }
+    }
+
+    /**
+     * Middleware to edit a user's password in the database
+     * @param {*} req
+     * @param {*} res
+     */
+    static async editPassword(req, res) {
+        try {
+            // Get user data from the database
+            const user = await UserController.getUserById(
+                parseInt(req.user.user.id)
+            );
+
+            if (!user) {
+                // Return an error if the user is not in the database
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/invalid_current_pass`);
+            }
+
+            // Check if the entered passwordt matches the user password
+            if (
+                await AuthService.validatePasswords(
+                    req.body.currentPass,
+                    user.password
+                )
+            ) {
+                // Check if the new passwords are the same
+                if (req.body.newPass !== req.body.newPassRepeat) {
+                    return res
+                        .status(HCS.StatusCodes.BAD_REQUEST)
+                        .redirect(`/profile/invalid_edit_pass_match`);
+                } else {
+                    // Hash the password
+                    const hashed_password = AuthService.hashPassword(
+                        req.body.newPass
+                    );
+
+                    // Update the password in the database
+                    const user = await UserController.updatePass(
+                        parseInt(req.user.user.id),
+                        hashed_password
+                    );
+
+                    // Redirect if successfull
+                    if (user) {
+                        return res
+                            .status(HCS.StatusCodes.OK)
+                            .redirect(`/profile/edit_password_changed`);
+                    } else {
+                        return res
+                            .status(HCS.StatusCodes.BAD_REQUEST)
+                            .redirect(`/profile/failed_update_pass`);
+                    }
+                }
+            } else {
+                return res
+                    .status(HCS.StatusCodes.BAD_REQUEST)
+                    .redirect(`/profile/edit_incorrect_password`);
+            }
+        } catch (e) {
+            console.log(e);
+            return res
+                .status(HCS.StatusCodes.BAD_REQUEST)
+                .redirect(`/profile/profile_unknown_error`);
+        }
     }
 }
 

@@ -69,24 +69,17 @@ router.post(
     }
 );
 
-router.delete("/deleteuser/:id", auth, async (req, res) => {
+router.get("/delete/:id", auth, async (req, res) => {
     try {
-        const id = parseInt(req.params.id);
-        const result = await UserController.deleteUser(id);
+        const result = await UserController.deleteUser(parseInt(req.params.id));
 
         if (result) {
-            return res
-                .status(HSC.StatusCodes.OK)
-                .send({ message: "User deleted succesfully!" });
+            return res.redirect("/profiles/profile_successful_deletion");
         } else {
-            return res
-                .status(HCS.StatusCodes.BAD_REQUEST)
-                .json({ message: "Bad request!" });
+            return res.redirect("/profiles/profile_deletion_error");
         }
     } catch (e) {
-        return res
-        .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "Deleting data failed!" });
+        return res.redirect("/profiles/profiles_unknown_error");
     }
 });
 
