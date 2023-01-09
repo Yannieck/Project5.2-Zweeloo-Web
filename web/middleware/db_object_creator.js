@@ -20,8 +20,8 @@ class DBObjectCreator {
     static createSponsor = async (req, res) => {
         try {
             const createdSponsor = await SponsorController.createSponsor(
-                req.body.sponsorName,
-                req.body.sponsorAddress,
+                req.body.sponsor_name,
+                req.body.sponsor_address,
                 req.file.filename,
                 req.body.link
             );
