@@ -22,7 +22,7 @@ html
                 .px-16.w-full
                     //- Loop through all sponsors and generate a tile
                     each sponsor, index in sponsors
-                        .w-full.mb-5.flex.flex-row
+                        .w-full.mb-5.flex.flex-row(class="h-[7.5rem]")
                             //- Load the image data
                             img(src="data:image/jpg;base64," + sponsor.logo).h-full.max-h-40.aspect-video.object-cover.rounded.mr-5
                             .w-full.flex
