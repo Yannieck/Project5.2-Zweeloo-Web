@@ -1,130 +1,93 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const usercontroller = require('../../../bin/usercontroller');
-const auth = require('../../../middleware/auth');
-const authservice = require('../../../config/authservice');
-const HCS = require('http-status-codes');
-const XMLRefactor = require("../../../middleware/XMLRefactors");
-const ContentTypeCheck = require('../../../middleware/contenttypecheck');
+const UserController = require("../../../bin/db_user_controller");
+const auth = require("../../../middleware/authenticator");
+const AuthService = require("../../../config/authservice");
+const HSC = require("http-status-codes");
+const JSONValidator = require("../../../middleware/JSONValidator");
 
-router.get('/allUsers', auth, async(req, res) => {
+router.get("/all", auth, async (req, res) => {
     try {
-        const users = (await usercontroller.getAllUsers());
-        if(!users || users.length === 0) {
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.apiErrorBuilder(404, "Could not find any users!");
-                return res.set('Content-Type', 'application/xml').send(xmlres);
-            } else {
-                return res.json({ message: "No users found!" });
-            }
+        const users = await UserController.getAllUsers();
+        if (!users || users.length === 0) {
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "No users found!" });
         } else {
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.allUsersResponse(users);
-                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
-            } else {
-                return res.status(HSC.StatusCodes.OK).json(users);
-            }
+            return res.status(HSC.StatusCodes.OK).json(users);
         }
     } catch (e) {
-        if(req.header('accept') === 'application/xml') {
-            const xmlres = XMLRefactor.apiErrorBuilder(500, "Internal server error");
-            return res.set('Content-Type', 'application/xml').send(xmlres);
-        } else {
-            return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
-        }
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting all routes failed" });
     }
 });
 
-router.get('/:id', auth, async(req, res) => {
+router.get("/user/:id", auth, async (req, res) => {
     const id = parseInt(req.params.id);
 
     try {
-        const user = await usercontroller.getUserById(id);
+        const user = await UserController.getUserById(id);
         if (user) {
-            const safe_user = authservice.getSafeData(user);
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.userResponse(safe_user);
-                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
-            } else {
-                return res.status(HSC.StatusCodes.OK).json(safe_user);
-            }
+            const safe_user = AuthService.getSafeData(user);
+            return res.status(HSC.StatusCodes.OK).json(safe_user);
         } else {
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.apiErrorBuilder(404, "User not found");
-                return res.set('Content-Type', 'application/xml').send(xmlres);
-            } else {
-                return res.send({message: "User not found"});
-            }
+            return res
+                .status(HSC.StatusCodes.NOT_FOUND)
+                .json({ message: "User not found" });
         }
     } catch (e) {
-        if(req.header('accept') === 'application/xml') {
-            const xmlres = XMLRefactor.apiErrorBuilder(500, "Internal server error");
-            return res.set('Content-Type', 'application/xml').send(xmlres);
-        } else {
-            return res.status(HSC.StatusCodes.INTERNAL_SERVER_ERROR).send();
-        }
+        return res
+            .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Getting route failed" });
     }
 });
 
-router.post('/edit/:id', auth, ContentTypeCheck.checkUserEdit, async(req, res) => {
-    const id = parseInt(req.params.id);
-    let data;
-    if(req.is('application/xml')) {
-        data = XMLRefactor.updateRequestParser(req.rawBody);
-    } else {
-        data = req.body;
-    }
-
-    try {
-        await usercontroller.updateUser(id, data);
-        const user = await usercontroller.getUserById(id);
-
-        if(req.header('accept') === 'application/xml') {
-            const xmlres = XMLRefactor.userResponse(user);
-            return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
-        } else {
-            return res.status(HSC.StatusCodes.OK).send(user);
-        }
-    } catch(e) {
-        if(req.header('accept') === 'application/xml') {
-            const xmlres = XMLRefactor.apiErrorBuilder(500, 'Updating data failed');
-            return res.set('Content-Type', 'application/xml').send(xmlres);
-        } else {
-            return res.status(500).send({err: 'Updating data failed!'})
-        }
-    }
-});
-
-router.delete('/deleteuser/:id', auth, async(req, res) => {
-    try {
+router.post(
+    "/edit/:id",
+    auth,
+    JSONValidator.checkUserEdit,
+    async (req, res) => {
         const id = parseInt(req.params.id);
-        const result = await usercontroller.deleteUser(id);
+        let data = req.body;
 
-        if(result) {
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.succesfulDeleteResponse({code: 200, message: 'User deleted succesfully!'});
-                return res.set('Content-Type', 'application/xml').status(HSC.StatusCodes.OK).send(xmlres);
+        try {
+            await UserController.updateUser(
+                id,
+                data.email,
+                data.first_name,
+                data.last_name
+            );
+            const user = await UserController.getUserById(id);
+
+            return res.status(HSC.StatusCodes.OK).json(user);
+        } catch (e) {
+            return res
+                .status(HSC.StatusCodes.INTERNAL_SERVER_ERROR)
+                .json({ message: "Updating data failed!" });
+        }
+    }
+);
+
+router.get("/delete/:id", auth, async (req, res) => {
+    try {
+        const allusers = await UserController.getAllUsers();
+
+        if (allusers.length > 1) {
+            const result = await UserController.deleteUser(
+                parseInt(req.params.id)
+            );
+
+            if (result) {
+                return res.redirect("/profiles/profile_successful_deletion");
             } else {
-                return res.status(HSC.StatusCodes.OK).send({message: 'User deleted succesfully!'})
+                return res.redirect("/profiles/profile_deletion_error");
             }
         } else {
-            if(req.header('accept') === 'application/xml') {
-                const xmlres = XMLRefactor.apiErrorBuilder(400, "Bad request");
-                return res.set('Content-Type', 'application/xml').send(xmlres);
-            } else {
-                return res.send({
-                    code: 400,
-                    message: "Bad request!"
-                });
-            }
+            return res.redirect("/profiles/last_profile_delete");
         }
     } catch (e) {
-        if(req.header('accept') === 'application/xml') {
-            const xmlres = XMLRefactor.apiErrorBuilder(400, "Bad request");
-            return res.set('Content-Type', 'application/xml').send(xmlres);
-        } else {
-            return res.status(HSC.StatusCodes.BAD_REQUEST).send(e);
-        }
+        return res.redirect("/profiles/profiles_unknown_error");
     }
 });
 

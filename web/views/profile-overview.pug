@@ -1,0 +1,30 @@
+html
+    head
+        include head.pug
+        title Pofielen
+
+    body.h-full.clr-bg-main(class='border-[20px] clr-border-sec')
+        include header.pug
+        block content
+            .w-full.flex.flex-col.py-12.px-8.overflow-y-auto(class='h-[calc(100%-4rem)] md:px-32')
+                .px-16
+                    script.
+                        let message = "#{status}";
+                        let additions = "#{additions}";
+                    script(src="/scripts/swal.js")
+
+                    h1.text-4xl.font-bold.mb-5 Profielen
+                    
+                .line 
+
+                .px-16
+                    each profile, index in profiles
+                        .w-full.mb-5.flex.flex-row.items-center.pl-4.gap-4
+                            .flex.flex-row.items-center(class="w-2/6")
+                                i(class="fa-solid fa-user").mr-2
+                                p.overflow-hidden.text-ellipsis.whitespace-nowrap #{profile.first_name} #{profile.last_name}
+                            p(class="w-3/6").overflow-hidden.text-ellipsis.whitespace-nowrap #{profile.email}
+                            div(class="w-1/6")
+                                a(href=`/profiles/confirm_delete_profile/${profile.id}`).btn.btn-delete.w-full.text-center.overflow-hidden.text-ellipsis Verwijderen
+                        .line.my-6
+                .line

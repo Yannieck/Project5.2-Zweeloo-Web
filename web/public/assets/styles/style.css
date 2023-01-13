@@ -1,0 +1,154 @@
+:root {
+    --clr-bg-300: #fff5d2; /* Main background color */
+    --clr-bg-400: #ffefb9; /* Darker background color */
+    --clr-acc-600: #e2030f; /* Accent color 1 */
+    --clr-acc-500: #00427d; /* Accent color 2 */
+    --clr-txt-900: #333333; /* Text color */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* The deviding line element styled like on the main website */
+.line {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    min-height: 3px;
+    background-color: var(--clr-bg-300);
+    position: relative;
+}
+
+/* The diamonds left and right of the line */
+.line::before {
+    content: "";
+    position: absolute;
+    background-color: var(--clr-bg-300);
+    transform: rotate(45deg);
+    width: 13px;
+    height: 13px;
+    top: -5px;
+    left: 0;
+}
+
+.line::after {
+    content: "";
+    position: absolute;
+    background-color: var(--clr-bg-300);
+    transform: rotate(45deg);
+    width: 13px;
+    height: 13px;
+    top: -5px;
+    right: 0;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+legend,
+label {
+    font-family: "Poppins", sans-serif !important;
+    color: var(--clr-txt-900);
+}
+
+.clr-bg-main {
+    background-color: var(--clr-bg-400) !important;
+}
+
+.clr-bg-sec {
+    background-color: var(--clr-bg-300) !important;
+}
+
+.clr-bg-black {
+    background-color: var(--clr-txt-900) !important;
+}
+
+.clr-acc-red {
+    background-color: var(--clr-acc-600) !important;
+}
+
+.clr-acc-blue {
+    background-color: var(--clr-acc-500) !important;
+}
+
+.clr-text-red {
+    color: var(--clr-acc-600) !important;
+}
+
+.clr-text {
+    background-color: var(--clr-txt-900) !important;
+}
+
+.clr-border-sec {
+    border-color: var(--clr-bg-300) !important;
+}
+
+.clr-border-dark {
+    border-color: var(--clr-txt-900) !important;
+}
+
+/* Styling for buttons */
+.btn {
+    background-color: transparent;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 3px solid var(--clr-txt-900);
+    color: var(--clr-txt-900);
+    transition: all 0.3s ease-in-out;
+    padding: 0.75em 1.4em;
+}
+
+.btn:hover {
+    background-color: var(--clr-txt-900);
+    color: var(--clr-bg-400);
+}
+
+/* Delete button */
+.btn-delete {
+    color: var(--clr-acc-600);
+    border-color: var(--clr-acc-600);
+}
+
+.btn-delete:hover {
+    background-color: var(--clr-acc-600);
+    color: var(--clr-bg-400);
+}
+
+.link {
+    text-decoration: underline;
+    color: var(--clr-txt-900);
+}
+
+.link:hover {
+    transition: border-bottom 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: var(--clr-acc-600) !important;
+}
+
+/* Make buttons in navbars different from the normal buttons */
+nav .btn {
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: border-bottom 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: var(--clr-txt-900);
+}
+
+nav .btn:hover {
+    color: var(--clr-acc-600) !important;
+    background-color: transparent;
+}
+
+/* Selected poi */
+.selected {
+    background-color: var(--clr-bg-300) !important;
+}
